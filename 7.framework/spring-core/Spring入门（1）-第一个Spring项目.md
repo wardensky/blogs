@@ -1,5 +1,6 @@
-###Spring入门（1）-第一个Spring项目
-####1. 创建maven项目，maven相关配置如下：
+### Spring入门（1）-第一个Spring项目
+
+#### 1. 创建maven项目，maven相关配置如下：
 ```
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -38,7 +39,8 @@
 </project>
 
 ```
-####2. Java的基本代码
+
+#### 2. Java的基本代码
 
 ```
 package com.chzhao.springtest;
@@ -77,7 +79,9 @@ public class PersonBll implements IPersonBll {
 }
 
 ```
-####3. 添加Spring配置文件applicationContext.xml
+
+#### 3. 添加Spring配置文件applicationContext.xml
+
 内容如下，配置了一个bean
 ```
 <?xml version="1.0" encoding="UTF-8"?>
@@ -87,7 +91,9 @@ public class PersonBll implements IPersonBll {
 	<bean  name="PersonBll" class="com.chzhao.springtest.PersonBll"/>
 </beans>
 ```
-####4. 主函数
+
+#### 4. 主函数
+
 ```
 package com.chzhao.springtest;
 
@@ -109,7 +115,9 @@ public class App {
 
 ```
 可以看到，我通过两种方法实例化了PersonBll：一种是常见的方法；一种是通过spring。
-####5. 输出
+
+#### 5. 输出
+
 ```
 add person: chzhao
 十二月 27, 2014 10:56:24 下午 org.springframework.context.support.AbstractApplicationContext prepareRefresh
@@ -122,10 +130,11 @@ add person: chzhao
 
 两张方法的输出是一样的。
 
-####6. 什么是IOC
+#### 6. 什么是IOC
+
 ![](http://docs.spring.io/spring/docs/current/spring-framework-reference/html/images/container-magic.png)
 上图是Spring官方文档中队IOC的介绍，Spring有一个container，你把pojo和配置拿过来，直接输出对象。减少了对象实例化的过程，降低了系统的耦合度。
 
 
-####7. 参考
+#### 7. 参考
 [The IoC container](http://docs.spring.io/spring/docs/current/spring-framework-reference/html/beans.html)
