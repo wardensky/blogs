@@ -9,7 +9,7 @@ public class App {
 		Person p = new Person();
 		p.setName("chzhao");
 		pbll.addPerson(p);
-		ApplicationContext act = new ClassPathXmlApplicationContext("applicationContext.xml");
+		ApplicationContext act = new ClassPathXmlApplicationContext("demo1.xml");
 		IPersonBll pbll1 = (IPersonBll) act.getBean("PersonBll");
 		pbll1.addPerson(p);
 		((ClassPathXmlApplicationContext) act).close();
