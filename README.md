@@ -19,6 +19,7 @@ github专门用来管理源代码，又可以直接在网页上显示markdown，
 ### 1. java
 
 #### java基础知识
+
   - equals与hashcode
   - stringbuffer与Stringbuilder
   - map有哪些？其特点和使用场景？
@@ -32,6 +33,7 @@ github专门用来管理源代码，又可以直接在网页上显示markdown，
   - 自动装箱与拆箱
 
 #### jvm基础
+
   - 内存模型
   - 内存管理调优
   - 内存参数设置
@@ -59,7 +61,9 @@ github专门用来管理源代码，又可以直接在网页上显示markdown，
   - 类加载过程
   - 双亲委派模型
   - stackoverflowerror outofmemoryerror
+
 #### java源码
+
   - ArrayList
   - HashMap
   - CopyOnWriteArrayList
@@ -67,7 +71,9 @@ github专门用来管理源代码，又可以直接在网页上显示markdown，
   - arrayblockingqueue
   - String
   - Integer
+
 #### java多线程
+
   - 线程池
   - synchronized
   - ReentrantLock
