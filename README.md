@@ -16,9 +16,9 @@ github专门用来管理源代码，又可以直接在网页上显示markdown，
 ## 二. 目录
 
 
-### 1. java
+### 01. java
 
-#### java基础知识
+#### 01. java基础知识
 
   - equals与hashcode
   - stringbuffer与Stringbuilder
@@ -32,7 +32,7 @@ github专门用来管理源代码，又可以直接在网页上显示markdown，
   - cache和buffer
   - 自动装箱与拆箱
 
-#### jvm基础
+#### 02.jvm基础
 
   - 内存模型
   - 内存管理调优
@@ -62,17 +62,8 @@ github专门用来管理源代码，又可以直接在网页上显示markdown，
   - 双亲委派模型
   - stackoverflowerror outofmemoryerror
 
-#### java源码
 
-  - ArrayList
-  - HashMap
-  - CopyOnWriteArrayList
-  - concurrentHashMap
-  - arrayblockingqueue
-  - String
-  - Integer
-
-#### java多线程
+#### 03.java多线程
 
   - 线程池
   - synchronized
@@ -89,32 +80,46 @@ github专门用来管理源代码，又可以直接在网页上显示markdown，
   - Java容器
   - Java并发容器
 
-### 2. design pattern
 
-### 3. db
+#### 04.java源码
 
-### 4. distributed
+  - ArrayList
+  - HashMap
+  - CopyOnWriteArrayList
+  - concurrentHashMap
+  - arrayblockingqueue
+  - String
+  - Integer
 
-### 5. network
 
-### 6. algorithm
+### 02. design pattern
 
-### 7. framework
+### 03. db
 
-#### hibernate
+### 04. distributed
 
-#### spring
+### 05. network
 
-#### jfinal
+### 06. algorithm
 
-#### struts2
+### 07. framework
 
-#### mybatis
+#### 01.spring
 
-### 8. nosql
+#### 02.hibernate
 
-### 9. linux
+
+
+#### 03.jfinal
+
+#### 04.struts2
+
+#### 05.mybatis
+
+### 08. nosql
+
+### 09. linux
 
 ### 10. docker
 
-### 11. Dmaven
+### 11. maven
