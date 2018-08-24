@@ -96,11 +96,60 @@ github专门用来管理源代码，又可以直接在网页上显示markdown，
 
 ### 03. db
 
+ - 基础sql
+ - mysql优化
+ - 分库分表
+ - 索引优化
+ - 二阶段分布式事务
+ - 自动扩容
+ - 存储引擎
+ - binlog
+ - 半同步
+ - mysql的事务是如何实现的
+ - 为何要有事务隔离级别
+
 ### 04. distributed
+
+
+ - 分布式事务
+ - 缓存
+ - 队列
+ - 一致性hash
+ - 分布式系统架构
+ - rpc
+ - 微服务
+ - 服务发现
+ - 降级
+ - zookeeper
+ - kafaka
+ - 缓存架构与设计
+ - redis数据结构
+ - 缓存击穿
+ - 任务管理
+ - thrift
+ - 布隆过滤器
+ - 分布式锁
 
 ### 05. network
 
+
+ - nio
+ - netty
+ - dubbo
+ - https
+ - http2
+ - epoll
+ - libuv
+ - 三次握手，四次挥手
+
 ### 06. algorithm
+ - 环形链表
+ - 二叉树、平衡二叉树
+ - B+树
+ - 红黑树
+ - LRU
+ - 单链表复制
+ - 归并排序、交换排序（冒泡、快排）、选择排序、插入排序
 
 ### 07. framework
 
@@ -117,6 +166,15 @@ github专门用来管理源代码，又可以直接在网页上显示markdown，
 #### 05.mybatis
 
 ### 08. nosql
+
+#### 01.redis
+
+ - 基础数据结构
+ - 用法
+
+#### 02.mongodb
+
+
 
 ### 09. linux
 
