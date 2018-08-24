@@ -167,7 +167,7 @@ github专门用来管理源代码，又可以直接在网页上显示markdown，
 - 10.[到底什么是IOC和DI](https://github.com/wardensky/blogs/blob/master/07.framework/spring/10.到底什么是IOC和DI.md)
 - 11.[BeanFactory和ApplicationContext联系和区别](https://github.com/wardensky/blogs/blob/master/07.framework/spring/11.BeanFactory和ApplicationContext联系和区别.md)
 - 12.[AOP初探](https://github.com/wardensky/blogs/blob/master/07.framework/spring/12.AOP初探.md)
-- 13.[Spring JDBC](https://github.com/wardensky/blogs/blob/master/07.framework/spring/13.Spring JDBC.md)
+- 13.[Spring JDBC](https://github.com/wardensky/blogs/blob/master/07.framework/spring/13.Spring-JDBC.md)
 - 14.[spring事务](https://github.com/wardensky/blogs/blob/master/07.framework/spring/14.spring事务.md)
 
 
