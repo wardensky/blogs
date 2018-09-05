@@ -1,4 +1,4 @@
-package com.zch.blogs.base;
+package com.zch.blogs.java.base;
 
 public class StringEqualsDemo {
 

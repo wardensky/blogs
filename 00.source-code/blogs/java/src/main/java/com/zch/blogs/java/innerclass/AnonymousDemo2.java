@@ -1,4 +1,4 @@
-package com.zch.blogs.innerclass;
+package com.zch.blogs.java.innerclass;
 
 public class AnonymousDemo2 {
 	public void foo(final String para) {

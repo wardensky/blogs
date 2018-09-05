@@ -1,4 +1,4 @@
-package com.zch.blogs.innerclass;
+package com.zch.blogs.java.innerclass;
 
 /**
  * @Description 测试通过内部类实现多重继承

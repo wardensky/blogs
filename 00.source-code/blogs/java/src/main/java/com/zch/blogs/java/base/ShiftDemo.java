@@ -1,4 +1,4 @@
-package com.zch.blogs.base;
+package com.zch.blogs.java.base;
 
 /**
  * @Description 主要介绍位移操作 <br>
