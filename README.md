@@ -71,9 +71,9 @@ github专门用来管理源代码，又可以直接在网页上显示markdown，
   - volatile
   - Atomics
   - wait/notify/notifyAll
-  - CountDownLatch
-  - CyclicBarrier
-  - Semaphore
+  - [CountDownLatch](https://github.com/wardensky/blogs/blob/master/01.java/03.java多线程/CountDownLatch.md)
+  - [CyclicBarrier](https://github.com/wardensky/blogs/blob/master/01.java/03.java多线程/CyclicBarrier.md)
+  - [Semaphore](https://github.com/wardensky/blogs/blob/master/01.java/03.java多线程/Semaphore.md)
   - Exchanger
   - Future/FutureTask
   - ThreadLocal
