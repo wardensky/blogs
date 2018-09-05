@@ -1,4 +1,4 @@
-package com.zch.blogs.java.multithreads;
+package com.zch.blogs.java.multithreads.pool;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;

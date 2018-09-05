@@ -1,11 +1,12 @@
-package com.zch.blogs.java.multithreads;
+package com.zch.blogs.java.multithreads.pool;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class NewFixedThreadPoolTest {
+public class NewSingleThreadExecutorTest {
 	public static void main(String[] args) {
-		ExecutorService executorService = Executors.newFixedThreadPool(3);
+		
+		ExecutorService executorService = Executors.newSingleThreadExecutor();
 		for (int i = 0; i < 5; i++) {
 			executorService.execute(new Runnable() {
 				public void run() {
@@ -14,8 +15,7 @@ public class NewFixedThreadPoolTest {
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
-					System.out.println(Thread.currentThread().getName()
-							+ "线程被调用了。");
+					System.out.println(Thread.currentThread().getName() + "线程被调用了。");
 				}
 			});
 			System.out.println("************* a" + i + " *************");
