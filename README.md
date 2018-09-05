@@ -31,6 +31,7 @@ github专门用来管理源代码，又可以直接在网页上显示markdown，
   - jsonp
   - cache和buffer
   - 自动装箱与拆箱
+  - Java容器
 
 #### 02.jvm基础
 
@@ -65,20 +66,22 @@ github专门用来管理源代码，又可以直接在网页上显示markdown，
 
 #### 03.java多线程
 
-  - 线程池
-  - synchronized
-  - ReentrantLock
-  - volatile
-  - Atomics
-  - wait/notify/notifyAll
+  - [线程池](https://github.com/wardensky/java36_study_notes/blob/master/java核心技术36讲/第21讲-Java并发类库提供的线程池有哪几种？%20分别有什么特点？.md)
+  - [synchronized](https://github.com/wardensky/blogs/blob/master/01.java/03.java多线程/synchronized.md)
+  - [ReentrantLock](https://github.com/wardensky/blogs/blob/master/01.java/03.java多线程/ReentrantLock.md)
+  - [volatile](https://github.com/wardensky/blogs/blob/master/01.java/03.java多线程/volatile.md)
+  - [Atomics](https://github.com/wardensky/blogs/blob/master/01.java/03.java多线程/Atomics.md)
+  - [wait/notify/notifyAll](https://github.com/wardensky/blogs/blob/master/01.java/03.java多线程/wait.md)
   - [CountDownLatch](https://github.com/wardensky/blogs/blob/master/01.java/03.java多线程/CountDownLatch.md)
   - [CyclicBarrier](https://github.com/wardensky/blogs/blob/master/01.java/03.java多线程/CyclicBarrier.md)
   - [Semaphore](https://github.com/wardensky/blogs/blob/master/01.java/03.java多线程/Semaphore.md)
   - [Exchanger](https://github.com/wardensky/blogs/blob/master/01.java/03.java多线程/Exchanger.md)
-  - Future/FutureTask
-  - ThreadLocal
-  - Java容器
-  - Java并发容器
+  - [Future/FutureTask](https://github.com/wardensky/blogs/blob/master/01.java/03.java多线程/FutureTask.md)
+  - [ThreadLocal](https://github.com/wardensky/blogs/blob/master/01.java/03.java多线程/Exchanger.md)
+  - [ConcurrentLinkedQueue](https://github.com/wardensky/blogs/blob/master/01.java/03.java多线程/ConcurrentLinkedQueue.md)
+  - [LinkedBlockingQueue](https://github.com/wardensky/blogs/blob/master/01.java/03.java多线程/LinkedBlockingQueue.md)
+  - [CopyOnWriteArrayList](https://github.com/wardensky/blogs/blob/master/01.java/03.java多线程/CopyOnWriteArrayList.md)
+  - [ConcurrentHashMap](https://github.com/wardensky/blogs/blob/master/01.java/03.java多线程/ConcurrentHashMap.md)
 
 
 #### 04.java源码
