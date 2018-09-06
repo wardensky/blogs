@@ -23,14 +23,12 @@ github专门用来管理源代码，又可以直接在网页上显示markdown，
   - [equals与hashcode](https://github.com/wardensky/blogs/blob/master/01.java/01.java基础知识/equals与hashcode.md)
   - [从源码角度简单看StringBuilder和StringBuffer的异同](https://github.com/wardensky/blogs/blob/master/01.java/01.java基础知识/从源码角度简单看StringBuilder和StringBuffer的异同.md)
   - [JavaMap集合类简介](https://github.com/wardensky/blogs/blob/master/01.java/01.java基础知识/JavaMap集合类简介.md)
-  - [Cache和Buffer]()
-  - [cookie和session的区别]()
+  - [Cache和Buffer](https://github.com/wardensky/blogs/blob/master/01.java/01.java基础知识/Cache和Buffer.md)
+  - [cookie和session的区别](https://github.com/wardensky/blogs/blob/master/01.java/01.java基础知识/cookie和session的区别.md)
   - 动态代理
   - 反射
   - session  cookie
   - nginx，apache 实际项目能做哪些？（鉴权，转发，缓存，反向代理等）和tomcat什么关系？最少了解
-  - ajax跨域
-  - cache和buffer
   - 自动装箱与拆箱
   - Java容器
 
@@ -89,9 +87,9 @@ github专门用来管理源代码，又可以直接在网页上显示markdown，
 #### 04.java源码
 
   - ArrayList
-  - [从Java源码分析HashMap]()
+  - [从Java源码分析HashMap](https://github.com/wardensky/blogs/blob/master/01.java/04.java源码/从Java源码分析HashMap.md)
   - CopyOnWriteArrayList
-  - concurrentHashMap
+  - ConcurrentHashMap
   - arrayblockingqueue
   - String
   - [Integer源代码学习](https://github.com/wardensky/blogs/blob/master/01.java/04.java源码/Integer源代码学习.md)
