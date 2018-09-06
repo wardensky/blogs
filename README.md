@@ -31,6 +31,8 @@ github专门用来管理源代码，又可以直接在网页上显示markdown，
   - nginx，apache 实际项目能做哪些？（鉴权，转发，缓存，反向代理等）和tomcat什么关系？最少了解
   - 自动装箱与拆箱
   - Java容器
+  - [Java嵌套类]()
+  - [Java的位移操作]()
 
 #### 02.jvm基础
 
@@ -38,6 +40,7 @@ github专门用来管理源代码，又可以直接在网页上显示markdown，
   - 内存管理调优
   - 内存参数设置
   - jstat
+  - jinfo
   - jmap
   - jstack
   - gc
@@ -148,6 +151,7 @@ github专门用来管理源代码，又可以直接在网页上显示markdown，
  - 三次握手，四次挥手
 
 ### 06. algorithm
+
  - 环形链表
  - 二叉树、平衡二叉树
  - B+树
@@ -202,3 +206,8 @@ github专门用来管理源代码，又可以直接在网页上显示markdown，
 ### 10. docker
 
 ### 11. maven
+
+### 12. git
+
+
+### 13.
