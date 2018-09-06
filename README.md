@@ -23,6 +23,8 @@ github专门用来管理源代码，又可以直接在网页上显示markdown，
   - [equals与hashcode](https://github.com/wardensky/blogs/blob/master/01.java/01.java基础知识/equals与hashcode.md)
   - [从源码角度简单看StringBuilder和StringBuffer的异同](https://github.com/wardensky/blogs/blob/master/01.java/01.java基础知识/从源码角度简单看StringBuilder和StringBuffer的异同.md)
   - [JavaMap集合类简介](https://github.com/wardensky/blogs/blob/master/01.java/01.java基础知识/JavaMap集合类简介.md)
+  - [Cache和Buffer]()
+  - [cookie和session的区别]()
   - 动态代理
   - 反射
   - session  cookie
