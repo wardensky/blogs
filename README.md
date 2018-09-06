@@ -20,7 +20,7 @@ github专门用来管理源代码，又可以直接在网页上显示markdown，
 
 #### 01. java基础知识
 
-  - equals与hashcode
+  - [equals与hashcode]()
   - stringbuffer与Stringbuilder
   - map有哪些？其特点和使用场景？
   - 动态代理
@@ -98,7 +98,7 @@ github专门用来管理源代码，又可以直接在网页上显示markdown，
 
 ### 02. design pattern
 
-- [设计模式学习]()
+- [设计模式学习](https://github.com/wardensky/blogs/blob/master/02.design_pattern/设计模式学习.md)
 
 ### 03. db
 
