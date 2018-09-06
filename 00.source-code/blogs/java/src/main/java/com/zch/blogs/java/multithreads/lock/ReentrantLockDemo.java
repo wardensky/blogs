@@ -6,7 +6,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class ReentrantLockDemo {
 	public static void main(String[] args) {
-		demo1();
+		demo2();
 	}
 
 	static void demo1() {
@@ -15,7 +15,6 @@ public class ReentrantLockDemo {
 		try {
 			for (int i = 0; i < 100; i++) {
 				System.out.println(i);
-
 			}
 		} finally {
 			lock.unlock();
@@ -41,6 +40,7 @@ public class ReentrantLockDemo {
 	/**
 	 * trylock加时间的
 	 */
+
 	static void demo3() {
 		Lock lock = new ReentrantLock();
 		try {

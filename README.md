@@ -82,7 +82,8 @@ github专门用来管理源代码，又可以直接在网页上显示markdown，
   - [LinkedBlockingQueue](https://github.com/wardensky/blogs/blob/master/01.java/03.java多线程/LinkedBlockingQueue.md)
   - [CopyOnWriteArrayList](https://github.com/wardensky/blogs/blob/master/01.java/03.java多线程/CopyOnWriteArrayList.md)
   - [ConcurrentHashMap](https://github.com/wardensky/blogs/blob/master/01.java/03.java多线程/ConcurrentHashMap.md)
-
+  - [synchronized原理分析](https://github.com/wardensky/blogs/blob/master/01.java/03.java多线程/synchronized原理分析.md)
+  - [synchronized与ReentrantLock区别](https://github.com/wardensky/blogs/blob/master/01.java/03.java多线程/synchronized与ReentrantLock区别.md)
 
 #### 04.java源码
 
