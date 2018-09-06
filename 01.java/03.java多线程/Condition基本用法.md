@@ -683,3 +683,5 @@ await等待结束
 ## 参考
 
 - [ReentrantLock（二）：正确使用Condition实现等待与通知](https://blog.csdn.net/zhang199416/article/details/70771238)
+
+- [ReentrantLock的使用和Condition](http://www.cnblogs.com/winner-0715/p/5011625.html)
