@@ -1,7 +1,5 @@
 package com.zch.blogs.java.multithreads.lock;
 
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
@@ -11,35 +9,24 @@ import java.util.concurrent.locks.ReentrantLock;
  * 
  */
 public class ReentrantLockDemo0 {
+	public final static ReentrantLock lock = new ReentrantLock();
+
 	public static void main(String[] args) {
 		ThreadClass0 tc1 = new ThreadClass0();
 		Thread t1 = new Thread(tc1, "t1");
 		Thread t2 = new Thread(tc1, "t2");
+		Thread t3 = new Thread(tc1, "t3");
+		Thread t4 = new Thread(tc1, "t4");
+		Thread t5 = new Thread(tc1, "t5");
+
 		t1.start();
 		t2.start();
+		t3.start();
+		t4.start();
+		t5.start();
+
 	}
 
-	/**
-	 * trylock加时间的
-	 */
-
-	static void demo3() {
-		Lock lock = new ReentrantLock();
-		try {
-			if (lock.tryLock(10, TimeUnit.SECONDS)) {
-				try {
-					for (int i = 0; i < 100; i++) {
-						System.out.println(i);
-
-					}
-				} finally {
-					lock.unlock();
-				}
-			}
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
 }
 
 class ThreadClass0 implements Runnable {
@@ -53,14 +40,21 @@ class ThreadClass0 implements Runnable {
 
 class ReentrantLockClass0 {
 	static void foo() {
-		Lock lock = new ReentrantLock();
-		lock.lock();
+
+		ReentrantLockDemo0.lock.lock();
 		try {
-			for (int i = 0; i < 10; i++) {
+			for (int i = 0; i < 3; i++) {
+				Thread.sleep(10);
 				System.out.println(Thread.currentThread().getName() + " " + i);
 			}
+			int count = ReentrantLockDemo0.lock.getHoldCount();
+			int queuedLength = ReentrantLockDemo0.lock.getQueueLength();
+			System.out.println(Thread.currentThread().getName() + " getHoldCount = " + count);
+			System.out.println(Thread.currentThread().getName() + " getQueueLength = " + queuedLength);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		} finally {
-			lock.unlock();
+			ReentrantLockDemo0.lock.unlock();
 		}
 	}
 }
