@@ -87,12 +87,12 @@ github专门用来管理源代码，又可以直接在网页上显示markdown，
 #### 04.java源码
 
   - ArrayList
-  - HashMap
+  - [从Java源码分析HashMap]()
   - CopyOnWriteArrayList
   - concurrentHashMap
   - arrayblockingqueue
   - String
-  - Integer
+  - [Integer源代码学习](https://github.com/wardensky/blogs/blob/master/01.java/04.java源码/Integer源代码学习.md)
 
 
 ### 02. design pattern
