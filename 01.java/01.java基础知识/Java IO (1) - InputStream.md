@@ -1,13 +1,13 @@
-#Java IO (1) - InputStream
-##前言
+# Java IO (1) - InputStream
+## 前言
 JavaIO一共包括两种，一种是stream，一种是reader/writer，每种又包括in/out，所以一共是四种包。Java 流在处理上分为字符流和字节流。字符流处理的单元为 2 个字节的 Unicode 字符，分别操作字符、字符数组或字符串，而字节流处理单元为 1 个字节，操作字节和字节数组。
 Java 内用 Unicode 编码存储字符，字符流处理类负责将外部的其他编码的字符流和 java 内 Unicode 字符流之间的转换。而类 InputStreamReader 和 OutputStreamWriter 处理字符流和字节流的转换。字符流（一次可以处理一个缓冲区）一次操作比字节流（一次一个字节）效率高。
-##0. 目录
 
-##1. InputStream
+
+## 1. InputStream
 ![inputstream](http://images.cnblogs.com/cnblogs_com/wardensky/645143/o_inputstream.png)
 InputStream是一个抽象类，是所有InputStream的基类。
-###1.1. 基本方法
+### 1.1. 基本方法
 ```
 int	available()
 Returns an estimate of the number of bytes that can be read (or skipped over)
@@ -41,10 +41,10 @@ long	skip(long n)
 Skips over and discards n bytes of data from this input stream.
 ```
 最主要的就是这几个read方法。
-##2. FileInputStream
+## 2. FileInputStream
 >FileInputStream从文件中读取字节，比较适合读取二进制数据，如果要读取字符文件，最好用FileReader。
 
-###2.1. 构造函数
+### 2.1. 构造函数
 ```
 FileInputStream(File file)
 Creates a FileInputStream by opening a connection to an actual file,
@@ -94,7 +94,7 @@ FileInputStream fis1 = new FileInputStream(new File("d:/123.txt"));
   }
 ```
 注意，这两个构造函数都会抛出FileNotFoundException，但如果传的字符串是null，也会抛出空指针异常。
-###2.2. 主要方法
+### 2.2. 主要方法
 ```
 int	available()
 Returns an estimate of the number of remaining bytes that can be read
@@ -128,7 +128,7 @@ Reads up to len bytes of data from this input stream into an array of bytes.
 long	skip(long n)
 Skips over and discards n bytes of data from the input stream.
 ```
-###2.3. 代码示例
+### 2.3. 代码示例
 ```
 	public static void main(String[] args) {
 		try {
