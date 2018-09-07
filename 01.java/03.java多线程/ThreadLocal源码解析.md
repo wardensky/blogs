@@ -202,6 +202,8 @@ ThreadLocal为什么会内存泄漏
 ThreadLocal 不是用于解决共享变量的问题的，也不是为了协调线程同步而存在，而是为了方便每个线程处理自己的状态而引入的一个机制。这点至关重要。
 每个Thread内部都有一个ThreadLocal.ThreadLocalMap类型的成员变量，该成员变量用来存储实际的ThreadLocal变量副本。
 ThreadLocal并不是为线程保存对象的副本，它仅仅只起到一个索引的作用。它的主要木得视为每一个线程隔离一个类的实例，这个实例的作用范围仅限于线程内部。
+
+
 ## 参考
 
 - [【死磕Java并发】—–深入分析ThreadLocal](http://cmsblogs.com/?p=2442)
