@@ -207,3 +207,4 @@ ThreadLocal并不是为线程保存对象的副本，它仅仅只起到一个索
 ## 参考
 
 - [【死磕Java并发】—–深入分析ThreadLocal](http://cmsblogs.com/?p=2442)
+- [Java多线程10：ThreadLocal的作用及使用](https://www.cnblogs.com/xrq730/p/4854820.html)

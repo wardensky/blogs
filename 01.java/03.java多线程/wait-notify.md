@@ -418,3 +418,8 @@ synchronized(obj)一个代码段，意思是下面```{} ```里面的代码执行
 - wait方法是针对一个被同步代码块加锁的对象
 - sleep方法和多线程没有直接关系，跟锁也没有关系
 - wait释放锁，notify和notifyAll不释放锁。
+
+
+## 参考
+
+- [Java 并发编程：线程间的协作(wait/notify/sleep/yield/join)](http://www.cnblogs.com/paddix/p/5381958.html)
