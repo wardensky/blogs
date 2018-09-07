@@ -1,6 +1,8 @@
 # CAS简介
 
 
+## 简介
+
 CAS全称compare-and-swap，是计算机科学中一种实现多线程原子操作的指令，它比较内存中当前存在的值和外部给定的期望值，只有两者相等时，才将这个内存值修改为新的给定值。CAS操作包含三个操作数，需要读写的内存位置（V）、拟比较的预期原值（A）和拟写入的新值（B），如果V的值和A的值匹配，则将V的值更新为B，否则不做任何操作。多线程尝试使用CAS更新同一变量时，只有一个线程可以操作成功，其他的线程都会失败，失败的线程不会被挂起，只是在此次竞争中被告知失败，下次可以继续尝试CAS操作的。
 
 目前的处理器基本都支持CAS，只不过不同的厂家的实现不一样罢了。CAS有三个操作数：内存值V、旧的预期值A、要修改的值B，当且仅当预期值A和内存值V相同时，将内存值修改为B并返回true，否则什么都不做并返回false。
@@ -19,9 +21,13 @@ public boolean compareAndSwapInt(int b) {
 试想这段代码在多线程并发下，会发生什么？我们不妨来分析一下：
 
 线程A执行到 a==1，正准备执行a = b时，线程B也正在运行a = b，并在线程A之前把a修改为2；最后线程A又把a修改成了3。结果就是两个线程同时修改了变量a，显然这种结果是无法符合预期的，无法确定a的值。
+
 解决方法也很简单，在compareAndSwapInt方法加锁同步，变成一个原子操作，同一时刻只有一个线程才能修改变量a。
+
 CAS中的比较和替换是一组原子操作，不会被外部打断，先根据paramLong/paramLong1获取到内存当中当前的内存值V，在将内存值V和原值A作比较，要是相等就修改为要修改的值B，属于硬件级别的操作，效率比加锁操作高。
 
+
+## AtomicInteger里面的CAS
 
 java.util.concurrent.atomic包下的原子操作类都是基于CAS实现的，接下去我们通过AtomicInteger来看看是如何通过CAS实现原子操作的：
 
@@ -47,7 +53,9 @@ public class AtomicInteger extends Number implements java.io.Serializable {
 Unsafe是CAS的核心类，Java无法直接访问底层操作系统，而是通过本地（native）方法来访问。不过尽管如此，JVM还是开了一个后门，JDK中有一个类Unsafe，它提供了硬件级别的原子操作。
 valueOffset表示的是变量值在内存中的偏移地址，因为Unsafe就是根据内存偏移地址获取数据的原值的。
 value是用volatile修饰的，保证了多线程之间看到的value值是同一份。
+
 接下去，我们看看AtomicInteger是如何实现并发下的累加操作：
+
 ```
 //jdk1.8实现
 public final int getAndAdd(int delta) {    
@@ -104,6 +112,9 @@ intel手册对lock前缀的说明如下：
 把写缓冲区的所有数据刷新到内存中。
 上面的第2点和第3点所具有的内存屏障效果，保证了CAS同时具有volatile读和volatile写的内存语义。
 
+
+ 
+
 ## CAS存在的问题
 
 ###  ABA问题
@@ -121,3 +132,9 @@ intel手册对lock前缀的说明如下：
 ### 只能保证一个共享变量的原子操作
 
 　　看了CAS的实现就知道这个只能针对一个共享变量，如果是多个共享变量就只能使用synchronized。除此之外，可以考虑使用AtomicReference来包装多个变量，通过这种方式来处理多个共享变量的情况。
+
+## 参考
+
+- [Java并发编程-CAS](http://www.cnblogs.com/wxd0108/p/6734504.html)
+- [Java 并发实践 — ConcurrentHashMap 与 CAS](http://www.importnew.com/26035.html)
+- [Java并发编程-CAS](https://www.cnblogs.com/iou123lg/p/9314826.html)
