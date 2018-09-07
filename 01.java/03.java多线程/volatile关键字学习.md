@@ -411,10 +411,11 @@ public class CheesyCounter {
 
 ## 总结
 
-volatile看起来简单，但是要想理解它还是比较难的，这里只是对其进行基本的了解。volatile相对于synchronized稍微轻量些，在某些场合它可以替代synchronized，但是又不能完全取代synchronized，只有在某些场合才能够使用volatile。使用它必须满足如下两个条件：
+volatile看起来简单，但是要想理解它还是比较难的，这里只是对其进行基本的了解。volatile相对于synchronized稍微轻量些，在某些场合它可以替代synchronized，但是又不能完全取代synchronized，只有在某些场合才能够使用volatile。
 
-- 对变量的写操作不依赖当前值；
-- 该变量没有包含在具有其他变量的不变式中。
+- volatile可见性；对一个volatile的读，总可以看到对这个变量最终的写；
+- volatile原子性；volatile对单个读/写具有原子性（32位Long、Double），但是复合操作除外，例如i++;
+- JVM底层采用“内存屏障”来实现volatile语义
 
 ## 参考
 
