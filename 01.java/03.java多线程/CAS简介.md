@@ -27,6 +27,8 @@ public boolean compareAndSwapInt(int b) {
 CAS中的比较和替换是一组原子操作，不会被外部打断，先根据paramLong/paramLong1获取到内存当中当前的内存值V，在将内存值V和原值A作比较，要是相等就修改为要修改的值B，属于硬件级别的操作，效率比加锁操作高。
 
 
+![cas](../images/cas.png)
+
 ## AtomicInteger里面的CAS
 
 java.util.concurrent.atomic包下的原子操作类都是基于CAS实现的，接下去我们通过AtomicInteger来看看是如何通过CAS实现原子操作的：
@@ -113,7 +115,7 @@ intel手册对lock前缀的说明如下：
 上面的第2点和第3点所具有的内存屏障效果，保证了CAS同时具有volatile读和volatile写的内存语义。
 
 
- 
+
 
 ## CAS存在的问题
 
@@ -138,3 +140,4 @@ intel手册对lock前缀的说明如下：
 - [Java并发编程-CAS](http://www.cnblogs.com/wxd0108/p/6734504.html)
 - [Java 并发实践 — ConcurrentHashMap 与 CAS](http://www.importnew.com/26035.html)
 - [Java并发编程-CAS](https://www.cnblogs.com/iou123lg/p/9314826.html)
+- [【死磕Java并发】—- 深入分析CAS](https://mp.weixin.qq.com/s?__biz=MzUzMTA2NTU2Ng==&mid=2247484156&idx=1&sn=88f659cd13ab4064d760b4b5c60cbc63&chksm=fa497d4dcd3ef45b520d06ea75c219d67f7ba35129ca800d374cfa6f2d39ab1d2d9bf3379b30&scene=21#wechat_redirect)
