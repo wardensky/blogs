@@ -1,4 +1,4 @@
-package com.zch.blogs.java.multithreads.lock;
+package com.zch.blogs.java.multithreads.synchronizeddemo;
 
 /**
  * @Description 在类上加锁，跟demo6里面是一样的。

@@ -1,4 +1,4 @@
-package com.zch.blogs.java.multithreads.lock;
+package com.zch.blogs.java.multithreads.synchronizeddemo;
 
 /**
  * @Description 零长度的byte数组对象创建起来将比任何对象都经济――查看编译后的字节码：生成零长度的byte[]对象只需3条操作码，而Object

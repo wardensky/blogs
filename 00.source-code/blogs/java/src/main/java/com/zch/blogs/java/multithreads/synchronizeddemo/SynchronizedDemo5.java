@@ -1,4 +1,4 @@
-package com.zch.blogs.java.multithreads.lock;
+package com.zch.blogs.java.multithreads.synchronizeddemo;
 
 public class SynchronizedDemo5 {
 
