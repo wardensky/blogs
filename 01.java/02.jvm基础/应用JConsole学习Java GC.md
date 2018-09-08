@@ -119,7 +119,7 @@ JConsole是一个程序，在windows里面找到JConsole.exe，双击启动即�
 ## 结论
 通过JConsole工具学习GC的过程，生动形象，很容易明白GC是如何进行的。然而这些知识都属于GC的基础知识，如果要了解更多GC的知识，还要多学习。
 
-参考：
+## 参考
 
 - 深入理解Java虚拟机
 - [Java 内存模型及GC原理](http://blog.csdn.net/ithomer/article/details/6252552)
