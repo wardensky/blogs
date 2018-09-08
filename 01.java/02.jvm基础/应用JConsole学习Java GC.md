@@ -9,7 +9,9 @@
 简单来讲，Java的内存分为堆和栈，其中堆是程序员用的内存，栈是系统用的内存。（*这句话不一定正确，但可以这么理解*）Java的内存管理主要是管理对象的分配和释放，或者说内存的分配和回收。在C或C++语言里面，内存是要自己控制的，new之后要delete掉，否则很容易出现内存泄漏。（*还记得当时写C的痛苦，不过通过写C代码，很好的了解了内存的分配机制*）在Java里面，分配内存和回收内存的事情是Jvm来管的。
 
 Jvm有自己的机制来管理内存，具体的细节算法这里不讲，主要讲大概的处理方式。Jvm的GC主要处理堆内存，JVM内存模型中的堆可以细分为Young Generation和Old Generation（又称为Tenure Space），其中Young Generation又分为Eden Space（*Eden是伊甸园的意思，老鹰乐队有首歌叫Long Road out of Eden*）和Survivor spaces。如下图所示：
-![](http://images.cnitblog.com/blog/239608/201412/152353513443951.jpg)
+
+
+![](../images/jvm-heap.jpg)
 
 
 具体GC的过程如下：
@@ -94,7 +96,9 @@ JConsole是一个程序，在windows里面找到JConsole.exe，双击启动即�
 
 首先把程序运行起来，在通过JConsole连接到程序上。
 因为我们只关心内存，切换到内存标签页。有一个下拉图表，可以观察不同的内存情况。右下角有个柱状图，显示的是堆内存和栈内存的占用情况。其中堆内存包括Eden Space、Survivor Space和Tenured Gen。如下图所示：
-![](http://images.cnitblog.com/blog/239608/201412/160022339841560.png)
+
+
+![](../images/jconsole-heap.png)
 
 可以看到，随着程序的运行，Eden Space会逐渐变满，到100%之后，Eden Space会变成0%，Survivor Space会变大；Survivor Space变100%之后，会挪到Tenured Gen中，Survivor Space变0%。这个过程和上面讲到的GC过程是一样的，很直观。
 
