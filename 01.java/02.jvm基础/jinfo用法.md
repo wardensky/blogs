@@ -3,9 +3,9 @@
 
 jinfo（Configuration Info for Java）的作用是实时地查看和调整虚拟机各项参数。使用jps命令的-v参数可以查看虚拟机启动时显式指定的参数列表，但如果想知道未被显式指定的参数的系统默认值，除了去找资料外，就只能使用jinfo的-flag选项进行查询了。
 
-```
-jinfo prints Java configuration information for a given Java process or core file  or  a  remote  debug  server.   Configuration information includes Java System properties and Java virtual machine command line flags.
-```
+
+>jinfo prints Java configuration information for a given Java process or core file  or  a  remote  debug  server.   Configuration information includes Java System properties and Java virtual machine command line flags.
+
 jinfo的语法
 
 ```
@@ -13,6 +13,7 @@ jinfo [ option ] pid
 jinfo [ option ] executable core
 jinfo [ option ] [ server-id@ ] remote-hostname-or-IP
 ```
+
 参数列表如下：
 
 ```
