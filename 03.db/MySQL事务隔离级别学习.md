@@ -17,6 +17,18 @@
 
 小结：不可重复读的和幻读很容易混淆，不可重复读侧重于修改，幻读侧重于新增或删除。解决不可重复读的问题只需锁住满足条件的行，解决幻读需要锁表
 
+
+## MySQL事务隔离级别
+
+|事务隔离级别 | 脏读| 不可重复读|幻读 |
+| - | - | - | - |
+| 读未提交（read-uncommitted） | 是 | 是 | 是 |
+| 不可重复读（read-committed | 否 | 是 | 是 |
+| 可重复读（repeatable-read） |否  |否 |是  |
+|串行化（serializable）  |  否| 否 | 否 |
+
+mysql默认的事务隔离级别为repeatable-read
+
 ## 参考
 
 - [MySQL的四种事务隔离级别](https://www.cnblogs.com/huanongying/p/7021555.html)
