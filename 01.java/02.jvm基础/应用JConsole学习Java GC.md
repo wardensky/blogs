@@ -1,9 +1,9 @@
 # 应用JConsole学习Java GC
 
 
-## 应用JConsole学习Java GC
 关于Java GC的知识，好多地方都讲了很多，今天我用JConsole来学习一下Java GC的原理。
-### GC原理
+
+## GC原理
 在我的[上一篇](http://www.cnblogs.com/wardensky/p/4162121.html)中介绍了Java运行时数据区，在了解这些的基础上，对Java GC的理解能更清晰一些。
 
 简单来讲，Java的内存分为堆和栈，其中堆是程序员用的内存，栈是系统用的内存。（*这句话不一定正确，但可以这么理解*）Java的内存管理主要是管理对象的分配和释放，或者说内存的分配和回收。在C或C++语言里面，内存是要自己控制的，new之后要delete掉，否则很容易出现内存泄漏。（*还记得当时写C的痛苦，不过通过写C代码，很好的了解了内存的分配机制*）在Java里面，分配内存和回收内存的事情是Jvm来管的。
@@ -28,22 +28,28 @@ Jvm有自己的机制来管理内存，具体的细节算法这里不讲，主�
 
 那上面这个过程如何得知呢？今天我就用JConsole给大家演示一下如何看GC的过程。
 
-####JConsole介绍
+## JConsole介绍
+
 先介绍一下JConsole。
-#####JConsole是什么
+
+### JConsole是什么
 JConsole 是一个内置 Java 性能分析器，可以从命令行或在 GUI shell 中运行。您可以轻松地使用 JConsole（或者，它更高端的 “近亲” VisualVM ）来监控 Java 应用程序性能和跟踪 Java 中的代码。
-#####如何启动JConsole
+
+### 如何启动JConsole
 JConsole是一个程序，在windows里面找到JConsole.exe，双击启动即可。启动之后的界面如下图所示：
 
 ![](http://images.cnitblog.com/blog/239608/201412/160000082814373.png)
 
 可以看到，JConsole即可以连接本地进程，也可以连接远程进程。
 
-####应用JConsole学习GC
+## 应用JConsole学习GC
+
 那么，如何用JConsole学习GC的过程呢？我们首先要设计一个程序，这个程序一直保持内存增长，直到发生内存泄漏。在这个过程中，我们应该JConsole观察GC的过程。
-#####写一个内存泄漏的程序
+
+### 写一个内存泄漏的程序
 写一个内存泄漏的程序比较简单，读一个很大的文件到内存中，直至内存溢出，代码如下：
 
+```
 
 	package com.chzhao.test;
 
@@ -73,8 +79,10 @@ JConsole是一个程序，在windows里面找到JConsole.exe，双击启动即�
 		}
 	}
 
+```
 这个文件是我程序的一个日志文件，足够大，300M+
-#####设置启动参数
+
+### 设置启动参数
 除了写程序之外，为了快点出现内存泄漏，我们把启动内存调小。在Eclispse里面调VM arguments就可以，内容为：
 
 ```
@@ -82,7 +90,8 @@ JConsole是一个程序，在windows里面找到JConsole.exe，双击启动即�
 ```
 
 我设置了4M。
-#####通过JConsole观察
+### 通过JConsole观察
+
 首先把程序运行起来，在通过JConsole连接到程序上。
 因为我们只关心内存，切换到内存标签页。有一个下拉图表，可以观察不同的内存情况。右下角有个柱状图，显示的是堆内存和栈内存的占用情况。其中堆内存包括Eden Space、Survivor Space和Tenured Gen。如下图所示：
 ![](http://images.cnitblog.com/blog/239608/201412/160022339841560.png)
@@ -103,13 +112,12 @@ JConsole是一个程序，在windows里面找到JConsole.exe，双击启动即�
 ![](http://images.cnitblog.com/blog/239608/201412/161051521879970.png)
 
 
-#####结论
+## 结论
 通过JConsole工具学习GC的过程，生动形象，很容易明白GC是如何进行的。然而这些知识都属于GC的基础知识，如果要了解更多GC的知识，还要多学习。
 
 参考：
 
-+ 深入理解Java虚拟机
-
-+ [Java 内存模型及GC原理](http://blog.csdn.net/ithomer/article/details/6252552)
-+ [如何利用 JConsole观察分析Java程序的运行，进行排错调优](http://jiajun.iteye.com/blog/810150)
-+ [JVM系列三:JVM参数设置、分析](http://www.cnblogs.com/redcreen/archive/2011/05/04/2037057.html)
+- 深入理解Java虚拟机
+- [Java 内存模型及GC原理](http://blog.csdn.net/ithomer/article/details/6252552)
+- [如何利用 JConsole观察分析Java程序的运行，进行排错调优](http://jiajun.iteye.com/blog/810150)
+- [JVM系列三:JVM参数设置、分析](http://www.cnblogs.com/redcreen/archive/2011/05/04/2037057.html)
