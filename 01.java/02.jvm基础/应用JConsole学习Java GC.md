@@ -38,7 +38,7 @@ JConsole 是一个内置 Java 性能分析器，可以从命令行或在 GUI she
 ### 如何启动JConsole
 JConsole是一个程序，在windows里面找到JConsole.exe，双击启动即可。启动之后的界面如下图所示：
 
-![](http://images.cnitblog.com/blog/239608/201412/160000082814373.png)
+![](../images/jconsole.png)
 
 可以看到，JConsole即可以连接本地进程，也可以连接远程进程。
 
