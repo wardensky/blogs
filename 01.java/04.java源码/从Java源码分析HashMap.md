@@ -2,6 +2,7 @@
 
 
 ## 前言
+
 Java里面的复杂数据结构，其底层都是数据啊，链表什么的。只不过人家（Doug Lea）写的好而已。所以，在看HashMap的源码之前，要在自己脑子里面想一想，如果是自己，应该怎么实现HashMap？
 
 当前，在看HashMap之前，应该对HashMap的使用比较熟悉。
@@ -19,15 +20,15 @@ HashMap不是简单的数据类型，里面应用了一些稍微高端的知识�
 
 hash在中文中通常翻译为哈希或者散列，hash的准确定义如下：
 
-```
-A hash function is any function that can be used to map data of arbitrary size to data of fixed size. The values returned by a hash function are called hash values, hash codes, hash sums, or simply hashes. One use is a data structure called a hash table, widely used in computer software for rapid data lookup.
-```
+
+>A hash function is any function that can be used to map data of arbitrary size to data of fixed size. The values returned by a hash function are called hash values, hash codes, hash sums, or simply hashes. One use is a data structure called a hash table, widely used in computer software for rapid data lookup.
+
 
 简单翻译如下：
 
-```
-哈希函数的指任何一个能把任意长度的数据变成固定长度数据的函数。一个哈希函数的返回值乘坐哈希值、哈希码、哈希和或者就是哈希。哈希的一个应用就是哈希表，在计算机软件中广泛用于快速查询。
-```
+
+>哈希函数的指任何一个能把任意长度的数据变成固定长度数据的函数。一个哈希函数的返回值乘坐哈希值、哈希码、哈希和或者就是哈希。哈希的一个应用就是哈希表，在计算机软件中广泛用于快速查询。
+
 
 ### 哈希表
 
