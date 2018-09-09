@@ -1,12 +1,9 @@
-#应用javap学习java class文件
-
-@(编程)
+# 应用javap学习java class文件
 
 
-[TOC]
 
 
-##1. class文件内容概述
+## class文件内容概述
 JVM运行Java程序的时候，它会加载对应的class文件，并提取class文件中的信息存放在JVM开辟出来的方法区 内存中。那么这个class文件里面到底有些什么内容呢？
 >class 文件是java代码编译之后的文件，但其实很多其它运行在jvm上的语言最后编译成的也是class文件，如jRuby等。所以可以说class文件是可以被jvm接受并运行的字节码文件。
 >Class文件是一组以8位字节为基础单位的二进制流，各个数据项目严格按照顺序紧凑地排列在Class文件之中，中间没有添加任何分隔符，这使得整个Class文件中存储的内容几乎全部是程序运行的必要数据，没有空隙存在。根据Java虚拟机规范的规定，Class文件格式采用一种类似于C语言结构体的伪结构来存储数据。
@@ -22,13 +19,13 @@ class文件包含以下内容
 >7. 方法表集合   methods
 >7. 属性表集合
 
-###1.1. 魔数 magic number
+### 魔数 magic number
 class文件的开始是magic number和版本号。
 头4个字节是magic number，即
 ```
 cafe babe
 ```
-###1.2. 版本号 minor_version major_verion
+### 版本号 minor_version major_verion
 第5和第6字节是次版本号，第7和第8字节是主版本号。
 版本号的具体对应关系如下：
 
@@ -39,7 +36,7 @@ cafe babe
 |jdk6|50 0x32|
 |jdk5|49 0x31|
 
-###1.3. 常量池 Constant pool
+### 常量池 Constant pool
 >常量池可以理解为Class文件之中的资源仓库，它是Class文件结构中与其他项目关联最多的数据类型，也是占用Class文件空间最大的数据项目之一，同时它还是在Class文件中第一个出现的表类型数据项目。由于常量池中常量的数量是不固定的，所以在常量池的入口需要放置一项u2类型的数据，代表常量池容量计数值（constant_pool_count）。与Java中语言习惯不一样的是，这个容量计数是从1而不是0开始的。关于常量池的分析在下面的例子中会有体现。
 
 常量池里面包含以下类型内容：
@@ -67,28 +64,28 @@ cafe babe
 
 
 
-###1.4. 访问标志 access_flag
+### 访问标志 access_flag
 > 占用2个字节。用来表明该class文件中定义的是类还是接口，访问修饰符是public还是缺省。类或接口是否是抽象的。类是否是final的。
 ![Alt text](./访问标志.jpg)
 
-###1.5. 类索引、父类索引与接口索引  this_class super_class interfaces
+### 类索引、父类索引与接口索引  this_class super_class interfaces
 >类索引（this_class）和父类索引（super_class）都是一个u2类型的数据，而接口索引集合（inter-faces）是一组u2类型的数据的集合，Class文件中由这三项数据来确定这个类的继承关系。类索引用于确定这个类的全限定名，父类索引用于确定这个类的父类的全限定名。类索引、父类索引和接口索引集合都按顺序排列在访问标志之后，类索引和父类索引用两个u2类型的索引值表示，它们各自指向一个类型为CONSTANT_Class_info的类描述符常量，通过CONSTANT_Class_info类型的常量中的索引值可以找到定义在CONSTANT_Utf8_info类型的常量中的全限定名字符串。
 >类索引、父类索引和接口索引集合都按顺序排列在访问标志之后，类索引和父类索引用两个u2类型的索引值表示，它们各自指向一个类型为CONSTANT_Class_info的类描述符常量，通过CONSTANT_Class_info类型的常量中的索引值可以找到定义在CONSTANT_Utf8_info类型的常量中的全限定名字符串。
 
-###1.6. 字段表集合   field_info
+### 字段表集合   field_info
 >字段表（field_info）用于描述接口或者类中声明的变量。字段（field）包括类级变量以及实例级变量，但不包括在方法内部声明的局部变量。可以包括的信息有：字段的作用域（public、private、protected修饰符）、是实例变量还是类变量（static修饰符）、可变性（final）、并发可见性（volatile修饰符，是否强制从主内存读写）、可否被序列化（transient修饰符）、字段数据类型（基本类型、对象、数组）、字段名称。上述这些信息中，各个修饰符都是布尔值，要么有某个修饰符，要么没有，很适合使用标志位来表示。而字段叫什么名字、字段被定义为什么数据类型，这些都是无法固定的，只能引用常量池中的常量来描述。
 字段表结构如下图所示：
 ![Alt text](./字段表结构.jpg)
 字段访问标志如下图所示：
 ![Alt text](./字段访问标志.jpg)
 
-###1.7. 方法表集合   method_info
+### 方法表集合   method_info
 >Class文件存储格式中对方法的描述与对字段的描述几乎采用了完全一致的方式，方法表的结构如同字段表一样，依次包括了访问标志（access_flags）、名称索引（name_index）、描述符索引（descriptor_index）、属性表集合（attributes）几项，见下表。
 
 ![Alt text](./方法表结构.jpg)
 其访问标志与字段表类似，不赘述。
 
-###1.8. 属性表集合
+### 属性表集合
 >在Class文件、字段表、方法表都可以携带自己的属性表集合，以用于描述某些场景专有的信息。在Class文件、字段表、方法表都可以携带自己的属性表集合，以用于描述某些场景专有的信息。
 jvm里面定义的属性包括以下类型：
 ![Alt text](./属性表1.jpg)
@@ -96,7 +93,7 @@ jvm里面定义的属性包括以下类型：
 
 
 
-##2. javap命令
+## javap命令
 >javap是jdk下面的一个反编译class文件的程序( Java class file disassembler)，所以说用javap来学习class文件最为合适不过。
 
 >help和man是学习的好方法，javap的help和man分别得到以下内容：
@@ -131,9 +128,9 @@ man的内容比较长，就不贴在这里来。
 ```
 可以看出－verbose参数最全面，能查看所有信息。下面的实例分析中，我们就采用－verbose参数，查看class文件。
 
-##3. 实例分析
+## 实例分析
 在说完上面的枯燥知识后，我们来实践一下，来分析一个真实的class文件。我们采用两种方式分析class文件：直接查看二进制和javap分析。通过两种方式的对比，加深对class文件结构的认识。
-###3.1. java代码
+### java代码
 
 ```
 import java.util.List;
@@ -165,7 +162,7 @@ public class Test{
 
 ```
 
-###3.2. class文件的内容
+### class文件的内容
 把如上代码编译成class文件。
 ```
 javac Test.java
@@ -226,7 +223,7 @@ javac Test.java
 
 
 
-###3.3. 应用javap得到的内容
+### 应用javap得到的内容
 javap有很多参数，我们先利用verbose命令查看。
 
 ```
@@ -383,7 +380,7 @@ Constant pool:
 }
 SourceFile: "Test.java"
 ```
-###3.5. 分析
+### 分析
 >可以看到，虽然我们的java代码不长，但是class文件内容和javap输出的内容比较长。现在结合上面提到的class文件内容，简单分析一下以上内容。
 
 >1. 最上面提到的基本信息不提。
@@ -391,14 +388,14 @@ SourceFile: "Test.java"
 >3. ACC_PUBLIC  ACC_SUPER 表明访问权限，对应前面提到的0001和0020
 >4. 常量池。前面提到过，常量池的内容是18项。
 
-####3.5.1. 魔数 magic number
+#### 魔数 magic number
 头4个字节是magic number，即
 ```
 cafe babe
 ```
 javap输出的文件里面没有魔数。
 
-####3.5.2. 版本号 minor_version major_verion
+#### 版本号 minor_version major_verion
 在javap的输出和class文件里面都可以看到版本号信息。
 javap都输出如下：
 ```
@@ -413,7 +410,7 @@ minor version 0000
 major version 0034
 0x34 = 52
 ```
-####3.5.3. 常量池 Constant pool
+#### 常量池 Constant pool
 常量池的前2个字节是常量池的长度。
 ```
 0030
@@ -456,7 +453,7 @@ Utf8       utf－8编码的字符串
 NamdAndType 字段或方法的部分符号引用
 ```
 
-####3.5.4. 访问标志 access_flag
+#### 访问标志 access_flag
 在常量池之后，有2个字节是访问标志
 ```
 00001a0: 6374 0100 0762 6569 6a69 6e67 0021 000a
@@ -469,15 +466,15 @@ NamdAndType 字段或方法的部分符号引用
 ```
 与javap的内容相同。
 
-####3.5.5. 类索引、父类索引与接口索引  this_class super_class interfaces
-####3.5.6. 字段表集合   fileds
-####3.5.7. 方法表集合   methods
-####3.5.8. 属性表集合
+#### 类索引、父类索引与接口索引  this_class super_class interfaces
+#### 字段表集合   fileds
+#### 方法表集合   methods
+#### 属性表集合
 
-##4.总结
+## 总结
 >本文首先介绍了class文件的结构，之后又介绍了javap命令，最后，通过直接分析二进制文件和分析javap输出的方式，对class文件的结构进行了回顾。一方面对于我自己学习class文件结构是一个总结和提高；另外一方面也希望给不熟悉class结构的同学一些帮助。
 
-##5.参考资料
+## 参考资料
 [《Java虚拟机原理图解》 1.1、class文件基本组织结构](http://blog.csdn.net/luanlouis/article/details/39892027)
 [《Java虚拟机原理图解》 1.2.2、Class文件中的常量池详解（上）](http://blog.csdn.net/luanlouis/article/details/39960815)
 [《Java虚拟机原理图解》3、JVM运行时数据区](http://blog.csdn.net/luanlouis/article/details/40043991)
