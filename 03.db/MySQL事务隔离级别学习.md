@@ -29,6 +29,10 @@
 
 mysql默认的事务隔离级别为repeatable-read
 
+### 未提交读
+
+事务中的修改，即使没有提交，也会被其他事务读取。
+
 ## 参考
 
 - [MySQL的四种事务隔离级别](https://www.cnblogs.com/huanongying/p/7021555.html)
