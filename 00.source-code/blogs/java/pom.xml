@@ -11,7 +11,7 @@
 		<artifactId>blogs</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
- 
+
 
 	<name>java</name>
 	<url>http://maven.apache.org</url>
@@ -21,6 +21,10 @@
 	</properties>
 
 	<dependencies>
-
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib</artifactId>
+			<version>3.2.7</version>
+		</dependency>
 	</dependencies>
 </project>
