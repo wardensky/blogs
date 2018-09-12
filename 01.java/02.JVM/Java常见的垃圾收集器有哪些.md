@@ -1,7 +1,13 @@
 # Java常见的垃圾收集器有哪些
 
 
-实际上，垃圾收集器（GC，Garbage Collector）是和具体 JVM 实现紧密相关的，不同厂商（IBM、Oracle），不同版本的 JVM，提供的选择也不同。
+
+垃圾收集器（GC，Garbage Collector）是和具体 JVM 实现紧密相关的，不同厂商（IBM、Oracle），不同版本的 JVM，提供的选择也不同。
+
+
+![](../images/垃圾收集器.png)
+
+上图展示了7种作用于不同分代的收集器，如果两个收集器之间存在连线，那说明它们可以搭配使用。虚拟机所处的区域说明它是属于新生代收集器还是老年代收集器。多说一句，我们必须要明白一个道理：没有最好的垃圾收集器，更加没有万能的收集器，只能选择对具体应用最合适的收集器。这也是HotSpot为什么要实现这么多收集器的原因。OK，下面一个一个看一下收集器：
 
 ## Serial GC
 
@@ -50,3 +56,25 @@ Serial GC 的对应 JVM 参数是：
 G1 GC 仍然存在着年代的概念，但是其内存结构并不是简单的条带式划分，而是类似棋盘的一个个 region。Region 之间是复制算法，但整体上实际可看作是标记 - 整理（Mark-Compact）算法，可以有效地避免内存碎片，尤其是当 Java 堆非常大的时候，G1 的优势更加明显。
 
 G1 吞吐量和停顿表现都非常不错，并且仍然在不断地完善，与此同时 CMS 已经在 JDK 9 中被标记为废弃（deprecated），所以 G1 GC 值得你深入掌握。
+
+## 垃圾收集器总结
+
+
+
+来看一下对垃圾收集器的总结，列了一张表
+
+|　GC组合|　　Minor GC             |FullGC             |描述|
+| - | - | - | - |
+| -XX:+UseSerialGC	| Serial收集器串行回收| 	Serial Old收集器串行回收	| 该选项可以手动指定Serial收集器+Serial Old收集器组合执行内存回收|
+| -XX:+UseParNewGC	| ParNew收集器并行回收| 	Serial Old收集器串行回收	| 该选项可以手动指定ParNew收集器+Serilal Old组合执行内存回收|
+| -XX:+UseParallelGC| 	Parallel收集器并行回收| 	Serial Old收集器串行回收	| 该选项可以手动指定Parallel收集器+Serial Old收集器组合执行内存回收|
+| -XX:+UseParallelOldGC| 	Parallel收集器并行回收| 	Parallel Old收集器并行回收	| 该选项可以手动指定Parallel收集器+Parallel Old收集器组合执行内存回收|
+| -XX:+UseConcMarkSweepGC	| ParNew收集器并行回收 | 	缺省使用CMS收集器并发回收，备用采用Serial Old收集器串行回收| 该选项可以手动指定ParNew收集器+CMS收集器+Serial Old收集器组合执行内存回收。优先使用ParNew收集器+CMS收集器的组合，当出现ConcurrentMode Fail或者Promotion Failed时，则采用ParNew收集器+Serial Old收集器的组合|
+| -XX:+UseConcMarkSweepGC -XX:-UseParNewGC|Serial收集器串行回收|同上|同上|
+|-XX:+UseG1GC	|G1收集器并发、并行执行内存回收	|同左|暂无|
+
+
+
+## 参考
+
+- [Java虚拟机5：Java垃圾回收（GC）机制详解](https://www.cnblogs.com/xrq730/p/4836700.html)
