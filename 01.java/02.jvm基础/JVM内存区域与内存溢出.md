@@ -33,7 +33,7 @@ Java虚拟机在执行Java程序的过程中会把它所管理的内存划分为
 由于Java虚拟机的多线程是通过线程轮流切换并分配处理器执行时间的方式来实现的，在任何一个确定的时刻，一个处理器（对于多核处理器来说是一个内核）都只会执行一条线程中的指令。因此，为了线程切换后能恢复到正确的执行位置，每条线程都需要有一个独立的程序计数器，各条线程之间计数器互不影响，独立存储，我们称这类内存区域为“线程私有”的内存。
 
 此内存区域是唯一一个在Java虚拟机规范中没有规定任何OutOfMemory-Error情况的区域。
-### ava虚拟机栈
+### Java虚拟机栈
 与程序计数器一样，Java虚拟机栈（Java Vir-tual Machine Stacks）也是线程私有的，它的生命周期与线程相同。虚拟机栈描述的是Java方法执行的内存模型：每个方法在执行的同时都会创建一个栈帧（Stack Frame）用于存储局部变量表、操作数栈、动态链接、方法出口等信息。每一个方法从调用直至执行完成的过程，就对应着一个栈帧在虚拟机栈中入栈到出栈的过程。
 
 局部变量表存放了编译期可知的各种基本数据类型（boolean、byte、char、short、int、float、long、double）、对象引用（reference类型，它不等同于对象本身，可能是一个指向对象起始地址的引用指针，也可能是指向一个代表对象的句柄或其他与此对象相关的位置）和returnAddress类型（指向了一条字节码指令的地址）。
@@ -77,7 +77,7 @@ Java虚拟机在执行Java程序的过程中会把它所管理的内存划分为
 
 ### 对象的访问定位
 通过直接指针访问对象
-![](http://images.cnblogs.com/cnblogs_com/wardensky/645143/o_javapointer.jpg)
+![](../images/直接指针方式访问对象.jpg)
 
 ## OutOfMemoryError异常
 1. 通过代码验证Java虚拟机规范中描述的各个运行时区域存储的内容；
@@ -140,7 +140,7 @@ Exception in thread "main" java.lang.OutOfMemoryError: Java heap space
 	at com.chzhao.jvmtest.HeapOOM.main(HeapOOM.java:14)
 ```
 用MAT分析
-![](http://images.cnblogs.com/cnblogs_com/wardensky/645143/o_mat.png)
+![](../images/o_mat.png)
 ### 栈溢出
 JVM启动参数
 ```
