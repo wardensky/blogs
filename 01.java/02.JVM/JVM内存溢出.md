@@ -3,7 +3,9 @@
 
 ## 堆溢出
 
-Java堆唯一的作用就是存储对象实例，只要保证不断创建对象并且对象不被回收，那么对象数量达到最大堆容量限制后就会产生内存溢出异常了。所以测试的时候把堆的大小固定住并且让堆不可扩展即可。测试代码如下
+Java堆唯一的作用就是存储对象实例，只要保证不断创建对象并且对象不被回收，那么对象数量达到最大堆容量限制后就会产生内存溢出异常了。所以测试的时候把堆的大小固定住并且让堆不可扩展即可。
+
+测试代码如下：
 
 
 ```
@@ -22,6 +24,12 @@ public class HeapOverflowTest {
 }
 
 ```
+
+JVM参数：
+```
+-Xms20M -Xmx20M -XX:+HeapDumpOnOutOfMemoryError
+```
+
 
 输出
 
@@ -66,21 +74,20 @@ public class StackOverflowTest {
 }
 
 ```
-
-
-```
-stack length:18622Exception in thread "main"
-java.lang.StackOverflowError
-	at com.zch.blogs.java.jvm.StackOverflowTest.stackLeak(StackOverflowTest.java:8)
-	at com.zch.blogs.java.jvm.StackOverflowTest.stackLeak(StackOverflowTest.java:8)
-	at com.zch.blogs.java.jvm.StackOverflowTest.stackLeak(StackOverflowTest.java:8)
-	at com.zch.blogs.java.jvm.StackOverflowTest.stackLeak(StackOverflowTest.java:8)
-	at com.zch.blogs.java.jvm.StackOverflowTest.stackLeak(StackOverflowTest.java:8)
-	at com.zch.blogs.java.jvm.StackOverflowTest.stackLeak(StackOverflowTest.java:8)
+JVM参数
 
 ```
+-Xss200k
+```
 
-## 方法区和运行时常量池溢出
+```
+stack length:1237
+Exception in thread "main" java.lang.StackOverflowError
+	at com.zch.blogs.java.jvm.StackOverflowTest.stackLeak(StackOverflowTest.java:8)
+	at com.zch.blogs.java.jvm.StackOverflowTest.stackLeak(StackOverflowTest.java:8)
+	at com.zch.blogs.java.jvm.StackOverflowTest.stackLeak(StackOverflowTest.java:8)
+	at com.zch.blogs.java.jvm.StackOverflowTest.stackLeak(StackOverflowTest.java:8)
+	at com.zch.blogs.java.jvm.StackOverflowTest.stackLeak(StackOverflowTest.java:8)
+	at com.zch.blogs.java.jvm.StackOverflowTest.stackLeak(StackOverflowTest.java:8)
 
-
-运行时常量池也是方法区的一部分，所以这两个区域一起看就可以了。这个区域的OutOfMemoryError可以利用String.intern()方法来产生。这是一个Native方法，意思是如果常量池中有一个String对象的字符串就返回池中的这个字符串的String对象；否则，将此String对象包含的字符串添加到常量池中去，并且返回此String对象的引用。测试代码如下
+``` 
