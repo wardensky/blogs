@@ -26,6 +26,7 @@
 　　与程序计数器一样，Java虚拟机栈也是线程私有的，它的生命周期与线程相同。虚拟机栈描述的是Java方法执行的内存模型：每个方法被执行的时候都会同时创建一个栈帧（Stack Frame）用于存储局部变量表、操作栈、动态链接、方法出口等信息。每一个方法被调用直至执行完成的过程，就对应着一个栈帧在虚拟机栈中从入栈到出栈的过程。
 　　经常有人把Java内存区分为堆内存（Heap）和栈内存（Stack），这种分法比较粗糙，Java内存区域的划分实际上远比这复杂。所指的“栈”就是现在讲的虚拟机栈，或者说是虚拟机栈中的局部变量表部分。局部变量表存放了编译期可知的各种基本数据类型（boolean、byte、char、short、int、float、long、double）、对象引用（reference类型），它不等同于对象本身，根据不同的虚拟机实现，它可能是一个指向对象起始地址的引用指针，也可能指向一个代表对象的句柄或者其他与此对象相关的位置）和returnAddress类型（指向了一条字节码指令的地址）。
 ### 本地方法栈
+
 本地方法栈与虚拟机栈所发挥的作用是非常相似的，其区别不过是虚拟机栈为虚拟机执行Java方法（字节码）服务，而本地方法则是虚拟机使用到的Native方法服务。虚拟机规范中对本地方法栈中的方法使用的语言、使用方式和数据结构并没有强制规定，因此具体的虚拟机可以自由实现它。甚至与虚拟机栈合二为一。本地方法栈区域也会抛出StackOverflowError和OutOfmemoryError异常。
 本地方法栈（Native Method Stacks）与虚拟机栈所发挥的作用是非常相似的，其区别不过是虚拟机栈为虚拟机执行Java方法服务，而本地方法栈则是为虚拟机使用到的Native方法服务。虚拟机规范中对本地方法栈中的方法使用的语言、使用方式与数据结构并没有强制规定，因此具体的虚拟机可以自由实现它。甚至有的虚拟机（譬如Sun HotSpot虚拟机）直接就把本地方法栈和虚拟机栈合二为一。与虚拟机栈一样，本地方法栈区域也会抛出StackOverflowError和OutOfMemoryError异常。在Java虚拟机规范中，对这个区域规定了两种异常状况：如果线程请求的栈深度大于虚拟机所允许的深度，将抛出StackOverflowError异常；如果虚拟机栈可以动态扩展（当前大部分的Java虚拟机都可动态扩展，只不过Java虚拟机规范中也允许固定长度的虚拟机栈），当扩展时无法申请到足够的内存时会抛出OutOfMemoryError异常。
 
@@ -45,6 +46,7 @@
 　　这次JDK8修改了JVM，去掉了PermGen内存，所以永久代的参数-XX:PermSize和-XX:MaxPermSize也被移除了，转而出现了一个Metaspace，其实这两个的作用都类似，都是用来装载一些类信息。但是PermGen是在JVM内存中的，而新的Metaspace是直接在navite memory中的，因此由于Permanent Generation默认很小而导致内存溢出的情况理论上是不会再出现了，因为Metaspace默认大小只要不超过机器内存，那么就是无限制的。不过也可以通过参数-XX:MaxMetaspaceSize=2M来限制它的大小，超过这个大小一样会报内存溢出。
 
 ### 运行时常量池
+
 　　运行时常量池（Runtime Constant Pool）是方法区的一部分，Class文件中除了有类的版本、字段、方法、接口等描述信息外，还有一项信息是常量池，用于存放编译期生成的各种字面量和符号引用，这部分内容将在类加载后存放到方法区的运行时常量池中。
 
 　　运行时常量池相对于Class文件常量池的另一个重要特征是具备动态性，Java语言并不要求常量一定只能在编译期产生，也就是并非预置入Class文件中常量池的内存才能进入方法区运行时常量池，运行期间也可能将新的常量放入池中，这种特性被被使用的较多的是String类的intern()法。
@@ -57,13 +59,17 @@
     除了字符串字面量，实际上还有整型字面量、浮点型字面量等等，但都大同小异，只不过数值类型的字面量不可以手动添加常量，程序启动时字面量中的字面量就已经确定了，比如整型字面量中的字面量范围：-128~127，只有这个范围的数字可以用到字面量。
 
 ## Java内存分配与内存回收
+
 这里所说的内存分配，主要指的是在堆上的分配。Java内存分配和回收的机制概括的说，就是：分代分配，分代回收。对象将根据存活的时间被分为：年轻代（Young Generation）、年老代（Old Generation）、永久代（Permanent Generation，也就是方法区）。如下图：
-![](http://www.importnew.com/wp-content/uploads/2012/12/Figure-1-GC-Area-Data-Flow.png)
+
+![](../images/Figure-1-GC-Area-Data-Flow.png)
+
+
 　　年轻代（Young Generation）：对象被创建时，内存的分配首先发生在年轻代（大对象可以直接被创建在年老代），大部分的对象在创建后很快就不再使用，因此很快变得不可达，于是被年轻代的GC机制清理掉（IBM的研究表明，98%的对象都是很快消亡的），这个GC机制被称为Minor GC或叫Young GC。注意，Minor GC并不代表年轻代内存不足，它事实上只表示在Eden区上的GC。
 
 　　年轻代上的内存分配是这样的，年轻代可以分为3个区域：Eden区和两个存活区（Survivor 0 、Survivor 1）。内存分配过程为：
 　　
-![](http://www.importnew.com/wp-content/uploads/2012/12/Figure-3-Before-After-a-GC.png)
+![](../images/Figure-3-Before-After-a-GC.png)
 　　　　
 绝大多数刚创建的对象会被分配在Eden区，其中的大多数对象很快就会消亡。Eden区是连续的内存空间，因此在其上分配内存极快；
 当Eden区满的时候，执行Minor GC，将消亡的对象清理掉，并将剩余的对象复制到一个存活区Survivor0（此时，Survivor1是空白的，两个Survivor总有一个是空白的）；
@@ -77,92 +83,7 @@
 　　年老代（Old Generation）：对象如果在年轻代存活了足够长的时间而没有被清理掉（即在几次Young GC后存活了下来），则会被复制到年老代，年老代的空间一般比年轻代大，能存放更多的对象，在年老代上发生的GC次数也比年轻代少。当年老代内存不足时，将执行Major GC，也叫 Full GC。　　
 
 ![java堆内存](http://images.cnitblog.com/blog/239608/201412/152353513443951.jpg)
-
-## 应用jconsole学习垃圾回收
-那么，如何用JConsole学习GC的过程呢？我们首先要设计一个程序，这个程序一直保持内存增长，直到发生内存泄漏。在这个过程中，我们应该JConsole观察GC的过程。
-### 写一个内存泄漏的程序
-写一个内存泄漏的程序比较简单，读一个很大的文件到内存中，直至内存溢出，代码如下：
-```
-package com.wisdombud.chzhao.demo;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-public class JConsoleDemo {
-
-	public static void main(String[] args) throws InterruptedException, IOException {
-		List<String> list = new ArrayList<String>();
-		String file = "/Users/chunhuizhao/Software/cn_windows_7_ultimate_x64_dvd_x15-66043.iso";
-		BufferedReader in = null;
-		in = new BufferedReader(new FileReader(file));
-		while (true) {
-			char[] cbuf = new char[1024];
-			int ret = in.read(cbuf);
-			if (ret <= 0) {
-				break;
-			}
-			list.add(cbuf.toString());
-			Thread.sleep(10);
-			System.out.println(ret + "\t" + list.size());
-		}
-		in.close();
-	}
-
-}
-```
-这个文件足够大，3G+
-
-### 设置启动参数
-除了写程序之外，为了快点出现内存泄漏，我们把启动内存调小。在Eclispse里面调VM arguments就可以，内容为：
-
-```
--Xms4M -Xmx4M
-```
-我设置了4M。
-
->-Xms               Specifies  the  initial  size  of the memory allocation pool.
-                           This value must be a multiple of  1024  greater  than  1  MB.
-                           Append  the letter k or K to indicate kilobytes, the letter m
-                           or M to indicate megabytes, the letter g  or  G  to  indicate
-                           gigabytes,  or  the letter t or T to indicate terabytes.  The
-                           default value is 2MB. Examples:
-			             -Xms6291456
-                           -Xms6144k
-                           -Xms6m
-
->-Xmx               Specifies the maximum size, in bytes, of the  memory  alloca-
-                           tion  pool.   This  value  must be a multiple of 1024 greater
-                           than 2 MB.  Append the letter k or K to  indicate  kilobytes,
-                           the letter m or M to indicate megabytes, the letter g or G to
-                           indicate gigabytes, or the letter t or  T  to  indicate  ter-
-                           abytes.  The default value is 64MB. Examples:
-						   -Xmx83886080
-                           -Xmx81920k
-                           -Xmx80m
-
-### 通过JConsole观察
-首先把程序运行起来，在通过JConsole连接到程序上。
-因为我们只关心内存，切换到内存标签页。有一个下拉图表，可以观察不同的内存情况。右下角有个柱状图，显示的是堆内存和栈内存的占用情况。其中堆内存包括Eden Space、Survivor Space和Tenured Gen。如下图所示：
-![](http://images.cnitblog.com/blog/239608/201412/160022339841560.png)
-
-可以看到，随着程序的运行，Eden Space会逐渐变满，到100%之后，Eden Space会变成0%，Survivor Space会变大；Survivor Space变100%之后，会挪到Tenured Gen中，Survivor Space变0%。这个过程和上面讲到的GC过程是一样的，很直观。
-
-也可以观察上面的曲线图，Eden Space的图是类似波形图，每次到波谷都是进行了一次GC。Tenured Gen则是类似梯田，一直向上涨，直到内存溢出。如下两张图所示。
-
-![Eden Space](http://images.cnitblog.com/blog/239608/201412/161051390311218.png)
-
-*Eden Space的波形图*
-
-![Tenured Gen](http://images.cnitblog.com/blog/239608/201412/161051460628666.png)
-
-*Tenured Gen的波形图*
-
-在VM摘要标签页，能看到更多JVM的信息，可以看到分配的内存已经等于堆的最大值了，所以内存溢出。（*为什么堆的最大值是5942Kb我没搞明白，不应该小于4M吗？如果哪位懂请指点一下。*）
-![](http://images.cnitblog.com/blog/239608/201412/161051521879970.png)
-
+ 
 
 ## 参考资料
 [Java内存区域](http://www.cnblogs.com/warden/archive/2012/11/18/2775874.html)
