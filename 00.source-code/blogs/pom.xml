@@ -25,5 +25,6 @@
   <modules>
   	<module>algorithm</module>
     <module>framework-spring</module>
+    <module>network-netty</module>
   </modules>
 </project>
