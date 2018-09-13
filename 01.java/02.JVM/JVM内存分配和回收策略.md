@@ -86,23 +86,27 @@ public static void testPretenureSizeThreshold() {
 **JVM参数**
 
 ```
--verbose:gc -Xms20M -Xmx20M -Xmn10M -XX:+PrintGCDetails -XX:SurvivorRatio=8 -XX:PretenureSizeThreshold= 3145728
+-verbose:gc -Xms20M -Xmx20M -Xmn10M -XX:+PrintGCDetails -XX:SurvivorRatio=8 -XX:PretenureSizeThreshold=3145728  -XX:+UseSerialGC
 
 
 ```
+
+因为我是Java8，所以要指定**-XX:+UseSerialGC**
 
 **输出**
 
 ```
+
 Heap
- PSYoungGen      total 9216K, used 5259K [0x00000007bf600000, 0x00000007c0000000, 0x00000007c0000000)
-  eden space 8192K, 64% used [0x00000007bf600000,0x00000007bfb22ef8,0x00000007bfe00000)
-  from space 1024K, 0% used [0x00000007bff00000,0x00000007bff00000,0x00000007c0000000)
-  to   space 1024K, 0% used [0x00000007bfe00000,0x00000007bfe00000,0x00000007bff00000)
- ParOldGen       total 10240K, used 0K [0x00000007bec00000, 0x00000007bf600000, 0x00000007bf600000)
-  object space 10240K, 0% used [0x00000007bec00000,0x00000007bec00000,0x00000007bf600000)
+ def new generation   total 9216K, used 1164K [0x00000007bec00000, 0x00000007bf600000, 0x00000007bf600000)
+  eden space 8192K,  14% used [0x00000007bec00000, 0x00000007bed23018, 0x00000007bf400000)
+  from space 1024K,   0% used [0x00000007bf400000, 0x00000007bf400000, 0x00000007bf500000)
+  to   space 1024K,   0% used [0x00000007bf500000, 0x00000007bf500000, 0x00000007bf600000)
+ tenured generation   total 10240K, used 4096K [0x00000007bf600000, 0x00000007c0000000, 0x00000007c0000000)
+   the space 10240K,  40% used [0x00000007bf600000, 0x00000007bfa00010, 0x00000007bfa00200, 0x00000007c0000000)
  Metaspace       used 2637K, capacity 4486K, committed 4864K, reserved 1056768K
   class space    used 285K, capacity 386K, committed 512K, reserved 1048576K
+
 
 ```
 
