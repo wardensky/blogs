@@ -93,9 +93,9 @@ github专门用来管理源代码，又可以直接在网页上显示markdown，
   - [从Java源码分析HashMap](https://github.com/wardensky/blogs/blob/master/01.java/04.java源码/从Java源码分析HashMap.md)
   - CopyOnWriteArrayList
   - ConcurrentHashMap
-  - arrayblockingqueue
+  - Arrayblockingqueue
   - String
-  - [Integer源代码学习](https://github.com/wardensky/blogs/blob/master/01.java/04.java源码/Integer源代码学习.md)
+  - [Integer源码学习](https://github.com/wardensky/blogs/blob/master/01.java/04.java源码/Integer源码学习.md)
 
 
 ### 02. design pattern
