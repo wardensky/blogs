@@ -75,7 +75,7 @@ Heap
 执行下列代码中的testPretenureSizeThreshold()方法后，我们看到Eden空间几乎没有被使用，而老年代的10MB空间被使用了40%，也就是4MB的allocation对象直接就分配在老年代中，这是因为PretenureSizeThreshold被设置为3MB（就是3145728，这个参数不能像-Xmx之类的参数一样直接写3MB），因此超过3MB的对象都会直接在老年代进行分配。注意PretenureSizeThreshold参数只对Serial和ParNew两款收集器有效，ParallelScavenge收集器不认识这个参数，ParallelScavenge收集器一般并不需要设置。如果遇到必须使用此参数的场合，可以考虑ParNew加CMS的收集器组合。
 
 
-**试验代码**
+**试验源代码**
 
 ```
 public static void testPretenureSizeThreshold() {
@@ -112,7 +112,58 @@ Heap
 
 ## 长期存活的对象将进入老年代
 
+既然虚拟机采用了分代收集的思想来管理内存，那么内存回收时就必须能识别哪些对象应放在新生代，哪些对象应放在老年代中。为了做到这点，虚拟机给每个对象定义了一个对象年龄（Age）计数器。如果对象在Eden出生并经过第一次MinorGC后仍然存活，并且能被Survivor容纳的话，将被移动到Survivor空间中，并且对象年龄设为1。对象在Survivor区中每“熬过”一次MinorGC，年龄就增加1岁，当它的年龄增加到一定程度（默认为15岁），就将会被晋升到老年代中。
+
+对象晋升老年代的年龄阈值，可以通过参数```-XX:MaxTenuringThreshold```设置。可以试试分别以```-XX:MaxTenuringThreshold=1```和```-XX:MaxTenuringThreshold=15```两种设置来执行下列代码中的testTenuringThreshold()方法，此方法中的allocation1对象需要256KB内存，Survivor空间可以容纳。当MaxTenuringThreshold=1时，allocation1对象在第二次GC发生时进入老年代，新生代已使用的内存GC后非常干净地变成0KB。而MaxTenuringThreshold=15时，第二次GC发生后，allocation1对象则还留在新生代Survivor空间，这时新生代仍然有404KB被占用。
+
+
+
+**试验源代码**
+
+```
+
+```
+**JVM参数**
+
+```
+
+```
+
+因为我是Java8，所以要指定**-XX:+UseSerialGC**
+
+**输出**
+
+```
+
+
+```
+
+
+
 ## 动态对象年龄判定
+
+
+**试验源代码**
+
+```
+
+```
+**JVM参数**
+
+```
+
+```
+
+因为我是Java8，所以要指定**-XX:+UseSerialGC**
+
+**输出**
+
+```
+
+
+```
+
+
 
 ## 空间分配保障
 

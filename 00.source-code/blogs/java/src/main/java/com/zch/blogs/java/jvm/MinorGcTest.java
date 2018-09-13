@@ -19,8 +19,18 @@ public class MinorGcTest {
 		allocation = new byte[4 * _1MB];
 	}
 
+	@SuppressWarnings("unused")
+	public static void testTenuringThreshold() {
+		byte[] allocation1, allocation2, allocation3;
+		allocation1 = new byte[_1MB / 4];
+		allocation2 = new byte[_1MB * 4];
+		allocation3 = new byte[_1MB * 4];
+		allocation3 = null;
+		allocation3 = new byte[_1MB * 4];
+	}
+
 	public static void main(String[] args) {
-		//testAllocation();
+		// testAllocation();
 		testPretenureSizeThreshold();
 	}
 }
