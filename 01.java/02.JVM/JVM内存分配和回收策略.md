@@ -86,12 +86,13 @@ public static void testPretenureSizeThreshold() {
 **JVM参数**
 
 ```
--verbose:gc -Xms20M -Xmx20M -Xmn10M -XX:+PrintGCDetails -XX:SurvivorRatio=8 -XX:PretenureSizeThreshold=3145728  -XX:+UseSerialGC
+-verbose:gc -Xms20M -Xmx20M -Xmn10M -XX:+PrintGCDetails -XX:SurvivorRatio=8
+-XX:PretenureSizeThreshold=3145728  -XX:+UseSerialGC
 
 
 ```
 
-因为我是Java8，所以要指定**-XX:+UseSerialGC**
+因为我是Java8，所以要指定 **-XX:+UseSerialGC**
 
 **输出**
 
