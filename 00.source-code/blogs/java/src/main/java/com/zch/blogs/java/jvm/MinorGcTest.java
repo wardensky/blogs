@@ -14,7 +14,13 @@ public class MinorGcTest {
 		allocation4 = new byte[4 * _1MB];
 	}
 
+	public static void testPretenureSizeThreshold() {
+		byte[] allocation;
+		allocation = new byte[4 * _1MB];
+	}
+
 	public static void main(String[] args) {
-		testAllocation();
+		//testAllocation();
+		testPretenureSizeThreshold();
 	}
 }
