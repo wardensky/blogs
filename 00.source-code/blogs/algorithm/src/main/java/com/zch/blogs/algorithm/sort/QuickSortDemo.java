@@ -17,6 +17,13 @@ public class QuickSortDemo extends SortBase {
 		printArray(a);
 	}
 
+	/**
+	 * 这个是我自己实现的版本
+	 * 
+	 * @param n
+	 * @param leftPoint
+	 * @param rightPoint
+	 */
 	static void qs(int n[], int leftPoint, int rightPoint) {
 		if (leftPoint == rightPoint) {
 			return;
