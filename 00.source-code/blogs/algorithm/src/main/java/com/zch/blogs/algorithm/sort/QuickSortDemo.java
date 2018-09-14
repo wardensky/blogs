@@ -10,10 +10,10 @@ package com.zch.blogs.algorithm.sort;
 public class QuickSortDemo extends SortBase {
 	public static void main(String[] args) {
 
-		System.out.println("排序前");
+		System.out.println("快排排序前");
 		printArray(a);
 		qs(a, 0, 8);
-		System.out.println("排序后");
+		System.out.println("快排排序后");
 		printArray(a);
 	}
 
