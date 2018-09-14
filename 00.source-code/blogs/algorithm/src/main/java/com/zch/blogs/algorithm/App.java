@@ -1,4 +1,4 @@
-package org.algorithm;
+package com.zch.blogs.algorithm;
 
 /**
  * Hello world!
