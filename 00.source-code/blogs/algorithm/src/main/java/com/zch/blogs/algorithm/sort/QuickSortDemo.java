@@ -29,7 +29,7 @@ public class QuickSortDemo extends SortBase {
 			return;
 		}
 		int pos = p(n, leftPoint, rightPoint);
-		System.out.println("pos = " + pos);
+
 		if (pos > 2) {
 			qs(n, leftPoint, pos - 1);
 		}
@@ -46,14 +46,11 @@ public class QuickSortDemo extends SortBase {
 		int current = n[leftPoint];
 		while (leftPoint < rightPoint) {
 
-			System.out.println("rightPoint = " + rightPoint);
-			System.out.println("leftPoint = " + leftPoint);
-
 			while (leftPoint < rightPoint) {
 
 				int rightValue = n[rightPoint];
 				if (current > rightValue) {
-					System.out.println("右边小交换");
+					System.out.println("右边交换");
 					n[leftPoint] = rightValue;
 					n[rightPoint] = current;
 					printArray(n);
@@ -67,7 +64,7 @@ public class QuickSortDemo extends SortBase {
 
 				int leftValue = n[leftPoint];
 				if (current < leftValue) {
-					System.out.println("左边大交换");
+					System.out.println("左边交换");
 					n[leftPoint] = current;
 					n[rightPoint] = leftValue;
 					printArray(n);
@@ -78,7 +75,7 @@ public class QuickSortDemo extends SortBase {
 			}
 
 		}
-		System.out.println("跳出 = " + leftPoint);
+		 
 		return leftPoint;
 	}
 
