@@ -1,5 +1,5 @@
 #CentOS环境下Mongodb的安装与配置
- 
+
 
 ## 安装
 ```
@@ -7,8 +7,13 @@
 ```
 
 ## 配置
-配置文件是```/etc/mongodb.conf```
 
+配置文件是
+```
+/etc/mongodb.conf
+```
+
+\mu
 
 ## 命令
 ```
