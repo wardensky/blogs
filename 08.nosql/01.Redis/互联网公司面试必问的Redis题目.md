@@ -5,25 +5,28 @@
 ## 介绍
 
 Redis 是一个开源的使用 ANSI C 语言编写、遵守 BSD 协议、支持网络、可基于内存亦可持久化的日志型、Key-Value 数据库，并提供多种语言的 API的非关系型数据库。
+
 传统数据库遵循 ACID 规则。而 Nosql（Not Only SQL 的缩写，是对不同于传统的关系型数据库的数据库管理系统的统称） 一般为分布式而分布式一般遵循 CAP 定理。
+
 Github 源码：https://github.com/antirez/redis
+
 Redis 官网：https://redis.io/
 
 ## Redis支持的数据类型？
 
-String字符串：
+### String字符串
 
 格式: set key value
 string类型是二进制安全的。意思是redis的string可以包含任何数据。比如jpg图片或者序列化的对象 。
 string类型是Redis最基本的数据类型，一个键最大能存储512MB。
 
-Hash（哈希）
+### Hash（哈希）
 
 格式: hmset name key1 value1 key2 value2
 Redis hash 是一个键值(key=>value)对集合。
 Redis hash是一个string类型的field和value的映射表，hash特别适合用于存储对象。
 
-List（列表）
+### List（列表）
 
 Redis 列表是简单的字符串列表，按照插入顺序排序。你可以添加一个元素到列表的头部（左边）或者尾部（右边）
 格式: lpush name value
@@ -35,7 +38,7 @@ key 对应 list 中删除 count 个和 value 相同的元素
 格式: llen name
 返回 key 对应 list 的长度
 
-Set（集合）
+### Set（集合）
 
 格式: sadd name value
 Redis的Set是string类型的无序集合。
