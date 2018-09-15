@@ -75,6 +75,8 @@ Redis的Set是string类型的无序集合。
 添加一个 string 元素到 key 对应的 set 集合中，成功返回1，如果元素已经在集合中返回 0，如果 key 对应的 set 不存在则返回错误。
 sadd key member
 实例
+
+```
 redis 127.0.0.1:6379> sadd runoob redis
 (integer) 1
 redis 127.0.0.1:6379> sadd runoob mongodb
@@ -88,6 +90,8 @@ redis 127.0.0.1:6379> smembers runoob
 1) "redis"
 2) "rabitmq"
 3) "mongodb"
+```
+
 注意：以上实例中 rabitmq 添加了两次，但根据集合内元素的唯一性，第二次插入的元素将被忽略。
 集合中最大的成员数为 232 - 1(4294967295, 每个集合可存储40多亿个成员)。
 zset(sorted set：有序集合)
