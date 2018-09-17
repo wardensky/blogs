@@ -7,15 +7,13 @@
 
 
 ```
-package com.hhtd.hhtd_utils.redis;
+package com.zch.blogs.nosql.redis;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
-
-import com.hhtd.hhtd_constants.GlobalConfig;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
@@ -171,6 +169,7 @@ public class RedisClient {
 		return this.jedis.smembers(key);
 	}
 }
+
 
 ```
 

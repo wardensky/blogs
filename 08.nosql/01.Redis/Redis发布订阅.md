@@ -65,11 +65,9 @@ Reading messages... (press Ctrl-C to quit)
 ### PubClient
 
 ```
-package com.hhtd.hhtd_utils.redis;
+package com.zch.blogs.nosql.redis;
 
 import org.apache.commons.lang3.StringUtils;
-
-import com.hhtd.hhtd_constants.GlobalConfig;
 
 import redis.clients.jedis.Jedis;
 
@@ -93,16 +91,15 @@ public class PubClient {
 	}
 }
 
+
 ```
 
 ### SubClient
 
 ```
-package com.hhtd.hhtd_utils.redis;
+package com.zch.blogs.nosql.redis;
 
 import org.apache.commons.lang3.StringUtils;
-
-import com.hhtd.hhtd_constants.GlobalConfig;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPubSub;
@@ -124,6 +121,7 @@ public class SubClient {
 
 }
 
+
 ```
 
 ### 测试代码
@@ -144,43 +142,42 @@ public class PrintListener extends JedisPubSub {
 ```
 
 ```
-package com.hhtd.hhtd_utils.redis;
+package com.zch.blogs.nosql.redis;
 
 import redis.clients.jedis.JedisPubSub;
 
 public class RedisTest {
-	public static void main(String[] args) throws InterruptedException {
-		Thread thread = new Thread(new TestThread());
-		thread.start();
-		System.out.println("start listener");
-		for (int i = 0; i < 10; i++) {
-			testPub(i);
-			Thread.sleep(10);
-		}
+ public static void main(String[] args) throws InterruptedException {
+   Thread thread = new Thread(new TestThread());
+   thread.start();
+   System.out.println("start listener");
+   for (int i = 0; i < 10; i++) {
+     testPub(i);
+     Thread.sleep(10);
+   }
 
-	}
+ }
 
-	private static void testPub(int i) {
+ private static void testPub(int i) {
 
-		PubClient client = new PubClient("127.0.0.1", "zch");
+   PubClient client = new PubClient("127.0.0.1", "zch");
 
-		client.pub("123", "adsfasfa" + i * 10000);
-		System.out.println("publish");
-	}
+   client.pub("123", "adsfasfa" + i * 10000);
+   System.out.println("publish");
+ }
 }
 
 class TestThread implements Runnable {
 
-	@Override
-	public void run() {
-		TestThread.testSub();
-	}
+ public void run() {
+   TestThread.testSub();
+ }
 
-	private static void testSub() {
-		SubClient subclient = new SubClient("127.0.0.1", "zch");
-		JedisPubSub listener = new PrintListener();
-		subclient.sub(listener, "123");
-	}
+ private static void testSub() {
+   SubClient subclient = new SubClient("127.0.0.1", "zch");
+   JedisPubSub listener = new PrintListener();
+   subclient.sub(listener, "123");
+ }
 
 }
 
