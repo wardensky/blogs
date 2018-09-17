@@ -1,21 +1,40 @@
-## Redis 列表(List)
+# Redis 列表(List)
+
+## 简介
 
 Redis列表是简单的字符串列表，按照插入顺序排序。你可以添加一个元素到列表的头部（左边）或者尾部（右边）
 一个列表最多可以包含 232 - 1 个元素 (4294967295, 每个列表超过40亿个元素)。
-实例
-redis 127.0.0.1:6379> LPUSH runoobkey redis
-(integer) 1
-redis 127.0.0.1:6379> LPUSH runoobkey mongodb
-(integer) 2
-redis 127.0.0.1:6379> LPUSH runoobkey mysql
-(integer) 3
-redis 127.0.0.1:6379> LRANGE runoobkey 0 10
 
-1) "mysql"
-2) "mongodb"
-3) "redis"
-在以上实例中我们使用了 LPUSH 将三个值插入了名为 runoobkey 的列表当中。
+## 实例
+
+```
+127.0.0.1:6379> lpush keke girl
+(integer) 1
+127.0.0.1:6379> lpush keke 3 pretty
+(integer) 3
+127.0.0.1:6379> lpush keke smart
+(integer) 4
+127.0.0.1:6379> lrange keke 0 10
+1) "smart"
+2) "pretty"
+3) "3"
+4) "girl"
+127.0.0.1:6379> llen keke
+(integer) 4
+127.0.0.1:6379> lpop keke
+"smart"
+127.0.0.1:6379> llen keke
+(integer) 3
+127.0.0.1:6379> lrange keke 0 10
+1) "pretty"
+2) "3"
+3) "girl"
+127.0.0.1:6379>
+```
+ 
+
 ## Redis 列表命令
+
 下表列出了列表相关的基本命令：
 
 
