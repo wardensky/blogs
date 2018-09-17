@@ -8,13 +8,13 @@ redis 127.0.0.1:6379> COMMAND KEY_NAME
 ```
 ## 实例
 ```
-redis 127.0.0.1:6379> SET runoobkey redis
+127.0.0.1:6379> set bbb 222
 OK
-redis 127.0.0.1:6379> GET runoobkey
-"redis"
-
+127.0.0.1:6379> get bbb
+"222"
+127.0.0.1:6379>
 ```
-在以上实例中我们使用了 SET 和 GET 命令，键为 runoobkey。
+在以上实例中我们使用了 SET 和 GET 命令，键为 222。
 
 ## Redis 字符串命令
 下表列出了常用的 redis 字符串命令：

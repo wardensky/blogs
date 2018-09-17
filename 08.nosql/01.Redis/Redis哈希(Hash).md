@@ -4,6 +4,9 @@
 Redis hash 是一个string类型的field和value的映射表，hash特别适合用于存储对象。
 Redis 中每个 hash 可以存储 232 - 1 键值对（40多亿）。
 
+hash可以类似Mongodb那样存储数据。
+
+## 实例
 
 ```
 HMSET runoobkey name "redis tutorial" description "redis basic commands for caching" likes 20 visitors 23000
@@ -11,15 +14,29 @@ HMSET runoobkey name "redis tutorial" description "redis basic commands for cach
 
 
 ```
-HGETALL runoobkey
+127.0.0.1:6379> hset person name keke
+(integer) 1
+127.0.0.1:6379> hset person age 3
+(integer) 1
+127.0.0.1:6379> hget person
+(error) ERR wrong number of arguments for 'hget' command
+127.0.0.1:6379> hgetall person
 1) "name"
-2) "redis tutorial"
-3) "description"
-4) "redis basic commands for caching"
-5) "likes"
-6) "20"
-7) "visitors"
-8) "23000"
+2) "keke"
+3) "age"
+4) "3"
+127.0.0.1:6379> hmset person1 name zhaochunhui age 33 gender male
+OK
+127.0.0.1:6379> hget person1 name
+"zhaochunhui"
+127.0.0.1:6379> hgetall person1
+1) "name"
+2) "zhaochunhui"
+3) "age"
+4) "33"
+5) "gender"
+6) "male"
+127.0.0.1:6379>
 ```
 
 
