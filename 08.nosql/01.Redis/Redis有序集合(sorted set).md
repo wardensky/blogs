@@ -10,24 +10,31 @@ Redis 有序集合和集合一样也是string类型元素的集合,且不允许�
 ## 实例
 
 ```
-redis 127.0.0.1:6379> ZADD runoobkey 1 redis
+127.0.0.1:6379> zadd zkk 1 girl
 (integer) 1
-redis 127.0.0.1:6379> ZADD runoobkey 2 mongodb
+127.0.0.1:6379> zadd zkk 2 3
 (integer) 1
-redis 127.0.0.1:6379> ZADD runoobkey 3 mysql
+127.0.0.1:6379> zadd zkk 3 pretty
 (integer) 1
-redis 127.0.0.1:6379> ZADD runoobkey 3 mysql
-(integer) 0
-redis 127.0.0.1:6379> ZADD runoobkey 4 mysql
-(integer) 0
-redis 127.0.0.1:6379> ZRANGE runoobkey 0 10 WITHSCORES
-
-1) "redis"
+127.0.0.1:6379> zadd zkk 4 smart
+(integer) 1
+127.0.0.1:6379> zcard zkk
+(integer) 4
+127.0.0.1:6379> zrange zkk 0 10
+1) "girl"
+2) "3"
+3) "pretty"
+4) "smart"
+127.0.0.1:6379> zrange zkk 0 10 withscores
+1) "girl"
 2) "1"
-3) "mongodb"
+3) "3"
 4) "2"
-5) "mysql"
-6) "4"
+5) "pretty"
+6) "3"
+7) "smart"
+8) "4"
+127.0.0.1:6379>
 
 ```
 
