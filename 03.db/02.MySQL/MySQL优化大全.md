@@ -398,74 +398,91 @@ mysql> explain select * from web_content;
 #### type:
 
 这是重要的列，显示连接使用了何种类型。从最好到最差的连接类型为：system、const、eg_reg、ref、ref_or_null、 range、indexhe、 ALL。
-       system:表仅有一行(=系统表)。这是const联接类型的一个特例
-       const:(PRIMARY KEY或UNIQUE)
-           表最多有一个匹配行，它将在查询开始时被读取。因为仅有一行，在这行的列值可被优化器剩余部分认为是常数。
-           const表很快，因为它们只读取一次！
-           const用于用常数值比较PRIMARY KEY或UNIQUE索引的所有部分时。
-           在下面的查询中，tbl_name可以用于const表：
-     SELECT * from tbl_name WHERE primary_key=1；
-       eq_reg:key
- 对于每个来自于前面的表的行组合，从该表中读取一行。这可能是最好的联接类型，除了const类型。
-          它用在一个索引的所有部分被联接使用并且索引是UNIQUE或PRIMARY KEY。
-          eq_ref可以用于使用= 操作符比较的带索引的列。比较值可以为常量或一个使用在该表前面所读取的表的列的表达式。
- 在下面的例子中，MySQL可以使用eq_ref联接来处理ref_tables：
-SELECT * FROM ref_table,other_table WHERE ref_table.key_column=other_table.column;
-    SELECT * FROM ref_table,other_table WHERE ref_table.key_column_part1=other_table.column
-                                                 AND ref_table.key_column_part2=1;
 
-       ref:key
+##### system
+表仅有一行(=系统表)。这是const联接类型的一个特例
+##### const:(PRIMARY KEY或UNIQUE)
+
+表最多有一个匹配行，它将在查询开始时被读取。因为仅有一行，在这行的列值可被优化器剩余部分认为是常数。
+const表很快，因为它们只读取一次！
+const用于用常数值比较PRIMARY KEY或UNIQUE索引的所有部分时。
+在下面的查询中，tbl_name可以用于const表：
+```
+SELECT * from tbl_name WHERE primary_key=1；
+```
+##### eq_reg:key
+
+对于每个来自于前面的表的行组合，从该表中读取一行。这可能是最好的联接类型，除了const类型。
+它用在一个索引的所有部分被联接使用并且索引是UNIQUE或PRIMARY KEY。
+eq_ref可以用于使用= 操作符比较的带索引的列。比较值可以为常量或一个使用在该表前面所读取的表的列的表达式。
+
+在下面的例子中，MySQL可以使用eq_ref联接来处理ref_tables：
+```
+SELECT * FROM ref_table,other_table WHERE ref_table.key_column=other_table.column;
+SELECT * FROM ref_table,other_table WHERE ref_table.key_column_part1=other_table.column AND ref_table.key_column_part2=1;
+```
+##### ref:key
+
 对于每个来自于前面的表的行组合，所有有匹配索引值的行将从这张表中读取。如果联接只使用键的最左边的前缀，
-         或如果键不是UNIQUE或PRIMARY KEY（换句话说，如果联接不能基于关键字选择单个行的话），则使用ref。
-         如果使用的键仅仅匹配少量行，该联接类型是不错的。
-         ref可以用于使用=或<=>操作符的带索引的列。
+或如果键不是UNIQUE或PRIMARY KEY（换句话说，如果联接不能基于关键字选择单个行的话），则使用ref。
+如果使用的键仅仅匹配少量行，该联接类型是不错的。
+ref可以用于使用=或<=>操作符的带索引的列。
 在下面的例子中，MySQL可以使用ref联接来处理ref_tables：
- SELECT * FROM ref_table WHERE key_column=expr;
-   SELECT * FROM ref_table,other_table WHERE ref_table.key_column=other_table.column;
-   SELECT * FROM ref_table,other_table WHERE ref_table.key_column_part1=other_table.column
-               AND ref_table.key_column_part2=1;
-     ref_or_null:Or Is null
+```
+SELECT * FROM ref_table WHERE key_column=expr;
+SELECT * FROM ref_table,other_table WHERE ref_table.key_column=other_table.column;
+SELECT * FROM ref_table,other_table WHERE ref_table.key_column_part1=other_table.column AND ref_table.key_column_part2=1;
+```               
+##### ref_or_null:Or Is null
+
 该联接类型如同ref，但是添加了MySQL可以专门搜索包含NULL值的行。在解决子查询中经常使用该联接类型的优化。
-       在下面的例子中，MySQL可以使用ref_or_null联接来处理ref_tables：
+在下面的例子中，MySQL可以使用ref_or_null联接来处理ref_tables：
+```
 SELECT * FROM ref_table WHERE key_column=expr OR key_column IS NULL;
-     range:=、<>、>、>=、<、<=、IS NULL、<=>、BETWEEN或者IN
+```
+##### range:=、<>、>、>=、<、<=、IS NULL、<=>、BETWEEN或者IN
 只检索给定范围的行，使用一个索引来选择行。key列显示使用了哪个索引。
-         key_len包含所使用索引的最长关键元素。在该类型中ref列为NULL。
+key_len包含所使用索引的最长关键元素。在该类型中ref列为NULL。
 当使用=、<>、>、>=、<、<=、IS NULL、<=>、BETWEEN或者IN操作符，用常量比较关键字列时，可以使用range：
+
+```
  SELECT * FROM tbl_name WHERE key_column = 10;
  SELECT * FROM tbl_name WHERE key_column BETWEEN 10 and 20;
  SELECT * FROM tbl_name WHERE key_column IN (10,20,30);
  SELECT * FROM tbl_name WHERE key_part1= 10 AND key_part2 IN (10,20,30);
-     indexhe:
+```
+
+##### indexhe
+
 该联接类型与ALL相同，除了只有索引树被扫描。这通常比ALL快，因为索引文件通常比数据文件小。
 当查询只使用作为单索引一部分的列时，MySQL可以使用该联接类型。
-     ALL：
-对于每个来自于先前的表的行组合，进行完整的表扫描。如果表是第一个没标记const的表，
-       这通常不好，并且通常在它情况下很差。通常可以增加更多的索引而不要使用ALL，
-       使得行能基于前面的表中的常数值或列值被检索出。
-3 possible_keys :
+
+##### ALL
+对于每个来自于先前的表的行组合，进行完整的表扫描。如果表是第一个没标记const的表，这通常不好，并且通常在它情况下很差。通常可以增加更多的索引而不要使用ALL，使得行能基于前面的表中的常数值或列值被检索出。
+
+#### possible_keys :
 
   显示可能应用在这张表中的索引。如果为空，没有可能的索引。可以为相关的域从WHERE语句中
   选择一个合适的语句
-4 key ：
+#### key ：
 
 实际使用的索引。如果为NULL，则没有使用索引。很少的情况下，MYSQL会选择优化不足的索引 。
 这种情况下，可以在SELECT语句中使用USEINDEX（indexname）来强制使用一个索引或者用IGNORE INDEX（indexname）来强制MYSQL忽略索引
-5key_len:
+#### key_len:
 
 使用的索引的长度。在不损失精确性的情况下，长度越短越好
 
 
-6 ref
+#### ref
 
 显示索引的哪一列被使用了，如果可能的话，是一个常数
 
 
-7 rows
+#### rows
 
 MYSQL认为必须检查的用来返回请求数据的行数 (扫描行的数量)
 
-8 Extra
+#### Extra
 
 该列包含MySQL解决查询的详细信息
 关于MYSQL如何解析查询的额外信息。将在表4.3中讨论，但这里可以看到的坏的例子是Using temporary和Using filesort，
@@ -473,75 +490,104 @@ MYSQL认为必须检查的用来返回请求数据的行数 (扫描行的数量)
 
 extra列返回的描述的意义
 
-Distinct:
+##### Distinct:
 一旦MYSQL找到了与行相联合匹配的行，就不再搜索了
-Not exists :
+
+##### Not exists :
 MYSQL优化了LEFT JOIN，一旦它找到了匹配LEFT JOIN标准的行， 就不再搜索了
        面是一个可以这样优化的查询类型的例子：
+```  
 SELECT * FROM t1 LEFT JOIN t2 ON t1.id=t2.id WHERE t2.id IS NULL；
+```
+
 假定t2.id定义为NOT NULL。在这种情况下，MySQL使用t1.id的值扫描t1并查找t2中的行。
-       如果MySQL在t2中发现一个匹配的行，它知道t2.id绝不会为NULL，并且不再扫描t2内有相同的id值的行。
-       换句话说，对于t1的每个行，MySQL只需要在t2中查找一次，无论t2内实际有多少匹配的行。
-Range checked for each Record（index map:#）
+如果MySQL在t2中发现一个匹配的行，它知道t2.id绝不会为NULL，并且不再扫描t2内有相同的id值的行。
+换句话说，对于t1的每个行，MySQL只需要在t2中查找一次，无论t2内实际有多少匹配的行。
+
+
+##### Range checked for each Record（index map:#）
+
 没有找到理想的索引，因此对于从前面表中来的每一个行组合，MYSQL检查使用哪个索引，并用它来从表中返回行。
-       这是使用索引的最慢的连接之一
-       MySQL没有发现好的可以使用的索引，但发现如果来自前面的表的列值已知，可能部分索引可以使用。
-       对前面的表的每个行组合，MySQL检查是否可以使用range或index_merge访问方法来索取行。
-       关于适用性标准的描述参见7.2.5节，“范围优化”和7.2.6节，“索引合并优化”，
-       不同的是前面表的所有列值已知并且认为是常量。这并不很快，但比执行没有索引的联接要快得多。
-Using filesort
+这是使用索引的最慢的连接之一。
+
+MySQL没有发现好的可以使用的索引，但发现如果来自前面的表的列值已知，可能部分索引可以使用。
+对前面的表的每个行组合，MySQL检查是否可以使用range或index_merge访问方法来索取行。
+关于适用性标准的描述参见7.2.5节，“范围优化”和7.2.6节，“索引合并优化”，
+不同的是前面表的所有列值已知并且认为是常量。这并不很快，但比执行没有索引的联接要快得多。
+
+
+##### Using filesort
+
 看到这个的时候，查询就需要优化了。MYSQL需要进行额外的步骤来发现如何对返回的行排序。
-       它根据连接类型以及存储排序键值和匹配条件的全部行的行指针来排序全部行
-Using index
+它根据连接类型以及存储排序键值和匹配条件的全部行的行指针来排序全部行
+
+##### Using index
 列数据是从仅仅使用了索引中的信息而没有读取实际的行动的表返回的，
-       这发生在对表的全部的请求列都是同一个索引的部分的时候
-Using temporary
+
+这发生在对表的全部的请求列都是同一个索引的部分的时候
+
+##### Using temporary
+
 看到这个的时候，查询需要优化了。这里，MYSQL需要创建一个临时表来存储结果，这通常发生在对不同的列集进行ORDER BY上，而不是GROUP BY上
-Using where
-使用了WHERE从句来限制哪些行将与下一张表匹配或者是返回给用户。如果不想返回表中的全部行，
-       并且连接类型ALL或index，这就会发生，或者是查询有问题
+
+##### Using where
+使用了WHERE从句来限制哪些行将与下一张表匹配或者是返回给用户。如果不想返回表中的全部行，并且连接类型ALL或index，这就会发生，或者是查询有问题
 Impossible WHERE noticed after reading const table...
 
-5. SQL核心语句(非常实用的几个技巧)
+## SQL核心语句(非常实用的几个技巧)
 
 
 
-1) 插入数据
+### 插入数据
 
 批量插入:
+```
 INSERT mytable (first_column,second_column,third_column)
 VALUES ('some data','some more data','yet more data') ,
 VALUES ('some data','some more data','yet more data') ,
 VALUES ('some data','some more data','yet more data')
-2）.清空数据表
+```
 
+### 清空数据表
 
+```
 TRUNCATE TABLE  `mytable`
+```
+
 注意：删除表中的所有记录，应使用TRUNCATE TABLE语句。注意这里为什么要用TRUNCATE TABLE语句代替DELETE语句:当你使用TRUNCATE TABLE语句时，记录的删除是不作记录的。也就是说，这意味着TRUNCATE TABLE要比DELETE快得多。
 
-3）用SELECT创建记录和表
+### 用SELECT创建记录和表
 
-　　INSERT语句与DELETE语句和UPDATE语句有一点不同，它一次只操作一个记录。然而，有一个方法可以使INSERT 语句一次添加多个记录。要作到这一点，你需要把INSERT语句与SELECT语句结合起来，象这样:
-
+INSERT语句与DELETE语句和UPDATE语句有一点不同，它一次只操作一个记录。然而，有一个方法可以使INSERT 语句一次添加多个记录。要作到这一点，你需要把INSERT语句与SELECT语句结合起来，象这样:
+```
 　　INSERT mytable(first_column,second_column)
 　　SELECT another_first,another_second  FROM anothertable WHERE another_first='Copy Me!';
-　　这个语句从anothertable拷贝记录到mytable.只有表anothertable中字段another_first的值为'Copy Me!'的记录才被拷贝。
+```
 
-　　当为一个表中的记录建立备份时，这种形式的INSERT语句是非常有用的。在删除一个表中的记录之前，你可以先用这种方法把它们拷贝到另一个表中。
+这个语句从anothertable拷贝记录到mytable.只有表anothertable中字段another_first的值为'Copy Me!'的记录才被拷贝。
 
-　　如果你需要拷贝整个表，你可以使用SELECT INTO语句。例如，下面的语句创建了一个名为newtable的新表，该表包含表mytable的所有数据:
+当为一个表中的记录建立备份时，这种形式的INSERT语句是非常有用的。在删除一个表中的记录之前，你可以先用这种方法把它们拷贝到另一个表中。
 
+如果你需要拷贝整个表，你可以使用SELECT INTO语句。例如，下面的语句创建了一个名为newtable的新表，该表包含表mytable的所有数据:
+```
 SELECT * INTO newtable FROM mytable;
-　　你也可以指定只有特定的字段被用来创建这个新表。要做到这一点，只需在字段列表中指定你想要拷贝的字段。另外，你可以使用WHERE子句来限制拷贝到新表中的记录。下面的例子只拷贝字段second_columnd的值等于'Copy Me!'的记录的first_column字段。
+```
 
+你也可以指定只有特定的字段被用来创建这个新表。要做到这一点，只需在字段列表中指定你想要拷贝的字段。另外，你可以使用WHERE子句来限制拷贝到新表中的记录。下面的例子只拷贝字段second_columnd的值等于'Copy Me!'的记录的first_column字段。
+
+```
 SELECT first_column INTO newtable
 FROM mytable
 WHERE second_column='Copy Me!';
-　　使用SQL修改已经建立的表是很困难的。例如，如果你向一个表中添加了一个字段，没有容易的办法来去除它。另外，如果你不小心把一个字段的数据类型给错了，你将没有办法改变它。但是，使用本节中讲述的SQL语句，你可以绕过这两个问题。
+```
 
-　　例如，假设你想从一个表中删除一个字段。使用SELECT INTO语句，你可以创建该表的一个拷贝，但不包含要删除的字段。这使你既删除了该字段，又保留了不想删除的数据。
+使用SQL修改已经建立的表是很困难的。例如，如果你向一个表中添加了一个字段，没有容易的办法来去除它。另外，如果你不小心把一个字段的数据类型给错了，你将没有办法改变它。但是，使用本节中讲述的SQL语句，你可以绕过这两个问题。
 
-　　如果你想改变一个字段的数据类型，你可以创建一个包含正确数据类型字段的新表。创建好该表后，你就可以结合使用UPDATE语句和SELECT语句，把原来表中的所有数据拷贝到新表中。通过这种方法，你既可以修改表的结构，又能保存原有的数据。
+
+例如，假设你想从一个表中删除一个字段。使用SELECT INTO语句，你可以创建该表的一个拷贝，但不包含要删除的字段。这使你既删除了该字段，又保留了不想删除的数据。
+
+
+如果你想改变一个字段的数据类型，你可以创建一个包含正确数据类型字段的新表。创建好该表后，你就可以结合使用UPDATE语句和SELECT语句，把原来表中的所有数据拷贝到新表中。通过这种方法，你既可以修改表的结构，又能保存原有的数据。
 
 
 
