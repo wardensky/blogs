@@ -29,37 +29,469 @@
 不可重复读的和幻读很容易混淆，不可重复读侧重于修改，幻读侧重于新增或删除。解决不可重复读的问题只需锁住满足条件的行，解决幻读需要锁表
 
 
+
+
 ## MySQL事务隔离级别
 
 |事务隔离级别 | 脏读| 不可重复读|幻读 |
 | - | - | - | - |
 | 读未提交（read-uncommitted） | 是 | 是 | 是 |
-| 不可重复读（read-committed | 否 | 是 | 是 |
+| 不可重复读（read-committed) | 否 | 是 | 是 |
 | 可重复读（repeatable-read） |否  |否 |是  |
 |串行化（serializable）  |  否| 否 | 否 |
 
+
+总结如下:
+- 未提交读(Read Uncommitted)：允许脏读，也就是可能读取到其他会话中未提交事务修改的数据
+- 提交读(Read Committed)：只能读取到已经提交的数据。Oracle等多数数据库默认都是该级别 (不重复读)
+- 可重复读(Repeated Read)：可重复读。在同一个事务内的查询都是事务开始时刻一致的，InnoDB默认级别。在SQL标准中，该隔离级别消除了不可重复读，但是还存在幻象读
+- 串行读(Serializable)：完全串行化的读，每次读都需要获得表级共享锁，读写相互都会阻塞
+
 mysql默认的事务隔离级别为repeatable-read
 
-### 未提交读
+```
+mysql> select @@tx_isolation;
++-----------------+
+| @@tx_isolation  |
++-----------------+
+| REPEATABLE-READ |
++-----------------+
+1 row in set, 1 warning (0.00 sec)
+```
+## 实例
 
-事务中的修改，即使没有提交，也会被其他事务读取。
+用例子说明各个隔离级别的情况
+
+### 读未提交：
+
+- 打开一个客户端A，并设置当前事务模式为read uncommitted（未提交读），查询表account的初始值：
+
+```
+mysql> set session transaction isolation level read uncommitted;
+Query OK, 0 rows affected (0.00 sec)
+```
+
+```
+mysql> select * from account;
++----+------+---------+
+| id | name | balance |
++----+------+---------+
+|  1 | zch  |     450 |
+|  2 | keke |   16000 |
+|  3 | ivy  |    2400 |
++----+------+---------+
+3 rows in set (0.00 sec)
+```
+- 在客户端A的事务提交之前，打开另一个客户端B，更新表account：
+
+```
+mysql> start transaction;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> update account set balance = balance - 50 where id = 1;
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from account;
++----+------+---------+
+| id | name | balance |
++----+------+---------+
+|  1 | zch  |     400 |
+|  2 | keke |   16000 |
+|  3 | ivy  |    2400 |
++----+------+---------+
+3 rows in set (0.00 sec)
+```
+
+- 这时，虽然客户端B的事务还没提交，但是客户端A就可以查询到B已经更新的数据：
+
+```
+mysql> select * from account;
++----+------+---------+
+| id | name | balance |
++----+------+---------+
+|  1 | zch  |     450 |
+|  2 | keke |   16000 |
+|  3 | ivy  |    2400 |
++----+------+---------+
+3 rows in set (0.00 sec)
+
+mysql> select * from account;
++----+------+---------+
+| id | name | balance |
++----+------+---------+
+|  1 | zch  |     400 |
+|  2 | keke |   16000 |
+|  3 | ivy  |    2400 |
++----+------+---------+
+3 rows in set (0.00 sec)
+
+```
+
+- 一旦客户端B的事务因为某种原因回滚，所有的操作都将会被撤销，那客户端A查询到的数据其实就是脏数据：
+
+```
+mysql> rollback;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> select * from account;
++----+------+---------+
+| id | name | balance |
++----+------+---------+
+|  1 | zch  |     450 |
+|  2 | keke |   16000 |
+|  3 | ivy  |    2400 |
++----+------+---------+
+3 rows in set (0.00 sec)
+```
+
+- 在客户端A执行更新语句```update account set balance = balance - 50 where id =1```,zch的balance没有变成350，居然是400，是不是很奇怪，数据不一致啊，如果你这么想就太天真 了，在应用程序中，我们会用400-50=350，并不知道其他会话回滚了，要想解决这个问题可以采用读已提交的隔离级别
+
+```
+mysql> update account set balance = balance - 50 where id = 1;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from account;
++----+------+---------+
+| id | name | balance |
++----+------+---------+
+|  1 | zch  |     400 |
+|  2 | keke |   16000 |
+|  3 | ivy  |    2400 |
++----+------+---------+
+3 rows in set (0.00 sec)
+```
+
+
+
+### 读已提交
+
+- 打开一个客户端A，并设置当前事务模式为read committed（未提交读），查询表account的所有记录：
+
+```
+mysql> set session transaction isolation level read committed;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> start transaction;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from account;
++----+------+---------+
+| id | name | balance |
++----+------+---------+
+|  1 | zch  |     450 |
+|  2 | keke |   16000 |
+|  3 | ivy  |    2400 |
++----+------+---------+
+3 rows in set (0.00 sec)
+```
+
+
+- 在客户端A的事务提交之前，打开另一个客户端B，更新表account：
+
+```
+mysql> set session transaction isolation level read committed;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> start transaction;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> update account set balance = balance - 50 where id = 1;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from account;
++----+------+---------+
+| id | name | balance |
++----+------+---------+
+|  1 | zch  |     400 |
+|  2 | keke |   16000 |
+|  3 | ivy  |    2400 |
++----+------+---------+
+3 rows in set (0.00 sec)
+```
+
+
+- 这时，客户端B的事务还没提交，客户端A不能查询到B已经更新的数据，解决了脏读问题：
+
+```
+mysql> select * from account;
++----+------+---------+
+| id | name | balance |
++----+------+---------+
+|  1 | zch  |     450 |
+|  2 | keke |   16000 |
+|  3 | ivy  |    2400 |
++----+------+---------+
+3 rows in set (0.00 sec)
+
+mysql> select * from account;
++----+------+---------+
+| id | name | balance |
++----+------+---------+
+|  1 | zch  |     450 |
+|  2 | keke |   16000 |
+|  3 | ivy  |    2400 |
++----+------+---------+
+3 rows in set (0.00 sec)
+```
+
+- 客户端B的事务提交
+
+```
+mysql> select * from account;
++----+------+---------+
+| id | name | balance |
++----+------+---------+
+|  1 | zch  |     400 |
+|  2 | keke |   16000 |
+|  3 | ivy  |    2400 |
++----+------+---------+
+3 rows in set (0.00 sec)
+
+mysql> commit;
+Query OK, 0 rows affected (0.02 sec)
+
+```
+
+- 客户端A执行与上一步相同的查询，结果 与上一步不一致，即产生了不可重复读的问题
+
+```
+mysql> select * from account;
++----+------+---------+
+| id | name | balance |
++----+------+---------+
+|  1 | zch  |     450 |
+|  2 | keke |   16000 |
+|  3 | ivy  |    2400 |
++----+------+---------+
+3 rows in set (0.00 sec)
+
+mysql> select * from account;
++----+------+---------+
+| id | name | balance |
++----+------+---------+
+|  1 | zch  |     400 |
+|  2 | keke |   16000 |
+|  3 | ivy  |    2400 |
++----+------+---------+
+3 rows in set (0.00 sec)
+```
+
+
+
+### 可重复读
+
+- 打开一个客户端A，并设置当前事务模式为repeatable read，查询表account的所有记录
+
+```
+mysql> set session transaction isolation level repeatable read;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> start transaction;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from account;
++----+------+---------+
+| id | name | balance |
++----+------+---------+
+|  1 | zch  |     400 |
+|  2 | keke |   16000 |
+|  3 | ivy  |    2400 |
++----+------+---------+
+3 rows in set (0.00 sec)
+```
+
+- 在客户端A的事务提交之前，打开另一个客户端B，更新表account并提交
+
+
+```
+mysql> set session transaction isolation level repeatable read;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> start transaction;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> update account set balance = balance - 50 where id = 1;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from account;
++----+------+---------+
+| id | name | balance |
++----+------+---------+
+|  1 | zch  |     350 |
+|  2 | keke |   16000 |
+|  3 | ivy  |    2400 |
++----+------+---------+
+3 rows in set (0.00 sec)
+
+mysql> commit;
+Query OK, 0 rows affected (0.00 sec)
+```
+
+- 在客户端A查询表account的所有记录，与步骤（1）查询结果一致，没有出现不可重复读的问题
+
+```
+mysql> select * from account;
++----+------+---------+
+| id | name | balance |
++----+------+---------+
+|  1 | zch  |     400 |
+|  2 | keke |   16000 |
+|  3 | ivy  |    2400 |
++----+------+---------+
+3 rows in set (0.00 sec)
+
+mysql> select * from account;
++----+------+---------+
+| id | name | balance |
++----+------+---------+
+|  1 | zch  |     400 |
+|  2 | keke |   16000 |
+|  3 | ivy  |    2400 |
++----+------+---------+
+3 rows in set (0.00 sec)
+
+```
+
+
+- 在客户端A，接着执行```update balance = balance - 50 where id = 1```，balance没有变成400-50=350，zch的balance值用的是步骤（2）中的350来算的，所以是300，数据的一致性倒是没有被破坏。可重复读的隔离级别下使用了MVCC机制，select操作不会更新版本号，是快照读（历史版本）；insert、update和delete会更新版本号，是当前读（当前版本）。
+
+
+```
+mysql> select * from account;
++----+------+---------+
+| id | name | balance |
++----+------+---------+
+|  1 | zch  |     400 |
+|  2 | keke |   16000 |
+|  3 | ivy  |    2400 |
++----+------+---------+
+3 rows in set (0.00 sec)
+
+mysql>  update account set balance = balance - 50 where id = 1;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from account;
++----+------+---------+
+| id | name | balance |
++----+------+---------+
+|  1 | zch  |     300 |
+|  2 | keke |   16000 |
+|  3 | ivy  |    2400 |
++----+------+---------+
+3 rows in set (0.00 sec)
+```
+
+- 重新打开客户端B，插入一条新数据后提交
+
+
+```
+mysql> start transaction;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> insert into account values (4,'zyx', 700);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> commit;
+Query OK, 0 rows affected (0.01 sec)
+```
+
+- 在客户端A查询表account的所有记录，没有查出新增数据，所以没有出现幻读
+
+```
+mysql> select * from account;
++----+------+---------+
+| id | name | balance |
++----+------+---------+
+|  1 | zch  |     300 |
+|  2 | keke |   16000 |
+|  3 | ivy  |    2400 |
++----+------+---------+
+3 rows in set (0.05 sec)
+```
+
+
+### 串行化
+- 打开一个客户端A，并设置当前事务模式为serializable，查询表account的初始值：
+
+```
+mysql> set session transaction isolation level serializable;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> start transaction;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from account;
+```
+如果另外一个事务没有提交，这个数据无法读出，会被阻塞。
+
+只有当另外一个客户端提交事务之后，才能查询出结果。
+```
+mysql> commit;
+Query OK, 0 rows affected (0.02 sec)
+
+```
+
+```
+mysql> select * from account;
++----+------+---------+
+| id | name | balance |
++----+------+---------+
+|  1 | zch  |     300 |
+|  2 | keke |   16000 |
+|  3 | ivy  |    2400 |
+|  4 | zyx  |     700 |
++----+------+---------+
+4 rows in set (12.86 sec)
+```
+
+时间很长，是因为被阻塞了。
+
+- 打开一个客户端B，并设置当前事务模式为serializable，插入一条记录报错，表被锁了插入失败，mysql中事务隔离级别为serializable时会锁表，因此不会出现幻读的情况，这种隔离级别并发性极低，开发中很少会用到。
+
+```
+mysql> set session transaction isolation level serializable;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> start transaction;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> insert into account values(5,'tom',0);
+ERROR 1205 (HY000): Lock wait timeout exceeded; try restarting transaction
+```
 
 ## 事务隔离是怎么实现的
 
 是基于锁实现的.
 有哪些锁？分别介绍下
 在DBMS中，可以按照锁的粒度把数据库锁分为行级锁(INNODB引擎)、表级锁(MYISAM引擎)和页级锁(BDB引擎 )。
-行级锁
-行级锁是Mysql中锁定粒度最细的一种锁，表示只针对当前操作的行进行加锁。行级锁能大大减少数据库操作的冲突。其加锁粒度最小，但加锁的开销也最大。行级锁分为共享锁 和 排他锁。
-特点：
+
+### 行级锁
+
+行级锁是Mysql中锁定粒度最细的一种锁，表示只针对当前操作的行进行加锁。行级锁能大大减少数据库操作的冲突。其加锁粒度最小，但加锁的开销也最大。行级锁分为共享锁和排他锁。
+
+**特点：**
+
 开销大，加锁慢；会出现死锁；锁定粒度最小，发生锁冲突的概率最低，并发度也最高。
-表级锁
+
+### 表级锁
+
 表级锁是MySQL中锁定粒度最大的一种锁，表示对当前操作的整张表加锁，它实现简单，资源消耗较少，被大部分MySQL引擎支持。最常使用的MYISAM与INNODB都支持表级锁定。表级锁定分为表共享读锁（共享锁）与表独占写锁（排他锁）。
-特点
+
+**特点**
+
 开销小，加锁快；不会出现死锁；锁定粒度大，发出锁冲突的概率最高，并发度最低。
-页级锁
+
+### 页级锁
+
 页级锁是MySQL中锁定粒度介于行级锁和表级锁中间的一种锁。表级锁速度快，但冲突多，行级冲突少，但速度慢。所以取了折衷的页级，一次锁定相邻的一组记录。
-特点
+
+**特点**
+
 开销和加锁时间界于表锁和行锁之间；会出现死锁；锁定粒度界于表锁和行锁之间，并发度一般
 
 ## 参考
