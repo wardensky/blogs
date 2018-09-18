@@ -1,4 +1,4 @@
-# hibernate面试题
+# Hibernate面试题
 
 ## 什么是Hibernate的并发机制？怎么去处理并发问题？
 
@@ -8,7 +8,7 @@ a、Hibernate的Session对象是非线程安全的,对于单个请求,单个会�
 
 
 >如果一个Session 实例允许共享的话，那些支持并发运行的,例如Http request,session beans将会导致出现资源争用。
->如果在Http Session中有hibernate的Session的话,就可能会出现同步访问Http Session。只要用户足够快的点击浏览器的“刷新”,  就会导致两个并发运行的线程使用同一个Session。  
+>如果在Http Session中有Hibernate的Session的话,就可能会出现同步访问Http Session。只要用户足够快的点击浏览器的“刷新”,  就会导致两个并发运行的线程使用同一个Session。  
 
 
 b、多个事务并发访问同一块资源,可能会引发第一类丢失更新，脏读，幻读，不可重复读，第二类丢失更新一系列的问题。
@@ -32,14 +32,14 @@ b、多个事务并发访问同一块资源,可能会引发第一类丢失更新
 - update()方法操作的对象必须是持久化了的对象。也就是说，如果此对象在数据库中不存在的话，就不能使用update()方法。
 - saveOrUpdate()方法操作的对象既可以使持久化了的，也可以使没有持久化的对象。如果是持久化了的对象调用saveOrUpdate()则会 更新数据库中的对象；如果是未持久化的对象使用此方法,则save到数据库中。
 
-## hibernate的三种状态之间如何转换
+## Hibernate的三种状态之间如何转换
 
 - 当对象由瞬时状态(Transient)一save()时，就变成了持久化状态；
 - 当我们在Session里存储对象的时候，实际是在Session的Map里存了一份， 也就是它的缓存里放了一份，然后，又到数据库里存了一份，在缓存里这一份叫持久对象(Persistent)。 Session 一 Close()了,它的缓存也都关闭了,整个Session也就失效了,这个时候，这个对象变成了游离状态(Detached)，但数据库中还是存在的。
 - 当游离状态(Detached)update()时，又变为了持久状态(Persistent)。
 - 当持久状态(Persistent)delete()时，又变为了瞬时状态(Transient), 此时，数据库中没有与之对应的记录。
 
-## 比较hibernate的三种检索策略优缺点
+## 比较Hibernate的三种检索策略优缺点
 
 ### 1立即检索；
 - 优点：
@@ -62,21 +62,21 @@ b、多个事务并发访问同一块资源,可能会引发第一类丢失更新
   - 可能会加载应用程序不需要访问的对象，白白浪费许多内存空间；
   - 复杂的数据库表连接也会影响检索性能；
 
-## 如何在控制台看到hibernate生成并执行的sql
+## 如何在控制台看到Hibernate生成并执行的sql
 
-在定义数据库和数据库属性的文件applicationConfig.xml里面，把```hibernate.show_sql``` 设置为true
+在定义数据库和数据库属性的文件applicationConfig.xml里面，把```Hibernate.show_sql``` 设置为true
 这样生成的SQL就会在控制台出现了。
 
 注意：这样做会加重系统的负担，不利于性能调优
 
-## hibernate都支持哪些缓存策略
+## Hibernate都支持哪些缓存策略
 
 - Read-only: 这种策略适用于那些频繁读取却不会更新的数据，这是目前为止最简单和最有效的缓存策略
 - Read/write:这种策略适用于需要被更新的数据，比read-only更耗费资源，在非JTA环境下，每个事务需要在session.close和session.disconnect()被调用
 - Nonstrict read/write: 这种策略不保障两个同时进行的事务会修改同一块数据，这种策略适用于那些经常读取但是极少更新的数据
 - Transactional: 这种策略是完全事务化得缓存策略，可以用在JTA环境下
 
-## hibernate里面的sorted collection 和ordered collection有什么区别
+## Hibernate里面的sorted collection 和ordered collection有什么区别
 
 - sorted collection是在内存中通过Java比较器进行排序的
 - ordered collection是在数据库中通过order by进行排序的
@@ -95,8 +95,8 @@ b、多个事务并发访问同一块资源,可能会引发第一类丢失更新
 为什么要用：
 - 对JDBC访问数据库的代码做了封装，大大简化了数据访问层繁琐的重复性代码。
 - Hibernate是一个基于JDBC的主流持久化框架，是一个优秀的ORM实现。他很大程度的简化DAO层的编码工作
-- hibernate使用Java反射机制，而不是字节码增强程序来实现透明性。
-- hibernate的性能非常好，因为它是个轻量级框架。映射的灵活性很出色。它支持各种关系数据库，从一对一到多对多的各种复杂关系。
+- Hibernate使用Java反射机制，而不是字节码增强程序来实现透明性。
+- Hibernate的性能非常好，因为它是个轻量级框架。映射的灵活性很出色。它支持各种关系数据库，从一对一到多对多的各种复杂关系。
 
 ## Hibernate是如何延迟加载?
 
@@ -156,7 +156,7 @@ inverse属性默认是false,就是说关系的两端都来维护关系。
 
 Detached Object（游离对象）可以传递到任何层直到表现层而不是用任何DTO(DataTransfer Objects). 然后你还可以重新把游离对象赋给另外一个Session.
 
-## JDBC hibernate 和 ibatis 的区别
+## JDBC Hibernate 和 ibatis 的区别
 
 - jdbc:手动
   - 手动写sql
@@ -166,7 +166,7 @@ Detached Object（游离对象）可以传递到任何层直到表现层而不�
   - sql要手动写
   - delete、insert、update:直接传入一个对象
   - select:直接返回一个对象
-- hibernate:全自动
+- Hibernate:全自动
   - 不写sql,自动封装
   - delete、insert、update:直接传入一个对象
   - select:直接返回一个对象
@@ -186,7 +186,7 @@ SessionFactory 是Hibrenate单例数据存储和线程安全的，以至于可�
 
 ## Hibernate的五个核心接口
 
-- Configuration 接口：配置Hibernate，根据其启动hibernate，创建SessionFactory 对象；
+- Configuration 接口：配置Hibernate，根据其启动Hibernate，创建SessionFactory 对象；
 - SessionFactory 接口：初始化Hibernate，充当数据存储源的代理，创建session 对象，sessionFactory 是线程安全的，意味着它的同一个实例可以被应用的多个线程共享，是重量级、二级缓存；
 - Session 接口：负责保存、更新、删除、加载和查询对象，是线程不安全的，避免多个线程共享同一个session，是轻量级、一级缓存；
 - Transaction 接口：管理事务；
@@ -194,6 +194,6 @@ SessionFactory 是Hibrenate单例数据存储和线程安全的，以至于可�
 
 ## 参考
 
-- [hibernate面试题](https://blog.csdn.net/hi_kevin/article/details/7284155)
+- [Hibernate面试题](https://blog.csdn.net/hi_kevin/article/details/7284155)
 - [Hibernate常见面试题(转)](http://www.cnblogs.com/huajiezh/p/6415411.html)
 - [java面试——Hibernate常见面试题](https://blog.csdn.net/qq1137623160/article/details/71194677)
