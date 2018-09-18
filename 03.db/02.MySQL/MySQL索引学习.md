@@ -22,6 +22,15 @@ MySQL索引的建立对于MySQL的高效运行是很重要的，索引可以大�
 CREATE INDEX indexName ON mytable(username(length));
 ```
 
+例子
+
+```
+mysql> create index id_index on account(`name`(255));
+Query OK, 0 rows affected (0.11 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+```
+
 如果是CHAR，VARCHAR类型，length可以小于字段实际长度；如果是BLOB和TEXT类型，必须指定 length。
 ### 修改表结构(添加索引)
 
@@ -104,6 +113,18 @@ mysql> ALTER TABLE testalter_tbl DROP PRIMARY KEY;
 ```
 mysql> SHOW INDEX FROM table_name; \G
 ........
+```
+
+实例
+```
+mysql> show index from account;
++---------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+| Table   | Non_unique | Key_name | Seq_in_index | Column_name | Collation | Cardinality | Sub_part | Packed | Null | Index_type | Comment | Index_comment |
++---------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+| account |          0 | PRIMARY  |            1 | id          | A         |           3 |     NULL | NULL   |      | BTREE      |         |               |
+| account |          1 | id_index |            1 | name        | A         |           4 |     NULL | NULL   |      | BTREE      |         |               |
++---------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+2 rows in set (0.01 sec)
 ```
 ## 参考
 
