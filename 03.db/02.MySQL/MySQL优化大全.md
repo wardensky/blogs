@@ -11,24 +11,24 @@
 以下几个参数对 Myisam 和 Innodb 存储引擎都计数：
 
 >1. Com_select 执行 select 操作的次数，一次查询只累加 1 ；
-2. Com_insert 执行 insert 操作的次数，对于批量插入的 insert 操作，只累加一次 ；
-3. Com_update 执行 update 操作的次数；
-4. Com_delete 执行 delete 操作的次数；
+>2. Com_insert 执行 insert 操作的次数，对于批量插入的 insert 操作，只累加一次 ；
+>3. Com_update 执行 update 操作的次数；
+>4. Com_delete 执行 delete 操作的次数；
 
 以下几个参数是针对 Innodb 存储引擎计数的，累加的算法也略有不同：
 
 >1. Innodb_rows_read select 查询返回的行数；
-2. Innodb_rows_inserted 执行 Insert 操作插入的行数；
-3. Innodb_rows_updated 执行 update 操作更新的行数；
-4. Innodb_rows_deleted 执行 delete 操作删除的行数；
+>2. Innodb_rows_inserted 执行 Insert 操作插入的行数；
+>3. Innodb_rows_updated 执行 update 操作更新的行数；
+>4. Innodb_rows_deleted 执行 delete 操作删除的行数；
 
 通过以上几个参数，可以很容易的了解当前数据库的应用是以插入更新为主还 是以查询操作为主，以及各种类型的 SQL大致的执行比例是多少。对于更新操作的计 数，是对执行次数的计数，不论提交还是回滚都会累加。
 
 对于事务型的应用，通过 Com_commit 和 Com_rollback 可以了解事务提交和回 滚的情况，对于回滚操作非常频繁的数据库，可能意味着应用编写存在问题。此外，以下几个参数便于我们了解数据库的基本情况：
 
 >1. Connections 试图连接 Mysql 服务器的次数
-2. Uptime 服务器工作时间
-3. Slow_queries 慢查询的次数
+>2. Uptime 服务器工作时间
+>3. Slow_queries 慢查询的次数
 
 
 
