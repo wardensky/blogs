@@ -78,118 +78,119 @@ mysql> show status like 'Handler_read%';
 
 ### 查询进行优化，应尽量避免全表扫描
 
-   对查询进行优化，应尽量避免全表扫描，首先应考虑在 where 及 order by 涉及的列上建立索引
+对查询进行优化，应尽量避免全表扫描，首先应考虑在 where 及 order by 涉及的列上建立索引
 
-      .    尝试下面的技巧以避免优化器错选了表扫描：
+尝试下面的技巧以避免优化器错选了表扫描：
 
-      ·   使用ANALYZE TABLEtbl_name为扫描的表更新关键字分布。
-
-      ·   对扫描的表使用FORCEINDEX告知MySQL，相对于使用给定的索引表扫描将非常耗时。
-
-           SELECT * FROM t1, t2 FORCE INDEX (index_for_column)   WHERE t1.col_name=t2.col_name；
-
-      ·   用--max-seeks-for-key=1000选项启动mysqld或使用SET max_seeks_for_key=1000告知优化器假设关键字扫描不会超过1,000次关键字搜索。
+- 使用ANALYZE TABLEtbl_name为扫描的表更新关键字分布。
+- 对扫描的表使用FORCEINDEX告知MySQL，相对于使用给定的索引表扫描将非常耗时。
+- SELECT * FROM t1, t2 FORCE INDEX (index_for_column)   WHERE t1.col_name=t2.col_name；
+- 用--max-seeks-for-key=1000选项启动mysqld或使用SET max_seeks_for_key=1000告知优化器假设关键字扫描不会超过1,000次关键字搜索。
 
 #### 应尽量避免在 where 子句中对字段进行 null 值判断
 
-       否则将导致引擎放弃使用索引而进行全表扫描，如：
+否则将导致引擎放弃使用索引而进行全表扫描，如：
+```
+select id from t where num is null
+```
+NULL对于大多数数据库都需要特殊处理，MySQL也不例外，它需要更多的代码，更多的检查和特殊的索引逻辑，有些开发人员完全没有意识到，创建表时NULL是默认值，但大多数时候应该使用NOT NULL，或者使用一个特殊的值，如0，-1作为默  认值。
 
-       select id from t where num is null
+不能用null作索引，任何包含null值的列都将不会被包含在索引中。即使索引有多列这样的情况下，只要这些列中有一列含有null，该列    就会从索引中排除。也就是说如果某列存在空值，即使对该列建索引也不会提高性能。 任何在where子句中使用is null或is not null的语句优化器是不允许使用索引的。
 
-       NULL对于大多数数据库都需要特殊处理，MySQL也不例外，它需要更多的代码，更多的检查和特殊的索引逻辑，有些开发人员完全没有意识到，创建表时NULL是默认值，但大多数时候应该使用NOT NULL，或者使用一个特殊的值，如0，-1作为默  认值。
-
-       不能用null作索引，任何包含null值的列都将不会被包含在索引中。即使索引有多列这样的情况下，只要这些列中有一列含有null，该列    就会从索引中排除。也就是说如果某列存在空值，即使对该列建索引也不会提高性能。 任何在where子句中使用is null或is not null的语句优化器是不允许使用索引的。
-
-       此例可以在num上设置默认值0，确保表中num列没有null值，然后这样查询：
-
-        select id    from t where num=0
-
+此例可以在num上设置默认值0，确保表中num列没有null值，然后这样查询：
+```
+select id    from t where num=0
+```
 #### 应尽量避免在 where 子句中使用!=或<>操作符
 
-        否则将引擎放弃使用索引而进行全表扫描。
-        MySQL只有对以下操作符才使用索引：<，<=，=，>，>=，BETWEEN，IN，以及某些时候的LIKE。
+否则将引擎放弃使用索引而进行全表扫描。
+MySQL只有对以下操作符才使用索引：<，<=，=，>，>=，BETWEEN，IN，以及某些时候的LIKE。
 
-        可以在LIKE操作中使用索引的情形是指另一个操作数不是以通配符（%或者_）开头的情形。例如:
-        SELECT id FROM  t WHERE col LIKE 'Mich%'; #  这个查询将使用索引，
-        SELECT id FROM  t WHERE col  LIKE '%ike';   #这个查询不会使用索引。
+
+可以在LIKE操作中使用索引的情形是指另一个操作数不是以通配符（%或者_）开头的情形。例如:
+```
+SELECT id FROM  t WHERE col LIKE 'Mich%'; #  这个查询将使用索引，
+SELECT id FROM  t WHERE col  LIKE '%ike';   #这个查询不会使用索引。
+```
 
 #### 应尽量避免在 where 子句中使用 or 来连接条件
 
-       否则将导致引擎放弃使用索引而进行全表扫描，如：
+否则将导致引擎放弃使用索引而进行全表扫描，如：
+```
+select id from t where num=10 or num=20
+```
 
-       select id from t where num=10 or num=20
+可以 使用UNION合并查询：
+```
+select id from t where num=10 union all select id from t where num=20
+```
 
-       可以 使用UNION合并查询： select id from t where num=10 union all select id from t where num=20
+在某些情况下，or条件可以避免全表扫描的。
 
-
-
-      在某些情况下，or条件可以避免全表扫描的。
-
-       1 .where 语句里面如果带有or条件, myisam表能用到索引， innodb不行。
-
-          2 .必须所有的or条件都必须是独立索引
-
-      mysql or条件可以使用索引而避免全表
+- where 语句里面如果带有or条件, myisam表能用到索引， innodb不行。
+- 必须所有的or条件都必须是独立索引
+- mysql or条件可以使用索引而避免全表
 
 
 
 #### in 和 not in 也要慎用，否则会导致全表扫描，
 
-       如：
-
-       select id from t where num in(1,2,3)
-
-       对于连续的数值，能用 between 就不要用 in 了：
-
-       Select id from t where num between 1 and 3
-
+如：
+```
+select id from t where num in(1,2,3)
+```
+对于连续的数值，能用 between 就不要用 in 了：
+```
+Select id from t where num between 1 and 3
+```
 #### 下面的查询也将导致全表扫描：
+```
+select id from t where name like '%abc%' 或者
 
-       select id from t where name like '%abc%' 或者
-
-       select id from t where name like '%abc' 或者
-
-       若要提高效率，可以考虑全文检索。
-
-       而select id from t where name like 'abc%' 才用到索引
-
+select id from t where name like '%abc' 或者
+```
+ 若要提高效率，可以考虑全文检索。
+```
+而select id from t where name like 'abc%' 才用到索引
+```
 #### 如果在 where 子句中使用参数，也会导致全表扫描。
 
-      因为SQL只有在运行时才会解析局部变量，但优化程序不能将访问计划的选择推 迟到运行时；它必须在编译时进行选择。然而，如果在编译时建立访问计划，变量的值还是未知的，因而无法作为索引选择的输入项。如下面语句将进行全表扫描：
-
+因为SQL只有在运行时才会解析局部变量，但优化程序不能将访问计划的选择推 迟到运行时；它必须在编译时进行选择。然而，如果在编译时建立访问计划，变量的值还是未知的，因而无法作为索引选择的输入项。如下面语句将进行全表扫描：
+```
       select id from t where num=@num
-
-      可以改为强制查询使用索引： select id from t with(index(索引名)) where num=@num
+```
+可以改为强制查询使用索引： select id from t with(index(索引名)) where num=@num
 
 #### 应尽量避免在 where 子句中对字段进行表达式操作，
 
-      这将导致引擎放弃使用索引而进行全表扫描。如：
-
-      select id from t where num/2=100
-
-      应改为:  select id from t where num=100*2
+这将导致引擎放弃使用索引而进行全表扫描。如：
+```
+select id from t where num/2=100
+```
+应改为:  
+```
+select id from t where num=100*2
+```
 
 #### 应尽量避免在where子句中对字段进行函数操作，
 
-      这将导致引擎放弃使用索引而进行全表扫描。如：
-
+这将导致引擎放弃使用索引而进行全表扫描。如：
+```
      select id from t where substring(name,1,3)='abc'   --name
 
      select id from t where datediff(day,createdate,'2005-11-30')=0--‘2005-11-30’
-
-     生成的id 应改为:
-
+```
+生成的id 应改为:
+```
      select id from t where name like 'abc%'
 
      select id from t where createdate>='2005-11-30' and createdate<'2005-12-1'
-
-#### 不要在 where 子句中的“=”左边进行函数、算术运算或其他表达式运算，
-
-     否则系统将可能无法正确使用索引。
+```
+#### 不要在 where 子句中的“=”左边进行函数、算术运算或其他表达式运算， 否则系统将可能无法正确使用索引。
 
 #### 索引字段不是复合索引的前缀索引
 
-      例如 在使用索引字段作为条件时，如果该索引是复合索引，那么必须使用到该索引中的第一个字段作为条件时才能保证系统使用该索引，否则该索引将不会被使用，并且应尽可能的让字段顺序与索引顺序相一致。
+例如 在使用索引字段作为条件时，如果该索引是复合索引，那么必须使用到该索引中的第一个字段作为条件时才能保证系统使用该索引，否则该索引将不会被使用，并且应尽可能的让字段顺序与索引顺序相一致。
 
 
 
@@ -197,81 +198,82 @@ mysql> show status like 'Handler_read%';
 
 #### 不要写一些没有意义的查询，
 
-       如需要生成一个空表结构：
-
-       select col1,col2 into #t from t where 1=0
-
-       这类代码不会返回任何结果集，但是会消耗系统资源的，应改成这样： create table #t(...)
+如需要生成一个空表结构：
+```
+select col1,col2 into #t from t where 1=0
+```
+这类代码不会返回任何结果集，但是会消耗系统资源的，应改成这样： create table #t(...)
 
 #### 很多时候用 exists 代替 in 是一个好的选择：
-
-      select num from a where num in(select num from b)
-
-      用下面的语句替换：
-
-      select num from a where exists(select 1 from b where num=a.num)
+```
+select num from a where num in(select num from b)
+```
+用下面的语句替换：
+```
+select num from a where exists(select 1 from b where num=a.num)
+```
 
 #### 并不是所有索引对查询都有效，
 
-      SQL是根据表中数据来进行查询优化的，当索引列有大量数据重复时，SQL查询可能不会去利用索引，如一表中有字段sex，male、female几乎各一半，那么即使在sex上建了索引也对查询效率起不了作用。
+SQL是根据表中数据来进行查询优化的，当索引列有大量数据重复时，SQL查询可能不会去利用索引，如一表中有字段sex，male、female几乎各一半，那么即使在sex上建了索引也对查询效率起不了作用。
 
 #### 索引并不是越多越好，
 
-      索引固然可以提高相应的 select 的效率，但同时也降低了 insert 及 update 的效率，因为 insert 或 update 时有可能会重建索引，所以怎样建索引需要慎重考虑，视具体情况而定。一个表的索引数最好不要超过6个，若太多则应考虑一些不常使用到的列上建的索引是否有必要。
+索引固然可以提高相应的 select 的效率，但同时也降低了 insert 及 update 的效率，因为 insert 或 update 时有可能会重建索引，所以怎样建索引需要慎重考虑，视具体情况而定。一个表的索引数最好不要超过6个，若太多则应考虑一些不常使用到的列上建的索引是否有必要。
 
 #### 应尽可能的避免更新 clustered 索引数据列，
 
-      因为 clustered 索引数据列的顺序就是表记录的物理存储顺序，一旦该列值改变将导致整个表记录的顺序的调整，会耗费相当大的资源。若应用系统需要频繁更新 clustered 索引数据列，那么需要考虑是否应将该索引建为 clustered 索引。
+因为 clustered 索引数据列的顺序就是表记录的物理存储顺序，一旦该列值改变将导致整个表记录的顺序的调整，会耗费相当大的资源。若应用系统需要频繁更新 clustered 索引数据列，那么需要考虑是否应将该索引建为 clustered 索引。
 
 #### 尽量使用数字型字段，
 
-     若只含数值信息的字段尽量不要设计为字符型，这会降低查询和连接的性能，并会增加存储开销。这是因为引擎在处理查询和连接时会逐个比较字符串中每一个字符，而对于数字型而言只需要比较一次就够了。
+只含数值信息的字段尽量不要设计为字符型，这会降低查询和连接的性能，并会增加存储开销。这是因为引擎在处理查询和连接时会逐个比较字符串中每一个字符，而对于数字型而言只需要比较一次就够了。
 
 #### 尽可能的使用 varchar/nvarchar 代替 char/nchar ，
 
-     因为首先变长字段存储空间小，可以节省存储空间，其次对于查询来说，在一个相对较小的字段内搜索效率显然要高些。
+因为首先变长字段存储空间小，可以节省存储空间，其次对于查询来说，在一个相对较小的字段内搜索效率显然要高些。
 
-#### 最好不要使用"*"返回所有： select * from t ，
+#### 最好不要使用"\*"返回所有： select \* from t ，
 
-    用具体的字段列表代替“*”，不要返回用不到的任何字段。
+用具体的字段列表代替“\*”，不要返回用不到的任何字段。
 
-### 临时表的问题：
+### 临时表的问题
 
-#### 尽量使用表变量来代替临时表。
+#### 尽量使用表变量来代替临时表
 
-   如果表变量包含大量数据，请注意索引非常有限（只有主键索引）。
+如果表变量包含大量数据，请注意索引非常有限（只有主键索引）。
 
 #### 避免频繁创建和删除临时表，以减少系统表资源的消耗。
 
 #### 临时表并不是不可使用，
 
-    适当地使用它们可以使某些例程更有效，例如，当需要重复引用大型表或常用表中的某个数据集时。但是，对于一次性事件，最好使用导出表。
+适当地使用它们可以使某些例程更有效，例如，当需要重复引用大型表或常用表中的某个数据集时。但是，对于一次性事件，最好使用导出表。
 
 #### 在新建临时表时，如果一次性插入数据量很大，那么可以使用 select into 代替 create table，避免造成大量 log ，以提高速度；
 
-    如果数据量不大，为了缓和系统表的资源，应先create table，然后insert。
+如果数据量不大，为了缓和系统表的资源，应先create table，然后insert。
 
 #### 如果使用到了临时表，在存储过程的最后务必将所有的临时表显式删除，先 truncate table ，然后 drop table ，这样可以避免系统表的较长时间锁定。
 
-### 游标的问题：
+### 游标的问题
 
 #### 尽量避免使用游标，
 
-     因为游标的效率较差，如果游标操作的数据超过1万行，那么就应该考虑改写。
+因为游标的效率较差，如果游标操作的数据超过1万行，那么就应该考虑改写。
 
 #### 使用基于游标的方法或临时表方法之前，
 
-     应先寻找基于集的解决方案来解决问题，基于集的方法通常更有效。
+应先寻找基于集的解决方案来解决问题，基于集的方法通常更有效。
 
 #### 与临时表一样，游标并不是不可使用。
 
-    对小型数据集使用 FAST_FORWARD 游标通常要优于其他逐行处理方法，尤其是在必须引用几个表才能获得所需的数据时。在结果集中包括“合计”的例程通常要比使用游标执行的速度快。如果开发时间允许，基于游标的方法和基于集的方法都可以尝试一下，看哪一种方法的效果更好。
+对小型数据集使用 FAST_FORWARD 游标通常要优于其他逐行处理方法，尤其是在必须引用几个表才能获得所需的数据时。在结果集中包括“合计”的例程通常要比使用游标执行的速度快。如果开发时间允许，基于游标的方法和基于集的方法都可以尝试一下，看哪一种方法的效果更好。
 
 #### 在所有的存储过程和触发器的开始处设置 SET NOCOUNT ON ，在结束时设置 SET NOCOUNT OFF 。
 
-     无需在执行存储过程和触发器的每个语句后向客户端发送 DONE_IN_PROC 消息。
+无需在执行存储过程和触发器的每个语句后向客户端发送 DONE_IN_PROC 消息。
 
-### 事务的问题：
+### 事务的问题
 
 #### 尽量避免大事务操作，提高系统并发能力。
 
@@ -280,99 +282,120 @@ mysql> show status like 'Handler_read%';
 #### 尽量避免向客户端返回大数据量，若数据量过大，应该考虑相应需求是否合理。
 
 
-### COUNT优化：
+### COUNT优化
 
-#### count(*) 优于count(1)和count(primary_key)
+#### count(\*) 优于count(1)和count(primary_key)
 
-　　很多人为了统计记录条数，就使用 count(1) 和 count(primary_key) 而不是 count(*) ，他们认为这样性能更好，其实这是一个误区。对于有些场景，这样做可能性能会更差，应为数据库对 count(*) 计数操作做了一些特别的优化。
+很多人为了统计记录条数，就使用 count(1) 和 count(primary_key) 而不是 count(\*) ，他们认为这样性能更好，其实这是一个误区。对于有些场景，这样做可能性能会更差，应为数据库对 count(\*) 计数操作做了一些特别的优化。
 
-#### count(column) 和 count(*) 是不一样的
+#### count(column) 和 count(\*) 是不一样的
 
-　　这个误区甚至在很多的资深工程师或者是 DBA 中都普遍存在，很多人都会认为这是理所当然的。实际上，count(column) 和 count(*) 是一个完全不一样的操作，所代表的意义也完全不一样。
+这个误区甚至在很多的资深工程师或者是 DBA 中都普遍存在，很多人都会认为这是理所当然的。实际上，count(column) 和 count(\*) 是一个完全不一样的操作，所代表的意义也完全不一样。
 
-　　count(column) 是表示结果集中有多少个column字段不为空的记录
+count(column) 是表示结果集中有多少个column字段不为空的记录
 
-　　count(*) 是表示整个结果集有多少条记录
-
-
+count(\*) 是表示整个结果集有多少条记录
 
 
-1)innodb引擎在统计方面和myisam是不同的，Myisam内置了一个计数器，
-
-Count(*)在没有查询条件的情况下使用 select count(*) from table 的时候，Myisam直接可以从计数器中取出数据。而innodb必须全表扫描一次方能得到总的数量
-
-2. 但是当有查询条件的时候，两者的查询效率一致。
-
-4. 主键索引count(*)的时候之所以慢
-
-InnoDB引擎:
-
-[1]     数据文件和索引文件存储在一个文件中，主键索引默认直接指向数据存储位置。
-
-[2]     二级索引存储指定字段的索引，实际的指向位置是主键索引。当我们通过二级索引统计数据的时候，无需扫描数据文件；而通过主键索引统计数据时，由于主键索引与数据文件存放在一起，所以每次都会扫描数据文件，所以主键索引统计没有二级索引效率高。
-
-[3]     由于主键索引直接指向实际数据，所以当我们通过主键id查询数据时要比通过二级索引查询数据要快。
-
-l  MyAsm引擎
-
-[1]     该引擎把每个表都分为几部分存储，比如用户表，包含user.frm，user.MYD和user.MYI。
-
-[2]     User.frm负责存储表结构
-
-[3]     User.MYD负责存储实际的数据记录，所有的用户记录都存储在这个文件中
-
-[4]     User.MYI负责存储用户表的所有索引，这里也包括主键索引。
 
 
-8. 优化order by语句
+##### innodb引擎在统计方面和myisam是不同的，Myisam内置了一个计数器，
 
-    基于索引的排序
-    MySQL的弱点之一是它的排序。虽然MySQL可以在1秒中查询大约15,000条记录，但由于MySQL在查询时最多只能使用一个索引。因此，如果WHERE条件已经占用了索引，那么在排序中就不使用索引了，这将大大降低查询的速度。我们可以看看如下的SQL语句:
+Count(\*)在没有查询条件的情况下使用 select count(*) from table 的时候，Myisam直接可以从计数器中取出数据。而innodb必须全表扫描一次方能得到总的数量
+
+##### 但是当有查询条件的时候，两者的查询效率一致。
+
+##### 主键索引count(\*)的时候之所以慢
+
+###### InnoDB引擎:
+
+- 数据文件和索引文件存储在一个文件中，主键索引默认直接指向数据存储位置。
+- 二级索引存储指定字段的索引，实际的指向位置是主键索引。当我们通过二级索引统计数据的时候，无需扫描数据文件；而通过主键索引统计数据时，由于主键索引与数据文件存放在一起，所以每次都会扫描数据文件，所以主键索引统计没有二级索引效率高。
+- 由于主键索引直接指向实际数据，所以当我们通过主键id查询数据时要比通过二级索引查询数据要快。
+
+###### MyAsm引擎
+
+- 该引擎把每个表都分为几部分存储，比如用户表，包含user.frm，user.MYD和user.MYI。
+- User.frm负责存储表结构
+- User.MYD负责存储实际的数据记录，所有的用户记录都存储在这个文件中
+- User.MYI负责存储用户表的所有索引，这里也包括主键索引。
+
+
+### 优化order by语句
+
+基于索引的排序
+
+MySQL的弱点之一是它的排序。虽然MySQL可以在1秒中查询大约15,000条记录，但由于MySQL在查询时最多只能使用一个索引。因此，如果WHERE条件已经占用了索引，那么在排序中就不使用索引了，这将大大降低查询的速度。我们可以看看如下的SQL语句:
+```
     SELECT * FROM SALES WHERE NAME = “name” ORDER BY SALE_DATE DESC;
-    在以上的SQL的WHERE子句中已经使用了NAME字段上的索引，因此，在对SALE_DATE进行排序时将不再使用索引。为了解决这个问题，我们可以对SALES表建立复合索引:
+```
+
+在以上的SQL的WHERE子句中已经使用了NAME字段上的索引，因此，在对SALE_DATE进行排序时将不再使用索引。为了解决这个问题，我们可以对SALES表建立复合索引:
+```
     ALTER TABLE SALES DROP INDEX NAME, ADD INDEX (NAME,SALE_DATE)
-    这样再使用上述的SELECT语句进行查询时速度就会大副提升。但要注意，在使用这个方法时，要确保WHERE子句中没有排序字段，在上例中就是不能用SALE_DATE进行查询，否则虽然排序快了，但是SALE_DATE字段上没有单独的索引，因此查询又会慢下来。
-
-    在某些情况中， MySQL可以使用一个索引来满足 ORDER BY子句，而不需要额外的排序。 where条件和order by使用相同的索引，并且order by 的顺序和索引顺序相 同，并且order by的字段都是升序或者都是降序。例如：下列sql可以使用索引。
-    SELECT * FROM t1 ORDER BY key_part1,key_part2,... ;
-    SELECT * FROM t1 WHERE key_part1=1 ORDER BY key_part1 DESC, key_part2 DESC;
-    SELECT * FROM t1 ORDER BY key_part1 DESC, key_part2 DESC;
-   但是以下情况不使用索引：
-    SELECT * FROM t1 ORDER BY key_part1 DESC, key_part2 ASC ； --order by 的字段混合 ASC 和 DESC
-    SELECT * FROM t1 WHERE key2=constant ORDER BY key1 ；-- 用于查询行的关键字与 ORDER BY 中所使用的不相同
-    SELECT * FROM t1 ORDER BY key1, key2 ；-- 对不同的关键字使用 ORDER BY ：
+```
+这样再使用上述的SELECT语句进行查询时速度就会大副提升。但要注意，在使用这个方法时，要确保WHERE子句中没有排序字段，在上例中就是不能用SALE_DATE进行查询，否则虽然排序快了，但是SALE_DATE字段上没有单独的索引，因此查询又会慢下来。
 
 
+在某些情况中， MySQL可以使用一个索引来满足 ORDER BY子句，而不需要额外的排序。 where条件和order by使用相同的索引，并且order by 的顺序和索引顺序相 同，并且order by的字段都是升序或者都是降序。例如：下列sql可以使用索引。
+```
+SELECT * FROM t1 ORDER BY key_part1,key_part2,... ;
+SELECT * FROM t1 WHERE key_part1=1 ORDER BY key_part1 DESC, key_part2 DESC;
+SELECT * FROM t1 ORDER BY key_part1 DESC, key_part2 DESC;
+```
+但是以下情况不使用索引：
+```
+SELECT * FROM t1 ORDER BY key_part1 DESC, key_part2 ASC ； --order by 的字段混合 ASC 和 DESC
+SELECT * FROM t1 WHERE key2=constant ORDER BY key1 ；-- 用于查询行的关键字与 ORDER BY 中所使用的不相同
+SELECT * FROM t1 ORDER BY key1, key2 ；-- 对不同的关键字使用 ORDER BY ：
+```
 
 
 
 
-9. 优化GROUP BY
 
-     默认情况下， MySQL 排序所有 GROUP BY col1 ， col2 ， .... 。查询的方法如同在查询中指定 ORDER BY col1 ， col2 ， ... 。如果显式包括一个包含相同的列的 ORDER BY
+### 优化GROUP BY
+
+默认情况下， MySQL 排序所有 GROUP BY col1 ， col2 ， .... 。查询的方法如同在查询中指定 ORDER BY col1 ， col2 ， ... 。如果显式包括一个包含相同的列的 ORDER BY
 子句， MySQL 可以毫不减速地对它进行优化，尽管仍然进行排序。如果查询包括 GROUP BY 但你想要避免排序结果的消耗，你可以指定 ORDER BY NULL禁止排序。
 例如 ：
-INSERT INTO foo  SELECT a, COUNT(*) FROM bar GROUP BY a ORDER BY NULL;
+```
+INSERT INTO foo  SELECT a, COUNT(\*) FROM bar GROUP BY a ORDER BY NULL;
+```
 
-
-10. 优化 OR
+### 优化 OR
 
 具体详解看：mysql or条件可以使用索引而避免全表
 
-4. Explain解释说明
+## Explain解释说明
 
 explain显示了mysql如何使用索引来处理select语句以及连接表。可以帮助选择更好的索引和写出更优化的查询语句。
 使用方法，在select语句前加上explain就可以了：
 如：
-
+```
 explain select surname,first_name form a,b where a.id=b.id
+```
 分析结果形式如下：
+```
 table |  type | possible_keys | key | key_len  | ref | rows | Extra
-EXPLAIN列的解释：
-1 table:
+```
+#### 实例
+
+```
+mysql> explain select * from web_content;
++----+-------------+-------------+------------+------+---------------+------+---------+------+------+----------+-------+
+| id | select_type | table       | partitions | type | possible_keys | key  | key_len | ref  | rows | filtered | Extra |
++----+-------------+-------------+------------+------+---------------+------+---------+------+------+----------+-------+
+|  1 | SIMPLE      | web_content | NULL       | ALL  | NULL          | NULL | NULL    | NULL | 6111 |   100.00 | NULL  |
++----+-------------+-------------+------------+------+---------------+------+---------+------+------+----------+-------+
+1 row in set, 1 warning (0.00 sec)
+```
+
+### EXPLAIN列的解释：
+#### 1 table:
 
 显示这一行的数据是关于哪张表的
-2 type:
+#### type:
 
 这是重要的列，显示连接使用了何种类型。从最好到最差的连接类型为：system、const、eg_reg、ref、ref_or_null、 range、indexhe、 ALL。
        system:表仅有一行(=系统表)。这是const联接类型的一个特例
