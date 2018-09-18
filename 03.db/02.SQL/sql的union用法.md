@@ -50,6 +50,7 @@ select first_name from teacher union select first_name from student;
 
 
 ![](../images/union-3.png)
+
 可以看到没有重复的数据。
 
 改为union all之后。
@@ -63,6 +64,7 @@ select first_name from teacher union all select first_name from student;
 可以看到，数据是重复的。
 
 但如果同时查询first_name和last_name呢？
+
 ```
 select first_name, last_name from teacher union select  first_name, last_name from student;
 ```
