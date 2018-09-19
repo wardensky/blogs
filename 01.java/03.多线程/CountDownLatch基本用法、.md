@@ -12,7 +12,7 @@ public CountDownLatch(int count) {  };  //参数count为计数值
 
 从下图也可以看出来
 
-![](./images/countdownlatch.png)
+![](../images/countdownlatch.png)
 
 ## 源码
 
