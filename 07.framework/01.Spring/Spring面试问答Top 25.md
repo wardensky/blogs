@@ -435,16 +435,19 @@ Spring提供了以下四种集合类的配置元素：
 
 下面的XML配置文件表明了如何根据名称将一个bean设置为自动装配：
 
-1
+```
 <bean id="employeeDAO" class="com.howtodoinjava.EmployeeDAOImpl" autowire="byName" />
+```
 除了bean配置文件中提供的自动装配模式，还可以使用@Autowired注解来自动装配指定的bean。在使用@Autowired注解之前需要在按照如下的配置方式在Spring配置文件进行配置才可以使用。
 
-1
+```
 <context:annotation-config />
+```
 也可以通过在配置文件中配置AutowiredAnnotationBeanPostProcessor 达到相同的效果。
 
-1
+```
 <bean class ="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
+```
 配置好以后就可以使用@Autowired来标注了。
 
 
@@ -459,11 +462,12 @@ public EmployeeDAOImpl ( EmployeeManager manager ) {
 
 在Spring框架中共有5种自动装配，让我们逐一分析。
 
-no：这是Spring框架的默认设置，在该设置下自动装配是关闭的，开发者需要自行在bean定义中用标签明确的设置依赖关系。
-byName：该选项可以根据bean名称设置依赖关系。当向一个bean中自动装配一个属性时，容器将根据bean的名称自动在在配置文件中查询一个匹配的bean。如果找到的话，就装配这个属性，如果没找到的话就报错。
-byType：该选项可以根据bean类型设置依赖关系。当向一个bean中自动装配一个属性时，容器将根据bean的类型自动在在配置文件中查询一个匹配的bean。如果找到的话，就装配这个属性，如果没找到的话就报错。
-constructor：造器的自动装配和byType模式类似，但是仅仅适用于与有构造器相同参数的bean，如果在容器中没有找到与构造器参数类型一致的bean，那么将会抛出异常。
-autodetect：该模式自动探测使用构造器自动装配或者byType自动装配。首先，首先会尝试找合适的带参数的构造器，如果找到的话就是用构造器自动装配，如果在bean内部没有找到相应的构造器或者是无参构造器，容器就会自动选择byTpe的自动装配方式。
+- no：这是Spring框架的默认设置，在该设置下自动装配是关闭的，开发者需要自行在bean定义中用标签明确的设置依赖关系。
+- byName：该选项可以根据bean名称设置依赖关系。当向一个bean中自动装配一个属性时，容器将根据bean的名称自动在在配置文件中查询一个匹配的bean。如果找到的话，就装配这个属性，如果没找到的话就报错。
+- byType：该选项可以根据bean类型设置依赖关系。当向一个bean中自动装配一个属性时，容器将根据bean的类型自动在在配置文件中查询一个匹配的bean。如果找到的话，就装配这个属性，如果没找到的话就报错。
+- constructor：造器的自动装配和byType模式类似，但是仅仅适用于与有构造器相同参数的bean，如果在容器中没有找到与构造器参数类型一致的bean，那么将会抛出异常。
+- autodetect：该模式自动探测使用构造器自动装配或者byType自动装配。首先，首先会尝试找合适的带参数的构造器，如果找到的话就是用构造器自动装配，如果在bean内部没有找到相应的构造器或者是无参构造器，容器就会自动选择byTpe的自动装配方式。
+
 ## 18、如何开启基于注解的自动装配？
 
 要使用 @Autowired，需要注册 AutowiredAnnotationBeanPostProcessor，可以有以下两种方式来实现：
@@ -513,8 +517,10 @@ public class EmployeeFactoryBean extends AbstractFactoryBean<Object>
 
 RequiredAnnotationBeanPostProcessor是Spring中的后置处理用来验证被@Required 注解的bean属性是否被正确的设置了。在使用RequiredAnnotationBeanPostProcesso来验证bean属性之前，首先要在IoC容器中对其进行注册：
 
-1
+```
 <bean class="org.springframework.beans.factory.annotation.RequiredAnnotationBeanPostProcessor" />
+```
+
 但是如果没有属性被用 @Required 注解过的话，后置处理器会抛出一个BeanInitializationException 异常。
 
 ## 20、请举例解释@Autowired注解？
@@ -614,6 +620,7 @@ public class Customer
 设值注入不会重写构造方法的值。如果我们对同一个变量同时使用了构造方法注入又使用了设置方法注入的话，那么构造方法将不能覆盖由设值方法注入的值。很明显，因为构造方法尽在对象被创建时调用。
 在使用设值注入时有可能还不能保证某种依赖是否已经被注入，也就是说这时对象的依赖关系有可能是不完整的。而在另一种情况下，构造器注入则不允许生成依赖关系不完整的对象。
 在设值注入时如果对象A和对象B互相依赖，在创建对象A时Spring会抛出sObjectCurrentlyInCreationException异常，因为在B对象被创建之前A对象是不能被创建的，反之亦然。所以Spring用设值注入的方法解决了循环依赖的问题，因对象的设值方法是在对象被创建之前被调用的。
+
 ## 23、Spring框架中有哪些不同类型的事件？
 
 Spring的ApplicationContext 提供了支持事件和代码中监听器的功能。
@@ -680,13 +687,13 @@ applicationContext.publishEvent(customEvent);
 
 Spring框架中使用到了大量的设计模式，下面列举了比较有代表性的：
 
-代理模式—在AOP和remoting中被用的比较多。
-单例模式—在spring配置文件中定义的bean默认为单例模式。
-模板方法—用来解决代码重复的问题。比如. RestTemplate, JmsTemplate, JpaTemplate。
-前端控制器—Spring提供了DispatcherServlet来对请求进行分发。
-视图帮助(View Helper )—Spring提供了一系列的JSP标签，高效宏来辅助将分散的代码整合在视图里。
-依赖注入—贯穿于BeanFactory / ApplicationContext接口的核心理念。
-工厂模式—BeanFactory用来创建对象的实例。
+- 代理模式—在AOP和remoting中被用的比较多。
+- 单例模式—在spring配置文件中定义的bean默认为单例模式。
+- 模板方法—用来解决代码重复的问题。比如. RestTemplate, JmsTemplate, JpaTemplate。
+- 前端控制器—Spring提供了DispatcherServlet来对请求进行分发。
+- 视图帮助(View Helper )—Spring提供了一系列的JSP标签，高效宏来辅助将分散的代码整合在视图里。
+- 依赖注入—贯穿于BeanFactory / ApplicationContext接口的核心理念。
+- 工厂模式—BeanFactory用来创建对象的实例。
 
 # 参考
 
