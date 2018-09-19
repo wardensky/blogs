@@ -1,9 +1,9 @@
-#Hibernate入门（2）- 不用配置用注解
+# Hibernate入门（2）- 不用配置用注解
 @(编程)
 
 在上一个例子里面，我用的配置文件的方式，这次改成注解。
 
-##pom.xml
+## pom.xml
 增加了hibernate-commons-annotations和hibernate-annotations
 ```
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -105,7 +105,7 @@
 ```
 
 
-##对象的修改
+## 对象的修改
 这个是重点，需要在类和属性上面增加注解。可以在属性上增加注解或者在get方法上增加注解。
 ```
 package com.wisdombud.HibernateTest;
@@ -154,5 +154,5 @@ public class Dept {
 	}
 }
 ```
-##删除hbm配置文件
+## 删除hbm配置文件
 把Dept.hbm.xml删除就可以了。

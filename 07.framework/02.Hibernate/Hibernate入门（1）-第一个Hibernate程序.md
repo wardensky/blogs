@@ -1,7 +1,7 @@
-#Hibernate入门（1）-第一个Hibernate程序
+# Hibernate入门（1）-第一个Hibernate程序
 Hibernate是最著名的ORM工具之一，本系列文章主要学习Hibernate的用法，不涉及Hibernate的原理。本文介绍第一个Hibernate例子，注意，这是一个独立的Hibernate，跟Spring和Struts没有任何关系。
 
-##目录结构
+## 目录结构
 ```
 main
 |--java
@@ -22,7 +22,7 @@ test
 |----------DeptDaoTest.java
 ```
 
-##maven pom.xml
+## pom.xml
 ```
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
@@ -88,7 +88,7 @@ test
 </project>
 ```
 
-##实体类
+## 实体类
 ```
 package com.chzhao.hibernatetest;
 
@@ -123,7 +123,7 @@ public class Dept {
 }
 
 ```
-##映射文件
+## 映射文件
 ```
 <!DOCTYPE hibernate-mapping PUBLIC  
 	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"  
@@ -137,7 +137,7 @@ public class Dept {
 	</class>
 </hibernate-mapping>  
 ```
-##Hibernate操作基础类
+## Hibernate操作基础类
 ```
 package com.chzhao.hibernatetest;
 
@@ -176,7 +176,7 @@ public abstract class HibernateBase {
 	}
 }
 ```
-##实体操作类
+## 实体操作类
 ```
 package com.chzhao.hibernatetest;
 
@@ -222,7 +222,7 @@ public class DeptDao extends HibernateBase {
 }
 
 ```
-##hibernate配置文件
+## hibernate配置文件
 ```
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE hibernate-configuration PUBLIC
@@ -243,7 +243,7 @@ public class DeptDao extends HibernateBase {
 	</session-factory>
 </hibernate-configuration>
 ```
-##测试类
+## 测试类
 
 ```
 package com.chzhao.hibernatetest;

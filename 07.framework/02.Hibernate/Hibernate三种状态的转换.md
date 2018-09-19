@@ -83,7 +83,7 @@ session.close();
 
 ## 三、三种状态的转换
 
-![](../images/Hibernate状态-1.jpg)
+![](../images/hibernate_states.png)
 
 ## 四、举例子
 
