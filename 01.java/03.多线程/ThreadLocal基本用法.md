@@ -10,10 +10,11 @@ ThreadLocal与线程同步机制不同，线程同步机制是多个线程共享
 
 ThreadLocal定义了四个方法：
 
-get()：返回此线程局部变量的当前线程副本中的值。
-initialValue()：返回此线程局部变量的当前线程的“初始值”。
-remove()：移除此线程局部变量当前线程的值。
-set(T value)：将此线程局部变量的当前线程副本中的值设置为指定值。
+- get()：返回此线程局部变量的当前线程副本中的值。
+- initialValue()：返回此线程局部变量的当前线程的“初始值”。
+- remove()：移除此线程局部变量当前线程的值。
+- set(T value)：将此线程局部变量的当前线程副本中的值设置为指定值。
+
 除了这四个方法，ThreadLocal内部还有一个静态内部类ThreadLocalMap，该内部类才是实现线程隔离机制的关键，get()、set()、remove()都是基于该内部类操作。ThreadLocalMap提供了一种用键值对方式存储每一个线程的变量副本的方法，key为当前ThreadLocal对象，value则是对应线程的变量副本。
 
 对于ThreadLocal需要注意的有两点：
