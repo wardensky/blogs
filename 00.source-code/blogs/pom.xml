@@ -27,5 +27,6 @@
     <module>framework-spring</module>
     <module>network-netty</module>
     <module>nosql-redis</module>
+    <module>framework-mybatis</module>
   </modules>
 </project>
