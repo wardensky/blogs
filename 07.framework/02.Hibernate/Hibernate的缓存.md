@@ -1,1 +1,0 @@
-# Hibernate的缓存
