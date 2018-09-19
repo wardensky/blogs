@@ -463,10 +463,11 @@ constructor 对应javabean中的构造方法
 ## 完全限定名使用别名替代
 
 在 mybatis 配置文件中，使用如下配置
-
+```
 <typeAliases>
     <typeAlias type="com.enh.bean.ProjectInfo" alias="projectInfo"/>
 </typeAliases>
+```
 那么在 Mapper 中，可以直接使用 projectInfo，即表示 com.enh.bean.ProjectInfo
 
 
@@ -475,12 +476,15 @@ constructor 对应javabean中的构造方法
 
 每个sql映射文件的要元素中，都需要指定一个名称空间，用以确保每个映射语句的id属性不会重复。如
 
+```
 <mapper namespace="com.enh.mapper.PersonMapper">
-在Java代码中引用某个 sql 映射时，使用的亦是含有名称空间的全路径。如
+```
 
+在Java代码中引用某个 sql 映射时，使用的亦是含有名称空间的全路径。如
+```
 session.update("com.enh.mapper.PersonMapper.udpateUser", user);  
 
-
+```
 
 ## 参考
 
