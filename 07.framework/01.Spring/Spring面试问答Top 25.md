@@ -61,9 +61,11 @@ Spring框架至今已集成了20多个模块。这些模块主要被分如下图
 
 在Java中依然注入有以下三种实现方式：
 
-构造器注入
-Setter方法注入
-接口注入
+- 构造器注入
+- Setter方法注入
+- 接口注入
+
+
 ## 4、请解释下Spring框架中的IoC？
 
 Spring中的 org.springframework.beans 包和 org.springframework.context包构成了Spring框架IoC容器的基础。
@@ -71,6 +73,7 @@ Spring中的 org.springframework.beans 包和 org.springframework.context包构�
 BeanFactory 接口提供了一个先进的配置机制，使得任何类型的对象的配置成为可能。ApplicationContex接口对BeanFactory（是一个子接口）进行了扩展，在BeanFactory的基础上添加了其他功能，比如与Spring的AOP更容易集成，也提供了处理message resource的机制（用于国际化）、事件传播以及应用层的特别配置，比如针对Web应用的WebApplicationContext。
 
 org.springframework.beans.factory.BeanFactory 是Spring IoC容器的具体实现，用来包装和管理前面提到的各种bean。BeanFactory接口是Spring IoC 容器的核心接口。
+
 
 ## 5、BeanFactory和ApplicationContext有什么区别？
 
@@ -80,28 +83,35 @@ BeanFactory还能在实例化对象的时生成协作类之间的关系。此举
 
 从表面上看，application context如同bean factory一样具有bean定义、bean关联关系的设置，根据请求分发bean的功能。但application context在此基础上还提供了其他的功能。
 
-提供了支持国际化的文本消息
-统一的资源文件读取方式
-已在监听器中注册的bean的事件
+- 提供了支持国际化的文本消息
+- 统一的资源文件读取方式
+- 已在监听器中注册的bean的事件
+
 以下是三种较常见的 ApplicationContext 实现方式：
 
 1、ClassPathXmlApplicationContext：从classpath的XML配置文件中读取上下文，并生成上下文定义。应用程序上下文从程序环境变量中取得。
 
-1
+```
 ApplicationContext context = new ClassPathXmlApplicationContext(“bean.xml”);
+```
+
 2、FileSystemXmlApplicationContext ：由文件系统中的XML配置文件读取上下文。
 
-1
+```
 ApplicationContext context = new FileSystemXmlApplicationContext(“bean.xml”);
+```
+
 3、XmlWebApplicationContext：由Web应用的XML文件读取上下文。
 
 ## 6、Spring有几种配置方式？
 
 将Spring配置到应用开发中有以下三种方式：
 
-基于XML的配置
-基于注解的配置
-基于Java的配置
+- 基于XML的配置
+- 基于注解的配置
+- 基于Java的配置
+
+
 ## 7、如何用基于XML配置的方式配置Spring？
 
 在Spring框架中，依赖和服务需要在专门的配置文件来实现，我常用的XML格式的配置文件。这些配置文件的格式通常用<beans>开头，然后一系列的bean定义和专门的应用配置选项组成。
@@ -109,6 +119,7 @@ ApplicationContext context = new FileSystemXmlApplicationContext(“bean.xml”)
 SpringXML配置的主要目的时候是使所有的Spring组件都可以用xml文件的形式来进行配置。这意味着不会出现其他的Spring配置类型（比如声明的方式或基于Java Class的配置方式）
 
 Spring的XML配置方式是使用被Spring命名空间的所支持的一系列的XML标签来实现的。Spring有以下主要的命名空间：context、beans、jdbc、tx、aop、mvc和aso。
+
 
 ```
 <beans>
@@ -121,7 +132,10 @@ Spring的XML配置方式是使用被Spring命名空间的所支持的一系列�
 
 </beans>
 ```
+
 下面这个web.xml仅仅配置了DispatcherServlet，这件最简单的配置便能满足应用程序配置运行时组件的需求。
+
+
 ```
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
@@ -189,6 +203,7 @@ public class AppConfig  {
 
 如果你要在你的web应用开发中选用上述的配置的方式的话，需要用AnnotationConfigWebApplicationContext 类来读取配置文件，可以用来配置Spring的Servlet监听器ContrextLoaderListener或者Spring MVC的DispatcherServlet。
 
+
 ```
 <web-app>
     <!-- Configure ContextLoaderListener to use AnnotationConfigWebApplicationContext
@@ -246,6 +261,7 @@ Spring在2.5版本以后开始支持用注解的方式来配置依赖注入。�
 
 注解装配在Spring中是默认关闭的。所以需要在Spring文件中配置一下才能使用基于注解的装配模式。如果你想要在你的应用程序中使用关于注解的方法的话，请参考如下的配置。
 
+
 ```
 <beans>
 
@@ -259,24 +275,29 @@ Spring在2.5版本以后开始支持用注解的方式来配置依赖注入。�
 
 下面是几种比较重要的注解类型：
 
-@Required：该注解应用于设值方法。
-@Autowired：该注解应用于有值设值方法、非设值方法、构造方法和变量。
-@Qualifier：该注解和@Autowired注解搭配使用，用于消除特定bean自动装配的歧义。
-JSR-250 Annotations：Spring支持基于JSR-250 注解的以下注解，@Resource、@PostConstruct 和 @PreDestroy。
+- @Required：该注解应用于设值方法。
+- @Autowired：该注解应用于有值设值方法、非设值方法、构造方法和变量。
+- @Qualifier：该注解和@Autowired注解搭配使用，用于消除特定bean自动装配的歧义。
+- JSR-250 Annotations：Spring支持基于JSR-250 注解的以下注解，@Resource、@PostConstruct 和 @PreDestroy。
+
 ## 10、请解释Spring Bean的生命周期？
 
 Spring Bean的生命周期简单易懂。在一个bean实例被初始化时，需要执行一系列的初始化操作以达到可用的状态。同样的，当一个bean不在被调用时需要进行相关的析构操作，并从bean容器中移除。
 
 Spring bean factory 负责管理在spring容器中被创建的bean的生命周期。Bean的生命周期由两组回调（call back）方法组成。
 
-初始化之后调用的回调方法。
-销毁之前调用的回调方法。
+1. 初始化之后调用的回调方法。
+1. 销毁之前调用的回调方法。
+
+
 Spring框架提供了以下四种方式来管理bean的生命周期事件：
 
-InitializingBean和DisposableBean回调接口
-针对特殊行为的其他Aware接口
-Bean配置文件中的Custom init()方法和destroy()方法
-@PostConstruct和@PreDestroy注解方式
+- InitializingBean和DisposableBean回调接口
+- 针对特殊行为的其他Aware接口
+- Bean配置文件中的Custom init()方法和destroy()方法
+- @PostConstruct和@PreDestroy注解方式
+
+
 使用customInit()和 customDestroy()方法管理bean生命周期的代码样例如下：
 
 ```
