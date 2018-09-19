@@ -219,7 +219,7 @@ extends 继承其他resultMap标签
 - 对应数据库表的列名
 - （这样，当javabean的属性与数据库对应表的列名不一致的时候，就能通过指定这个保持正常映射了）
 
-#### reslut
+#### result
 
 result 与id相比，对应普通属性
 
