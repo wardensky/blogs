@@ -371,10 +371,10 @@ Spring框架并没有对单例bean进行任何多线程的封装处理。关于�
 
 Spring提供了以下四种集合类的配置元素：
 
-<list> :   该标签用来装配可重复的list值。
-<set> :    该标签用来装配没有重复的set值。
-<map>:   该标签可用来注入键和值可以为任何类型的键值对。
-<props> : 该标签支持注入键和值都是字符串类型的键值对。
+- ```<list>``` :   该标签用来装配可重复的list值。
+- ```<set>``` :    该标签用来装配没有重复的set值。
+- ```<map>```:   该标签可用来注入键和值可以为任何类型的键值对。
+- ```<props>``` : 该标签支持注入键和值都是字符串类型的键值对。
 下面看一下具体的例子：
 
 
@@ -490,9 +490,9 @@ public EmployeeDAOImpl ( EmployeeManager manager ) {
 
 ## 18、如何开启基于注解的自动装配？
 
-要使用 @Autowired，需要注册 AutowiredAnnotationBeanPostProcessor，可以有以下两种方式来实现：
+要使用 ```@Autowired````，需要注册 ```AutowiredAnnotationBeanPostProcessor```，可以有以下两种方式来实现：
 
-1、引入配置文件中的<bean>下引入 <context:annotation-config>
+1、引入配置文件中的<bean>下引入 ```<context:annotation-config>```
 
 
 ```
@@ -636,10 +636,10 @@ public class Customer
 
 请注意以下明显的区别：
 
-在设值注入方法支持大部分的依赖注入，如果我们仅需要注入int、string和long型的变量，我们不要用设值的方法注入。对于基本类型，如果我们没有注入的话，可以为基本类型设置默认值。在构造方法注入不支持大部分的依赖注入，因为在调用构造方法中必须传入正确的构造参数，否则的话为报错。
-设值注入不会重写构造方法的值。如果我们对同一个变量同时使用了构造方法注入又使用了设置方法注入的话，那么构造方法将不能覆盖由设值方法注入的值。很明显，因为构造方法尽在对象被创建时调用。
-在使用设值注入时有可能还不能保证某种依赖是否已经被注入，也就是说这时对象的依赖关系有可能是不完整的。而在另一种情况下，构造器注入则不允许生成依赖关系不完整的对象。
-在设值注入时如果对象A和对象B互相依赖，在创建对象A时Spring会抛出sObjectCurrentlyInCreationException异常，因为在B对象被创建之前A对象是不能被创建的，反之亦然。所以Spring用设值注入的方法解决了循环依赖的问题，因对象的设值方法是在对象被创建之前被调用的。
+- 在设值注入方法支持大部分的依赖注入，如果我们仅需要注入int、string和long型的变量，我们不要用设值的方法注入。对于基本类型，如果我们没有注入的话，可以为基本类型设置默认值。在构造方法注入不支持大部分的依赖注入，因为在调用构造方法中必须传入正确的构造参数，否则的话为报错。
+- 设值注入不会重写构造方法的值。如果我们对同一个变量同时使用了构造方法注入又使用了设置方法注入的话，那么构造方法将不能覆盖由设值方法注入的值。很明显，因为构造方法尽在对象被创建时调用。
+- 在使用设值注入时有可能还不能保证某种依赖是否已经被注入，也就是说这时对象的依赖关系有可能是不完整的。而在另一种情况下，构造器注入则不允许生成依赖关系不完整的对象。
+- 在设值注入时如果对象A和对象B互相依赖，在创建对象A时Spring会抛出sObjectCurrentlyInCreationException异常，因为在B对象被创建之前A对象是不能被创建的，反之亦然。所以Spring用设值注入的方法解决了循环依赖的问题，因对象的设值方法是在对象被创建之前被调用的。
 
 ## 23、Spring框架中有哪些不同类型的事件？
 
@@ -659,11 +659,13 @@ public class AllApplicationEventListener implements ApplicationListener < Applic
 ```
 Spring 提供了以下5中标准的事件：
 
-上下文更新事件（ContextRefreshedEvent）：该事件会在ApplicationContext被初始化或者更新时发布。也可以在调用ConfigurableApplicationContext 接口中的refresh()方法时被触发。
-上下文开始事件（ContextStartedEvent）：当容器调用ConfigurableApplicationContext的Start()方法开始/重新开始容器时触发该事件。
-上下文停止事件（ContextStoppedEvent）：当容器调用ConfigurableApplicationContext的Stop()方法停止容器时触发该事件。
-上下文关闭事件（ContextClosedEvent）：当ApplicationContext被关闭时触发该事件。容器被关闭时，其管理的所有单例Bean都被销毁。
-请求处理事件（RequestHandledEvent）：在Web应用中，当一个http请求（request）结束触发该事件。
+- 上下文更新事件（ContextRefreshedEvent）：该事件会在ApplicationContext被初始化或者更新时发布。也可以在调用ConfigurableApplicationContext 接口中的refresh()方法时被触发。
+- 上下文开始事件（ContextStartedEvent）：当容器调用ConfigurableApplicationContext的Start()方法开始/重新开始容器时触发该事件。
+- 上下文停止事件（ContextStoppedEvent）：当容器调用ConfigurableApplicationContext的Stop()方法停止容器时触发该事件。
+- 上下文关闭事件（ContextClosedEvent）：当ApplicationContext被关闭时触发该事件。容器被关闭时，其管理的所有单例Bean都被销毁。
+- 请求处理事件（RequestHandledEvent）：在Web应用中，当一个http请求（request）结束触发该事件。
+
+
 除了上面介绍的事件以外，还可以通过扩展ApplicationEvent 类来开发自定义的事件。
 
 ```
