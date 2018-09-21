@@ -19,7 +19,7 @@ github专门用来管理源代码，又可以直接在网页上显示markdown，
 - blogs
 - 01.java
 - 01.Java基础
-	- 01.Java基础/Cache和Buffer.md
+	- ![01.Java基础/Cache和Buffer](https://github.com/wardensky/blogs/blob/master/01.java/01.Java%E5%9F%BA%E7%A1%80/Cache%E5%92%8CBuffer.md)
 	- 01.Java基础/Exception和Error有什么区别.md
 	- 01.Java基础/Java IO (1) - InputStream.md
 	- 01.Java基础/Java IO (2) - OutputStream.md
