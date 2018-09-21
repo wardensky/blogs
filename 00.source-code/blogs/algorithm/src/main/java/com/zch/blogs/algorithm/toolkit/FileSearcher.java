@@ -14,6 +14,12 @@ public class FileSearcher {
 
 	public static void main(String[] args) {
 		String folder = "/Users/zch/github/blogs";
+
+		if (args.length > 1) {
+			System.out.println(args[0]);
+			folder = args[0];
+		}
+
 		List<String> ignoreList = new ArrayList<String>();
 		ignoreList.add("images");
 		ignoreList.add("00.source-code");
