@@ -18,13 +18,26 @@ public class FileSearcher {
 		ignoreList.add("README.md");
 		List<String> fileList = new ArrayList<String>(1000);
 
-		findMdFiles(folder, ignoreList, fileList, 0);
+		findMdFiles(folder, ignoreList, fileList, -1);
 		// Collections.sort(fileList);
 
 		for (String s : fileList) {
 			System.out.println(s);
 		}
 		System.out.println(fileList.size());
+	}
+
+	static String findNParent(File file, int depth) {
+		StringBuilder sb = new StringBuilder();
+		String path = file.getAbsolutePath();
+		String[] array = path.split("/");
+
+		for (int i = (array.length - depth - 1); i < array.length; i++) {
+			sb.append(array[i]);
+			sb.append("/");
+		}
+		return sb.substring(0, sb.length() - 1);
+
 	}
 
 	static String addUrl(File file, int depth) {
@@ -38,10 +51,16 @@ public class FileSearcher {
 		} else {
 			final String prefix = "https://github.com/wardensky/blogs/blob/master/";
 			String fileName = file.getName();
-			sb.append("- ");
-			sb.append(fileName);
+			sb.append("- [");
+			sb.append(fileName.replace(".md", ""));
+			sb.append("](");
+			sb.append(prefix);
+
+			sb.append(findNParent(file, depth));
+			 
+			sb.append(")");
 			return sb.toString();
-			//return "[" + fileName.replace(".md", "") + "](" + prefix + ")";
+
 		}
 	}
 
@@ -57,6 +76,9 @@ public class FileSearcher {
 		Collections.sort(files);
 		depth++;
 		for (File f : files) {
+			if (ignoreList.contains(f.getName())) {
+				continue;
+			}
 			if (f.isFile()) {
 				if (f.getName().endsWith(".md")) {
 					fileList.add(addUrl(f, depth));
