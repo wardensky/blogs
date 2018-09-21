@@ -1,6 +1,5 @@
+
 # 我的博客
-
-
 
 
 这里是我这些年的一些博客的总结。
@@ -14,7 +13,6 @@ github专门用来管理源代码，又可以直接在网页上显示markdown，
 一方面自己水平有限，另外一方面时间也有限，所以博客的水平基本都比较低，大部分是sample code的级别。
 
 ## 目录
-
 - [01.java][1]
 	- [01.Java基础][2]
 		- [Cache和Buffer][3]
@@ -346,6 +344,8 @@ github专门用来管理源代码，又可以直接在网页上显示markdown，
 - [13.编辑器与正则表达式][329]
 	- [3种不同编辑器里面的正则表达式替换][330]
 	- [正则表达式的贪婪与懒惰][331]
+- [Header][332]
+- [catalog][333]
 
 [1]:https://github.com/wardensky/blogs/blob/master/01.java
 [2]:https://github.com/wardensky/blogs/blob/master/01.java/01.Java基础
@@ -678,3 +678,5 @@ github专门用来管理源代码，又可以直接在网页上显示markdown，
 [329]:https://github.com/wardensky/blogs/blob/master/13.编辑器与正则表达式
 [330]:https://github.com/wardensky/blogs/blob/master/13.编辑器与正则表达式/3种不同编辑器里面的正则表达式替换.md
 [331]:https://github.com/wardensky/blogs/blob/master/13.编辑器与正则表达式/正则表达式的贪婪与懒惰.md
+[332]:https://github.com/wardensky/blogs/blob/master/Header.md
+[333]:https://github.com/wardensky/blogs/blob/master/catalog.md
