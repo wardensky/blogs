@@ -24,7 +24,7 @@ public class FileSearcher {
 		for (String s : fileList) {
 			System.out.println(s);
 		}
-		System.out.println(fileList.size());
+		 
 	}
 
 	static String findNParent(File file, int depth) {
@@ -36,7 +36,7 @@ public class FileSearcher {
 			sb.append(array[i]);
 			sb.append("/");
 		}
-		return sb.substring(0, sb.length() - 1);
+		return sb.substring(0, sb.length() - 1).replace(" ", "%20");
 
 	}
 
@@ -55,12 +55,9 @@ public class FileSearcher {
 			sb.append(fileName.replace(".md", ""));
 			sb.append("](");
 			sb.append(prefix);
-
 			sb.append(findNParent(file, depth));
-			 
 			sb.append(")");
 			return sb.toString();
-
 		}
 	}
 
