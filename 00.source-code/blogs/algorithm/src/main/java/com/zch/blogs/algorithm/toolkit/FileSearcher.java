@@ -29,7 +29,7 @@ public class FileSearcher {
 		for (String s : fileList) {
 			System.out.println(s);
 		}
-
+		System.out.println();
 		for (Integer k : keyMap.keySet()) {
 			System.out.println("[" + k + "]:" + keyMap.get(k));
 		}
@@ -65,7 +65,7 @@ public class FileSearcher {
 			sb.append(key);
 			sb.append("]");
 			keyMap.put(key, prefix + findNParent(file, depth));
-			sb.append(")");
+
 			key++;
 			return sb.toString();
 		}
