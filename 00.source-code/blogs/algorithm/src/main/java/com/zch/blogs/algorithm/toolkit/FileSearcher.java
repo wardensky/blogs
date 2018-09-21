@@ -27,6 +27,8 @@ public class FileSearcher {
 		ignoreList.add(".DS_Store");
 		ignoreList.add("LICENSE");
 		ignoreList.add("README.md");
+		ignoreList.add("Header.md");
+		ignoreList.add("catalog.md");
 		List<String> fileList = new ArrayList<String>(1000);
 
 		findMdFiles(folder, ignoreList, fileList, -1);
