@@ -24,7 +24,6 @@ public class FileSearcher {
 		List<String> fileList = new ArrayList<String>(1000);
 
 		findMdFiles(folder, ignoreList, fileList, -1);
-		// Collections.sort(fileList);
 
 		for (String s : fileList) {
 			System.out.println(s);
@@ -48,16 +47,22 @@ public class FileSearcher {
 		return sb.substring(0, sb.length() - 1).replace(" ", "%20");
 	}
 
+	static final String prefix = "https://github.com/wardensky/blogs/blob/master/";
+
 	static String addUrl(File file, int depth) {
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < depth; i++) {
 			sb.append("	");
 		}
 		if (file.isDirectory()) {
-			sb.append("- " + file.getName());
+			sb.append("- [" + file.getName());
+			sb.append("][");
+			sb.append(key);
+			sb.append("]");
+			keyMap.put(key, prefix + findNParent(file, depth));
+			key++;
 			return sb.toString();
 		} else {
-			final String prefix = "https://github.com/wardensky/blogs/blob/master/";
 			String fileName = file.getName();
 			sb.append("- [");
 			sb.append(fileName.replace(".md", ""));
@@ -65,7 +70,6 @@ public class FileSearcher {
 			sb.append(key);
 			sb.append("]");
 			keyMap.put(key, prefix + findNParent(file, depth));
-
 			key++;
 			return sb.toString();
 		}
