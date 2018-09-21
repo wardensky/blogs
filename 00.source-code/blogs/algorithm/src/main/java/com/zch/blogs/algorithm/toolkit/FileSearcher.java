@@ -4,9 +4,14 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class FileSearcher {
+	static int key = 1;
+	static Map<Integer, String> keyMap = new HashMap<Integer, String>(1000);
+
 	public static void main(String[] args) {
 		String folder = "/Users/zch/github/blogs";
 		List<String> ignoreList = new ArrayList<String>();
@@ -24,7 +29,11 @@ public class FileSearcher {
 		for (String s : fileList) {
 			System.out.println(s);
 		}
-		 
+
+		for (Integer k : keyMap.keySet()) {
+			System.out.println("[" + k + "]:" + keyMap.get(k));
+		}
+
 	}
 
 	static String findNParent(File file, int depth) {
@@ -37,7 +46,6 @@ public class FileSearcher {
 			sb.append("/");
 		}
 		return sb.substring(0, sb.length() - 1).replace(" ", "%20");
-
 	}
 
 	static String addUrl(File file, int depth) {
@@ -53,10 +61,12 @@ public class FileSearcher {
 			String fileName = file.getName();
 			sb.append("- [");
 			sb.append(fileName.replace(".md", ""));
-			sb.append("](");
-			sb.append(prefix);
-			sb.append(findNParent(file, depth));
+			sb.append("][");
+			sb.append(key);
+			sb.append("]");
+			keyMap.put(key, prefix + findNParent(file, depth));
 			sb.append(")");
+			key++;
 			return sb.toString();
 		}
 	}
@@ -68,7 +78,9 @@ public class FileSearcher {
 		}
 
 		File root = new File(folder);
-		fileList.add(addUrl(root, depth));
+		if (!root.getName().equals("blogs")) {
+			fileList.add(addUrl(root, depth));
+		}
 		List<File> files = Arrays.asList(root.listFiles());
 		Collections.sort(files);
 		depth++;

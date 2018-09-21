@@ -1,6 +1,5 @@
 ###通过源码学Java基础：InputStream、OutputStream、FileInputStream和FileOutputStream
 
-@(编程)
 
 
 ####1. InputStream
