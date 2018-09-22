@@ -228,7 +228,7 @@ github专门用来管理源代码，又可以直接在网页上显示markdown，
 		- [数据结构-二叉树的度][213]
 		- [数据结构-堆][214]
 		- [数据结构-树][215]
-		- [红黑树][216]
+		- [数据结构-红黑树][216]
 	- [05.算法面试题][217]
 		- [topK问题][218]
 		- [大整数相加问题][219]
@@ -564,7 +564,7 @@ github专门用来管理源代码，又可以直接在网页上显示markdown，
 [213]:https://github.com/wardensky/blogs/blob/master/06.algorithm/04.树相关/数据结构-二叉树的度.md
 [214]:https://github.com/wardensky/blogs/blob/master/06.algorithm/04.树相关/数据结构-堆.md
 [215]:https://github.com/wardensky/blogs/blob/master/06.algorithm/04.树相关/数据结构-树.md
-[216]:https://github.com/wardensky/blogs/blob/master/06.algorithm/04.树相关/红黑树.md
+[216]:https://github.com/wardensky/blogs/blob/master/06.algorithm/04.树相关/数据结构-红黑树.md
 [217]:https://github.com/wardensky/blogs/blob/master/06.algorithm/05.算法面试题
 [218]:https://github.com/wardensky/blogs/blob/master/06.algorithm/05.算法面试题/topK问题.md
 [219]:https://github.com/wardensky/blogs/blob/master/06.algorithm/05.算法面试题/大整数相加问题.md
