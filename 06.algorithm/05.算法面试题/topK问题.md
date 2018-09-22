@@ -113,6 +113,7 @@ void quick_sort(int[]arr, int low, inthigh){
 减治法（Reduce&Conquer），把一个大的问题，转化为若干个子问题（Reduce），这些子问题中“只”解决一个，大的问题便随之解决（Conquer）。这里的关键词是“只”。
 
 二分查找binary_search，BS，是一个典型的运用减治法思想的算法，其伪代码是：
+```
 int BS(int[]arr, int low, inthigh, int target){
          if(low> high) return -1;
          mid= (low+high)/2;
@@ -122,7 +123,7 @@ int BS(int[]arr, int low, inthigh, int target){
          else
                    return BS(arr, mid+1, high, target);
 }
-
+```
 从伪代码可以看到，二分查找，一个大的问题，可以用一个mid元素，分成左半区，右半区两个子问题。而左右两个子问题，只需要解决其中一个，递归一次，就能够解决二分查找全局的问题。
 
 通过分治法与减治法的描述，可以发现，分治法的复杂度一般来说是大于减治法的：
@@ -130,8 +131,9 @@ int BS(int[]arr, int low, inthigh, int target){
 二分查找：O(lg(n))
 
 话题收回来，快速排序的核心是：
+```
 i = partition(arr, low, high);
-
+```
 这个partition是干嘛的呢？
 顾名思义，partition会把整体分为两个部分。
 更具体的，会用数组arr中的一个元素（默认是第一个元素t=arr[low]）为划分依据，将数据arr[low, high]划分成左右两个子数组：
@@ -189,3 +191,9 @@ TopK，不难；其思路优化过程，不简单：
 * 分治法，每个分支“都要”递归，例如：快速排序，O(n*lg(n))
 * 减治法，“只要”递归一个分支，例如：二分查找O(lg(n))，随机选择O(n)
 * TopK的另一个解法：随机选择+partition
+
+## 参考
+
+- [拜托，面试别再问我TopK了！！！][1]
+
+[1]:a
