@@ -224,9 +224,9 @@ github专门用来管理源代码，又可以直接在网页上显示markdown，
 		- [单链表复制][209]
 		- [环形链表][210]
 	- [04.树相关][211]
-		- [二叉树等总结][212]
-		- [数据结构-树][213]
-		- [数据结构之“堆”][214]
+		- [数据结构-二叉树][212]
+		- [数据结构-堆][213]
+		- [数据结构-树][214]
 		- [红黑树][215]
 	- [05.算法面试题][216]
 		- [topK问题][217]
@@ -559,9 +559,9 @@ github专门用来管理源代码，又可以直接在网页上显示markdown，
 [209]:https://github.com/wardensky/blogs/blob/master/06.algorithm/03.链表相关/单链表复制.md
 [210]:https://github.com/wardensky/blogs/blob/master/06.algorithm/03.链表相关/环形链表.md
 [211]:https://github.com/wardensky/blogs/blob/master/06.algorithm/04.树相关
-[212]:https://github.com/wardensky/blogs/blob/master/06.algorithm/04.树相关/二叉树等总结.md
-[213]:https://github.com/wardensky/blogs/blob/master/06.algorithm/04.树相关/数据结构-树.md
-[214]:https://github.com/wardensky/blogs/blob/master/06.algorithm/04.树相关/数据结构之“堆”.md
+[212]:https://github.com/wardensky/blogs/blob/master/06.algorithm/04.树相关/数据结构-二叉树.md
+[213]:https://github.com/wardensky/blogs/blob/master/06.algorithm/04.树相关/数据结构-堆.md
+[214]:https://github.com/wardensky/blogs/blob/master/06.algorithm/04.树相关/数据结构-树.md
 [215]:https://github.com/wardensky/blogs/blob/master/06.algorithm/04.树相关/红黑树.md
 [216]:https://github.com/wardensky/blogs/blob/master/06.algorithm/05.算法面试题
 [217]:https://github.com/wardensky/blogs/blob/master/06.algorithm/05.算法面试题/topK问题.md
