@@ -214,26 +214,26 @@ github专门用来管理源代码，又可以直接在网页上显示markdown，
 		- [时间复杂度和空间复杂度][199]
 	- [02.排序相关][200]
 		- [冒泡排序学习][201]
-		- [堆排序学习][202]
-		- [希尔排序][203]
-		- [常见排序算法总结][204]
-		- [归并排序学习][205]
-		- [快排学习][206]
-		- [选择排序][207]
-	- [03.链表相关][208]
-		- [单链表复制][209]
-		- [环形链表][210]
-	- [04.树相关][211]
-		- [数据结构-二叉树][212]
-		- [数据结构-二叉树的度][213]
-		- [数据结构-堆][214]
-		- [数据结构-树][215]
-		- [数据结构-红黑树][216]
-	- [05.算法面试题][217]
-		- [topK问题][218]
-		- [大整数相加问题][219]
-		- [奇数在偶数前面问题][220]
-	- [06.堆][221]
+		- [堆排序][202]
+		- [堆排序学习][203]
+		- [希尔排序][204]
+		- [常见排序算法总结][205]
+		- [归并排序学习][206]
+		- [快排学习][207]
+		- [选择排序][208]
+	- [03.链表相关][209]
+		- [单链表复制][210]
+		- [环形链表][211]
+	- [04.树相关][212]
+		- [数据结构-二叉树][213]
+		- [数据结构-二叉树的度][214]
+		- [数据结构-堆][215]
+		- [数据结构-树][216]
+		- [数据结构-红黑树][217]
+	- [05.算法面试题][218]
+		- [topK问题][219]
+		- [大整数相加问题][220]
+		- [奇数在偶数前面问题][221]
 	- [LRU][222]
 	- [二分搜索][223]
 	- [分治][224]
@@ -550,26 +550,26 @@ github专门用来管理源代码，又可以直接在网页上显示markdown，
 [199]:https://github.com/wardensky/blogs/blob/master/06.algorithm/01.算法基础/时间复杂度和空间复杂度.md
 [200]:https://github.com/wardensky/blogs/blob/master/06.algorithm/02.排序相关
 [201]:https://github.com/wardensky/blogs/blob/master/06.algorithm/02.排序相关/冒泡排序学习.md
-[202]:https://github.com/wardensky/blogs/blob/master/06.algorithm/02.排序相关/堆排序学习.md
-[203]:https://github.com/wardensky/blogs/blob/master/06.algorithm/02.排序相关/希尔排序.md
-[204]:https://github.com/wardensky/blogs/blob/master/06.algorithm/02.排序相关/常见排序算法总结.md
-[205]:https://github.com/wardensky/blogs/blob/master/06.algorithm/02.排序相关/归并排序学习.md
-[206]:https://github.com/wardensky/blogs/blob/master/06.algorithm/02.排序相关/快排学习.md
-[207]:https://github.com/wardensky/blogs/blob/master/06.algorithm/02.排序相关/选择排序.md
-[208]:https://github.com/wardensky/blogs/blob/master/06.algorithm/03.链表相关
-[209]:https://github.com/wardensky/blogs/blob/master/06.algorithm/03.链表相关/单链表复制.md
-[210]:https://github.com/wardensky/blogs/blob/master/06.algorithm/03.链表相关/环形链表.md
-[211]:https://github.com/wardensky/blogs/blob/master/06.algorithm/04.树相关
-[212]:https://github.com/wardensky/blogs/blob/master/06.algorithm/04.树相关/数据结构-二叉树.md
-[213]:https://github.com/wardensky/blogs/blob/master/06.algorithm/04.树相关/数据结构-二叉树的度.md
-[214]:https://github.com/wardensky/blogs/blob/master/06.algorithm/04.树相关/数据结构-堆.md
-[215]:https://github.com/wardensky/blogs/blob/master/06.algorithm/04.树相关/数据结构-树.md
-[216]:https://github.com/wardensky/blogs/blob/master/06.algorithm/04.树相关/数据结构-红黑树.md
-[217]:https://github.com/wardensky/blogs/blob/master/06.algorithm/05.算法面试题
-[218]:https://github.com/wardensky/blogs/blob/master/06.algorithm/05.算法面试题/topK问题.md
-[219]:https://github.com/wardensky/blogs/blob/master/06.algorithm/05.算法面试题/大整数相加问题.md
-[220]:https://github.com/wardensky/blogs/blob/master/06.algorithm/05.算法面试题/奇数在偶数前面问题.md
-[221]:https://github.com/wardensky/blogs/blob/master/06.algorithm/06.堆
+[202]:https://github.com/wardensky/blogs/blob/master/06.algorithm/02.排序相关/堆排序.md
+[203]:https://github.com/wardensky/blogs/blob/master/06.algorithm/02.排序相关/堆排序学习.md
+[204]:https://github.com/wardensky/blogs/blob/master/06.algorithm/02.排序相关/希尔排序.md
+[205]:https://github.com/wardensky/blogs/blob/master/06.algorithm/02.排序相关/常见排序算法总结.md
+[206]:https://github.com/wardensky/blogs/blob/master/06.algorithm/02.排序相关/归并排序学习.md
+[207]:https://github.com/wardensky/blogs/blob/master/06.algorithm/02.排序相关/快排学习.md
+[208]:https://github.com/wardensky/blogs/blob/master/06.algorithm/02.排序相关/选择排序.md
+[209]:https://github.com/wardensky/blogs/blob/master/06.algorithm/03.链表相关
+[210]:https://github.com/wardensky/blogs/blob/master/06.algorithm/03.链表相关/单链表复制.md
+[211]:https://github.com/wardensky/blogs/blob/master/06.algorithm/03.链表相关/环形链表.md
+[212]:https://github.com/wardensky/blogs/blob/master/06.algorithm/04.树相关
+[213]:https://github.com/wardensky/blogs/blob/master/06.algorithm/04.树相关/数据结构-二叉树.md
+[214]:https://github.com/wardensky/blogs/blob/master/06.algorithm/04.树相关/数据结构-二叉树的度.md
+[215]:https://github.com/wardensky/blogs/blob/master/06.algorithm/04.树相关/数据结构-堆.md
+[216]:https://github.com/wardensky/blogs/blob/master/06.algorithm/04.树相关/数据结构-树.md
+[217]:https://github.com/wardensky/blogs/blob/master/06.algorithm/04.树相关/数据结构-红黑树.md
+[218]:https://github.com/wardensky/blogs/blob/master/06.algorithm/05.算法面试题
+[219]:https://github.com/wardensky/blogs/blob/master/06.algorithm/05.算法面试题/topK问题.md
+[220]:https://github.com/wardensky/blogs/blob/master/06.algorithm/05.算法面试题/大整数相加问题.md
+[221]:https://github.com/wardensky/blogs/blob/master/06.algorithm/05.算法面试题/奇数在偶数前面问题.md
 [222]:https://github.com/wardensky/blogs/blob/master/06.algorithm/LRU.md
 [223]:https://github.com/wardensky/blogs/blob/master/06.algorithm/二分搜索.md
 [224]:https://github.com/wardensky/blogs/blob/master/06.algorithm/分治.md
