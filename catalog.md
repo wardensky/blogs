@@ -349,8 +349,9 @@
 	- [python 应用xml.dom.minidom读xml][349]
 	- [python 递归遍历文件夹][350]
 	- [python抓取网页例子][351]
-	- [对pymysql的简单封装][352]
-	- [用Python直接写UTF-8文本文件][353]
+	- [如何在Centos上安装python3.4][352]
+	- [对pymysql的简单封装][353]
+	- [用Python直接写UTF-8文本文件][354]
 
 [1]:https://github.com/wardensky/blogs/blob/master/01.java
 [2]:https://github.com/wardensky/blogs/blob/master/01.java/01.Java基础
@@ -703,5 +704,6 @@
 [349]:https://github.com/wardensky/blogs/blob/master/15.Python/python%20应用xml.dom.minidom读xml.md
 [350]:https://github.com/wardensky/blogs/blob/master/15.Python/python%20递归遍历文件夹.md
 [351]:https://github.com/wardensky/blogs/blob/master/15.Python/python抓取网页例子.md
-[352]:https://github.com/wardensky/blogs/blob/master/15.Python/对pymysql的简单封装.md
-[353]:https://github.com/wardensky/blogs/blob/master/15.Python/用Python直接写UTF-8文本文件.md
+[352]:https://github.com/wardensky/blogs/blob/master/15.Python/如何在Centos上安装python3.4.md
+[353]:https://github.com/wardensky/blogs/blob/master/15.Python/对pymysql的简单封装.md
+[354]:https://github.com/wardensky/blogs/blob/master/15.Python/用Python直接写UTF-8文本文件.md
