@@ -124,7 +124,7 @@ docker run -it --rm \
 ### 通过本地主机连接 ZK 集群
 因为我们分别将 zoo1, zoo2, zoo3 的 2181 端口映射到了 本地主机的2181, 2182, 2183 端口上, 因此我们使用如下命令即可连接 ZK 集群了:
 ```
-zkCli.sh -server localhost:2181,localhost:2182,localhost:2183
+zkCli -server localhost:2181,localhost:2182,localhost:2183
 ```
 
 ### 查看集群
