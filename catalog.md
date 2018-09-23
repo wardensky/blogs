@@ -357,6 +357,8 @@
 	- [如何在Centos上安装python3.4][357]
 	- [对pymysql的简单封装][358]
 	- [用Python直接写UTF-8文本文件][359]
+- [16.mac][360]
+	- [brew相关操作][361]
 
 [1]:https://github.com/wardensky/blogs/blob/master/01.java
 [2]:https://github.com/wardensky/blogs/blob/master/01.java/01.Java基础
@@ -717,3 +719,5 @@
 [357]:https://github.com/wardensky/blogs/blob/master/15.Python/如何在Centos上安装python3.4.md
 [358]:https://github.com/wardensky/blogs/blob/master/15.Python/对pymysql的简单封装.md
 [359]:https://github.com/wardensky/blogs/blob/master/15.Python/用Python直接写UTF-8文本文件.md
+[360]:https://github.com/wardensky/blogs/blob/master/16.mac
+[361]:https://github.com/wardensky/blogs/blob/master/16.mac/brew相关操作.md
