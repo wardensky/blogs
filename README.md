@@ -360,6 +360,12 @@ github专门用来管理源代码，又可以直接在网页上显示markdown，
 	- [04.跨域问题][345]
 		- [前端跨域问题各种解决方案][346]
 - [15.Python][347]
+	- [mac多版本python安装 pymysql][348]
+	- [python 应用xml.dom.minidom读xml][349]
+	- [python 递归遍历文件夹][350]
+	- [python抓取网页例子][351]
+	- [对pymysql的简单封装][352]
+	- [用Python直接写UTF-8文本文件][353]
 
 [1]:https://github.com/wardensky/blogs/blob/master/01.java
 [2]:https://github.com/wardensky/blogs/blob/master/01.java/01.Java基础
@@ -708,3 +714,9 @@ github专门用来管理源代码，又可以直接在网页上显示markdown，
 [345]:https://github.com/wardensky/blogs/blob/master/14.前端/04.跨域问题
 [346]:https://github.com/wardensky/blogs/blob/master/14.前端/04.跨域问题/前端跨域问题各种解决方案.md
 [347]:https://github.com/wardensky/blogs/blob/master/15.Python
+[348]:https://github.com/wardensky/blogs/blob/master/15.Python/mac多版本python安装%20pymysql.md
+[349]:https://github.com/wardensky/blogs/blob/master/15.Python/python%20应用xml.dom.minidom读xml.md
+[350]:https://github.com/wardensky/blogs/blob/master/15.Python/python%20递归遍历文件夹.md
+[351]:https://github.com/wardensky/blogs/blob/master/15.Python/python抓取网页例子.md
+[352]:https://github.com/wardensky/blogs/blob/master/15.Python/对pymysql的简单封装.md
+[353]:https://github.com/wardensky/blogs/blob/master/15.Python/用Python直接写UTF-8文本文件.md
