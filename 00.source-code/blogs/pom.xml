@@ -28,5 +28,6 @@
     <module>network-netty</module>
     <module>nosql-redis</module>
     <module>framework-mybatis</module>
+    <module>distributed-zookeeper</module>
   </modules>
 </project>
