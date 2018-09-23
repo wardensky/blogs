@@ -4,7 +4,7 @@
 ```
 f = file('x1.txt', 'w')
 f.write(u'中文')
-f.colse()
+f.close()
 ```
 直接结果应该是类似
 ```
