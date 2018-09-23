@@ -358,10 +358,12 @@
 	- [对pymysql的简单封装][358]
 	- [用Python直接写UTF-8文本文件][359]
 - [16.mac][360]
-	- [brew相关操作][361]
-	- [homebrew常见用法][362]
-	- [mac activemq][363]
-	- [mac下通过mdfind命令搜索文件][364]
+	- [Mac下的截屏功能][361]
+	- [brew相关操作][362]
+	- [homebrew常见用法][363]
+	- [mac activemq][364]
+	- [mac下通过mdfind命令搜索文件][365]
+- [17.C#][366]
 
 [1]:https://github.com/wardensky/blogs/blob/master/01.java
 [2]:https://github.com/wardensky/blogs/blob/master/01.java/01.Java基础
@@ -723,7 +725,9 @@
 [358]:https://github.com/wardensky/blogs/blob/master/15.Python/对pymysql的简单封装.md
 [359]:https://github.com/wardensky/blogs/blob/master/15.Python/用Python直接写UTF-8文本文件.md
 [360]:https://github.com/wardensky/blogs/blob/master/16.mac
-[361]:https://github.com/wardensky/blogs/blob/master/16.mac/brew相关操作.md
-[362]:https://github.com/wardensky/blogs/blob/master/16.mac/homebrew常见用法.md
-[363]:https://github.com/wardensky/blogs/blob/master/16.mac/mac%20activemq.md
-[364]:https://github.com/wardensky/blogs/blob/master/16.mac/mac下通过mdfind命令搜索文件.md
+[361]:https://github.com/wardensky/blogs/blob/master/16.mac/Mac下的截屏功能.md
+[362]:https://github.com/wardensky/blogs/blob/master/16.mac/brew相关操作.md
+[363]:https://github.com/wardensky/blogs/blob/master/16.mac/homebrew常见用法.md
+[364]:https://github.com/wardensky/blogs/blob/master/16.mac/mac%20activemq.md
+[365]:https://github.com/wardensky/blogs/blob/master/16.mac/mac下通过mdfind命令搜索文件.md
+[366]:https://github.com/wardensky/blogs/blob/master/17.C#
