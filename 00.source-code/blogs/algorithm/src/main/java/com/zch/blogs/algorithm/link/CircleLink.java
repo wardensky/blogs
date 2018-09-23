@@ -22,15 +22,15 @@ public class CircleLink {
 	 * @param head
 	 * @return
 	 */
-	public boolean hasCycle(ListNode head) {
-		Set<ListNode> nodesSeen = new HashSet<>();
+	public boolean hasCycle(LinkNode head) {
+		Set<LinkNode> nodesSeen = new HashSet<>();
 		while (head != null) {
 			if (nodesSeen.contains(head)) {
 				return true;
 			} else {
 				nodesSeen.add(head);
 			}
-			head = head.next;
+			head = head.getNextNode();
 		}
 		return false;
 	}
@@ -46,18 +46,18 @@ public class CircleLink {
 	 * @param head
 	 * @return
 	 */
-	public boolean hasCycle1(ListNode head) {
-		if (head == null || head.next == null) {
+	public boolean hasCycle1(LinkNode head) {
+		if (head == null || head.getNextNode() == null) {
 			return false;
 		}
-		ListNode slow = head;
-		ListNode fast = head.next;
+		LinkNode slow = head;
+		LinkNode fast = head.getNextNode();
 		while (slow != fast) {
-			if (fast == null || fast.next == null) {
+			if (fast == null || fast.getNextNode() == null) {
 				return false;
 			}
-			slow = slow.next;
-			fast = fast.next.next;
+			slow = slow.getNextNode();
+			fast = fast.getNextNode();
 		}
 		return true;
 	}
