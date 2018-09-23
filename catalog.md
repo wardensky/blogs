@@ -344,6 +344,7 @@
 	- [03.css][344]
 	- [04.跨域问题][345]
 		- [前端跨域问题各种解决方案][346]
+- [15.Python][347]
 
 [1]:https://github.com/wardensky/blogs/blob/master/01.java
 [2]:https://github.com/wardensky/blogs/blob/master/01.java/01.Java基础
@@ -691,3 +692,4 @@
 [344]:https://github.com/wardensky/blogs/blob/master/14.前端/03.css
 [345]:https://github.com/wardensky/blogs/blob/master/14.前端/04.跨域问题
 [346]:https://github.com/wardensky/blogs/blob/master/14.前端/04.跨域问题/前端跨域问题各种解决方案.md
+[347]:https://github.com/wardensky/blogs/blob/master/15.Python
