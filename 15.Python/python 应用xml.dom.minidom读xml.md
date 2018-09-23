@@ -1,6 +1,6 @@
 # python 应用xml.dom.minidom读xml
 
-##xml文件
+## xml文件
 ```
 <?xml version="1.0" encoding="utf-8"?>
  <city>
@@ -26,7 +26,7 @@
 </city>
 
 ```
-##代码
+## 代码
 读xml代码如下：
 ```
 def readXml(file):
@@ -53,7 +53,7 @@ def readXml(file):
     return unis
 ```
 
-##说明
+## 说明
 
 - 使用parse()或者createDocument()返回的为DOM对象
 - 使用DOM的documentElement属性可以锋利RootElement;
