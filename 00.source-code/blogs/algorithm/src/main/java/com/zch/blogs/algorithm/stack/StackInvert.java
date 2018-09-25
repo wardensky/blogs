@@ -10,15 +10,20 @@ import java.util.Stack;
  */
 public class StackInvert {
 	public static void main(String[] args) {
+		Stack<Integer> s1 = init();
+		StackBase.print(s1);
+		Stack<Integer> s2 = invert(s1);
+		StackBase.print(s2);
+	}
+
+	public static Stack<Integer> init() {
 		Stack<Integer> s1 = new Stack<Integer>();
 		s1.push(5);
 		s1.push(4);
 		s1.push(3);
 		s1.push(2);
 		s1.push(1);
-		StackBase.print(s1);
-		Stack<Integer> s2 = invert(s1);
-		StackBase.print(s2);
+		return s1;
 	}
 
 	static Stack<Integer> invert(Stack<Integer> s) {
