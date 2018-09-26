@@ -216,13 +216,13 @@ github专门用来管理源代码，又可以直接在网页上显示markdown，
 - [06.algorithm][201]
 	- [01.算法基础][202]
 		- [分治法][203]
-		- [动态规划][204]
+		- [动态规划与背包问题][204]
 		- [回溯之子集树和排列树][205]
 		- [回溯法][206]
 		- [布隆过滤器][207]
 		- [时间复杂度和空间复杂度][208]
 		- [解空间的穷举搜索][209]
-		- [贪婪法][210]
+		- [贪婪法与背包问题][210]
 	- [02.排序相关][211]
 		- [冒泡排序学习][212]
 		- [堆排序][213]
@@ -588,13 +588,13 @@ github专门用来管理源代码，又可以直接在网页上显示markdown，
 [201]:https://github.com/wardensky/blogs/blob/master/06.algorithm
 [202]:https://github.com/wardensky/blogs/blob/master/06.algorithm/01.算法基础
 [203]:https://github.com/wardensky/blogs/blob/master/06.algorithm/01.算法基础/分治法.md
-[204]:https://github.com/wardensky/blogs/blob/master/06.algorithm/01.算法基础/动态规划.md
+[204]:https://github.com/wardensky/blogs/blob/master/06.algorithm/01.算法基础/动态规划与背包问题.md
 [205]:https://github.com/wardensky/blogs/blob/master/06.algorithm/01.算法基础/回溯之子集树和排列树.md
 [206]:https://github.com/wardensky/blogs/blob/master/06.algorithm/01.算法基础/回溯法.md
 [207]:https://github.com/wardensky/blogs/blob/master/06.algorithm/01.算法基础/布隆过滤器.md
 [208]:https://github.com/wardensky/blogs/blob/master/06.algorithm/01.算法基础/时间复杂度和空间复杂度.md
 [209]:https://github.com/wardensky/blogs/blob/master/06.algorithm/01.算法基础/解空间的穷举搜索.md
-[210]:https://github.com/wardensky/blogs/blob/master/06.algorithm/01.算法基础/贪婪法.md
+[210]:https://github.com/wardensky/blogs/blob/master/06.algorithm/01.算法基础/贪婪法与背包问题.md
 [211]:https://github.com/wardensky/blogs/blob/master/06.algorithm/02.排序相关
 [212]:https://github.com/wardensky/blogs/blob/master/06.algorithm/02.排序相关/冒泡排序学习.md
 [213]:https://github.com/wardensky/blogs/blob/master/06.algorithm/02.排序相关/堆排序.md
