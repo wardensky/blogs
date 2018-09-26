@@ -27,12 +27,12 @@ public class EightQueens {
 
 	public void Search(int m) {
 		if (m >= COUNT) {
-			System.out.println("八皇后的一组解为： " + m);
+			System.out.println("八皇后的一组解为： ");
 			count++;
 			// printResult();
 			print();
 		} else {
-			System.out.println("m = " + m);
+//			System.out.println("m = " + m);
 			for (int i = 0; i < COUNT; i++) {
 				if (CanPlace(m, i)) {
 					a[m] = i;
@@ -54,24 +54,24 @@ public class EightQueens {
 	 * @return
 	 */
 	private boolean CanPlace(int k, int j) {
-		System.out.println("call can place k=" + k + " j=" + j);
+//		System.out.println("call can place k=" + k + " j=" + j);
 
 		for (int i = 1; i <= k; i++) {
 			if (a[k - i] == j) {//j表示当前列
-				System.out.println("  a[k - i] == j false " + j);
+//				System.out.println("  a[k - i] == j false " + j);
 				return false;
 			}
 			if (a[k - i] == j - i) {
-				System.out.println("  a[k - i] == j - i false " + (j - i));
+//				System.out.println("  a[k - i] == j - i false " + (j - i));
 				return false;
 			}
 			if (a[k - i] == j + i) {
-				System.out.println("  a[k - i] == j + i false " + (j + i));
+//				System.out.println("  a[k - i] == j + i false " + (j + i));
 				return false;
 			}
 
 		}
-		System.out.println("  true");
+//		System.out.println("  true");
 		return true;
 	}
 
