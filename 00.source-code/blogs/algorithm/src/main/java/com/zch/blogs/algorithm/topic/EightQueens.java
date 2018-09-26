@@ -15,8 +15,8 @@ package com.zch.blogs.algorithm.topic;
  * 
  */
 public class EightQueens {
-
-	private int[] a = new int[8]; // 存储第i行皇后位于第a[i]列
+	private static final int COUNT = 4;
+	private int[] a = new int[COUNT]; // 存储第i行皇后位于第a[i]列
 	private static int count = 0;
 
 	public static void main(String[] args) {
@@ -26,36 +26,58 @@ public class EightQueens {
 	}
 
 	public void Search(int m) {
-		if (m >= 8) {
-		//	System.out.println("八皇后的一组解为： " + m);
+		if (m >= COUNT) {
+			System.out.println("八皇后的一组解为： " + m);
 			count++;
-			printResult();
+			// printResult();
+			print();
 		} else {
-		//	System.out.println("m = " + m);
-			for (int i = 0; i < 8; i++) {
+			System.out.println("m = " + m);
+			for (int i = 0; i < COUNT; i++) {
 				if (CanPlace(m, i)) {
 					a[m] = i;
 					Search(m + 1);
+
 					a[m] = -10;
 				}
 			}
 		}
 	}
 
+	/**
+	 * 能否放一个皇后。
+	 * 
+	 * @param k
+	 *            表示第几行
+	 * @param j
+	 *            表示第几个。
+	 * @return
+	 */
 	private boolean CanPlace(int k, int j) {
-		// System.out.println("call can place k=" + k + " j=" + j);
+		System.out.println("call can place k=" + k + " j=" + j);
+
 		for (int i = 1; i <= k; i++) {
-			if ((a[k - i] == j) || (a[k - i] == j - i) || (a[k - i] == j + i)) { // 判断左上，右上，该列有没有其他皇后
+			if (a[k - i] == j) {//j表示当前列
+				System.out.println("  a[k - i] == j false " + j);
 				return false;
 			}
-		}
-		return true;
+			if (a[k - i] == j - i) {
+				System.out.println("  a[k - i] == j - i false " + (j - i));
+				return false;
+			}
+			if (a[k - i] == j + i) {
+				System.out.println("  a[k - i] == j + i false " + (j + i));
+				return false;
+			}
 
+		}
+		System.out.println("  true");
+		return true;
 	}
 
 	private void printResult() {
-		for (int i = 0; i < 8; i++) {
-			for (int j = 0; j < 8; j++) {
+		for (int i = 0; i < COUNT; i++) {
+			for (int j = 0; j < COUNT; j++) {
 				if (a[i] == j) {
 					System.out.print("Q");
 				} else {
@@ -67,4 +89,11 @@ public class EightQueens {
 		System.out.println("*****************");
 	}
 
+	private void print() {
+		for (int i = 0; i < COUNT; i++) {
+			System.out.print(a[i]);
+		}
+		System.out.println();
+		System.out.println("*****************");
+	}
 }
