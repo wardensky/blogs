@@ -27,11 +27,11 @@ public class EightQueens {
 
 	public void Search(int m) {
 		if (m >= 8) {
-			System.out.println("八皇后的一组解为： " + m);
+		//	System.out.println("八皇后的一组解为： " + m);
 			count++;
 			printResult();
 		} else {
-			System.out.println("m = " + m);
+		//	System.out.println("m = " + m);
 			for (int i = 0; i < 8; i++) {
 				if (CanPlace(m, i)) {
 					a[m] = i;
@@ -43,7 +43,7 @@ public class EightQueens {
 	}
 
 	private boolean CanPlace(int k, int j) {
-		System.out.println("call can place k=" + k + " j=" + j);
+		// System.out.println("call can place k=" + k + " j=" + j);
 		for (int i = 1; i <= k; i++) {
 			if ((a[k - i] == j) || (a[k - i] == j - i) || (a[k - i] == j + i)) { // 判断左上，右上，该列有没有其他皇后
 				return false;
