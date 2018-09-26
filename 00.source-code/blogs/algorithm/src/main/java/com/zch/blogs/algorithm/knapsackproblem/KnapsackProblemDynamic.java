@@ -13,11 +13,17 @@ public class KnapsackProblemDynamic {
 	public static void main(String[] args) {
 		List<TagObject> data = TagObjectUtil.init();
 		KnapsackProblemDynamic kpd = new KnapsackProblemDynamic();
-		int result = kpd.findMax(data, TagObjectUtil.BAG_CONTENT);
-		System.out.println(result);
+		int[][] result = kpd.findMax(data, TagObjectUtil.BAG_CONTENT);
+		for(int i = 0; i < result.length;i++) {
+			for(int j = 1; j < result[i].length;j++) {
+				System.out.print(result[i][j] + "\t");
+			}
+			System.out.println();
+		}
+		 
 	}
 
-	public int findMax(List<TagObject> data, int total) {
+	public int[][] findMax(List<TagObject> data, int total) {
 		int tagNumber = data.size();
 		int[][] result = new int[tagNumber][total + 1];
 		for (int rowIndex = 0; rowIndex < tagNumber; rowIndex++) {
@@ -48,7 +54,7 @@ public class KnapsackProblemDynamic {
 				}
 			}
 		}
-		return result[tagNumber - 1][total];
+		return result;
 	}
 
 }
