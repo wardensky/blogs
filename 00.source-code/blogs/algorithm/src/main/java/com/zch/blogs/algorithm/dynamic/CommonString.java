@@ -1,5 +1,12 @@
 package com.zch.blogs.algorithm.dynamic;
 
+/**
+ * @Description 
+求两个字符串的最长公共子串，如“abcdefg”和“adefgwgeweg”的最长公共子串为“defg”（子串必须是连续的）
+ * @author zch
+ * @time 2018年9月26日 下午10:59:37
+ * 
+ */
 public class CommonString {
 
 	public static void main(String[] args) {
