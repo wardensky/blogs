@@ -243,132 +243,134 @@
 		- [EinsteinProblem][243]
 	- [07.查找][244]
 		- [二分查找][245]
-- [07.framework][246]
-	- [01.Spring][247]
-		- [01.第一个Spring项目][248]
-		- [02.通过构造器注入Bean][249]
-		- [03.Spring命名空间与Bean作用域][250]
-		- [04.注入Bean属性][251]
-		- [05.自动装配Bean属性][252]
-		- [06.使用注解装配][253]
-		- [07.自动检测Bean][254]
-		- [08.基于Java配置而不是XML][255]
-		- [09.Bean的生命周期][256]
-		- [10.到底什么是IOC和DI][257]
-		- [11.BeanFactory和ApplicationContext联系和区别][258]
-		- [12.AOP初探][259]
-		- [13.Spring-JDBC][260]
-		- [14.spring事务][261]
-		- [69道Spring面试题和答案][262]
-		- [Spring Boot面试题][263]
-		- [Spring面试问答Top 25][264]
-	- [02.Hibernate][265]
-		- [Hibernate一对多和多对多][266]
-		- [Hibernate一级缓存——Session][267]
-		- [Hibernate三种状态的转换][268]
-		- [Hibernate入门（1）-第一个Hibernate程序][269]
-		- [Hibernate入门（2）- 不用配置用注解][270]
-		- [Hibernate入门（3）- 持久对象的生命周期介绍][271]
-		- [Hibernate入门（4）- Hibernate数据操作][272]
-		- [Hibernate常见面试题][273]
-		- [Hibernate有哪5个核心接口][274]
-		- [Hibernate的SessionFactory][275]
-		- [Hibernate的一级缓存与二级缓存的区别][276]
-		- [Hibernate面试题][277]
-		- [JDBC和Hibernate分页怎样实现][278]
-		- [java面试——Hibernate常见面试题][279]
-	- [03.struts2][280]
-		- [Struts2入门（1）-第一个Struts2程序][281]
-		- [Struts2入门（2）-常用struts2标签][282]
-	- [04.mybatis][283]
-		- [MyBatis学习-映射文件标签][284]
-		- [Mybatis Dao接口的工作原理][285]
-		- [Mybatis sqlSession][286]
-		- [Mybatis分页][287]
-		- [Mybatis动态sql][288]
-		- [Mybatis常见面试题][289]
-		- [Mybatis的#{}和${}][290]
-		- [Mybatis的Executor][291]
-	- [jfinal][292]
-- [08.nosql][293]
-	- [01.Redis][294]
-		- [Redis HyperLogLog][295]
-		- [Redis中文存储乱码问题][296]
-		- [Redis事务][297]
-		- [Redis列表(List)][298]
-		- [Redis发布订阅][299]
-		- [Redis哈希(Hash)][300]
-		- [Redis字符串(String)][301]
-		- [Redis常用命令][302]
-		- [Redis持久化][303]
-		- [Redis支持的数据类型][304]
-		- [Redis有序集合(sorted set)][305]
-		- [Redis查询数据条数][306]
-		- [Redis的架构模式][307]
-		- [Redis键(key)][308]
-		- [Redis集合(Set)][309]
-		- [redis-cli常用命令][310]
-		- [redis通讯协议(RESP)][311]
-		- [互联网公司面试必问的Redis题目][312]
-		- [删除Redis所有KEY][313]
-		- [基于Redis的异步队列][314]
-		- [基于分词+Redis技术的地域字符串快速匹配设计与实现][315]
-		- [应用Java操作Redis][316]
-		- [应用Redis实现分布式锁][317]
-	- [02.MongoDB][318]
-		- [CentOS环境下Mongodb的安装与配置][319]
-		- [MongoDB入门（1）- MongoDB简介][320]
-	- [03.Elasticsearch][321]
-		- [ElasticSearch入门][322]
-	- [04.HBase][323]
-- [09.linux][324]
-	- [CentOS系统时间和时区查看以及修改的方法][325]
-	- [应用maven自动部署的脚本][326]
-- [10.Docker][327]
-	- [Docker常用命令(1)][328]
-	- [Docker挂载本地硬盘][329]
-	- [docker commit命令][330]
-	- [docker exec命令][331]
-	- [docker load命令][332]
-	- [docker logs命令][333]
-	- [docker ps命令][334]
-	- [docker run命令][335]
-	- [docker save命令][336]
-	- [mysql on docker][337]
-- [11.maven][338]
-	- [maven基础][339]
-- [12.git][340]
-	- [Elastic Search操作入门][341]
-	- [git alias 配置][342]
-	- [git下载某一个版本][343]
-	- [git入门1-Git工作流][344]
-	- [git学习笔记5-撤销操作][345]
-	- [git学习笔记6-tag][346]
-	- [git学习笔记7-branch][347]
-- [13.编辑器与正则表达式][348]
-	- [3种不同编辑器里面的正则表达式替换][349]
-	- [正则表达式的贪婪与懒惰][350]
-- [14.前端][351]
-	- [01.JavaScript][352]
-	- [02.HTML][353]
-	- [03.css][354]
-	- [04.跨域问题][355]
-		- [前端跨域问题各种解决方案][356]
-- [15.Python][357]
-	- [mac多版本python安装 pymysql][358]
-	- [python 应用xml.dom.minidom读xml][359]
-	- [python 递归遍历文件夹][360]
-	- [python抓取网页例子][361]
-	- [如何在Centos上安装python3.4][362]
-	- [对pymysql的简单封装][363]
-	- [用Python直接写UTF-8文本文件][364]
-- [16.mac][365]
-	- [Mac下的截屏功能][366]
-	- [brew相关操作][367]
-	- [homebrew常见用法][368]
-	- [mac activemq][369]
-	- [mac下通过mdfind命令搜索文件][370]
-- [17.C#][371]
+	- [08.动态规划][246]
+		- [最长公共子串问题][247]
+- [07.framework][248]
+	- [01.Spring][249]
+		- [01.第一个Spring项目][250]
+		- [02.通过构造器注入Bean][251]
+		- [03.Spring命名空间与Bean作用域][252]
+		- [04.注入Bean属性][253]
+		- [05.自动装配Bean属性][254]
+		- [06.使用注解装配][255]
+		- [07.自动检测Bean][256]
+		- [08.基于Java配置而不是XML][257]
+		- [09.Bean的生命周期][258]
+		- [10.到底什么是IOC和DI][259]
+		- [11.BeanFactory和ApplicationContext联系和区别][260]
+		- [12.AOP初探][261]
+		- [13.Spring-JDBC][262]
+		- [14.spring事务][263]
+		- [69道Spring面试题和答案][264]
+		- [Spring Boot面试题][265]
+		- [Spring面试问答Top 25][266]
+	- [02.Hibernate][267]
+		- [Hibernate一对多和多对多][268]
+		- [Hibernate一级缓存——Session][269]
+		- [Hibernate三种状态的转换][270]
+		- [Hibernate入门（1）-第一个Hibernate程序][271]
+		- [Hibernate入门（2）- 不用配置用注解][272]
+		- [Hibernate入门（3）- 持久对象的生命周期介绍][273]
+		- [Hibernate入门（4）- Hibernate数据操作][274]
+		- [Hibernate常见面试题][275]
+		- [Hibernate有哪5个核心接口][276]
+		- [Hibernate的SessionFactory][277]
+		- [Hibernate的一级缓存与二级缓存的区别][278]
+		- [Hibernate面试题][279]
+		- [JDBC和Hibernate分页怎样实现][280]
+		- [java面试——Hibernate常见面试题][281]
+	- [03.struts2][282]
+		- [Struts2入门（1）-第一个Struts2程序][283]
+		- [Struts2入门（2）-常用struts2标签][284]
+	- [04.mybatis][285]
+		- [MyBatis学习-映射文件标签][286]
+		- [Mybatis Dao接口的工作原理][287]
+		- [Mybatis sqlSession][288]
+		- [Mybatis分页][289]
+		- [Mybatis动态sql][290]
+		- [Mybatis常见面试题][291]
+		- [Mybatis的#{}和${}][292]
+		- [Mybatis的Executor][293]
+	- [jfinal][294]
+- [08.nosql][295]
+	- [01.Redis][296]
+		- [Redis HyperLogLog][297]
+		- [Redis中文存储乱码问题][298]
+		- [Redis事务][299]
+		- [Redis列表(List)][300]
+		- [Redis发布订阅][301]
+		- [Redis哈希(Hash)][302]
+		- [Redis字符串(String)][303]
+		- [Redis常用命令][304]
+		- [Redis持久化][305]
+		- [Redis支持的数据类型][306]
+		- [Redis有序集合(sorted set)][307]
+		- [Redis查询数据条数][308]
+		- [Redis的架构模式][309]
+		- [Redis键(key)][310]
+		- [Redis集合(Set)][311]
+		- [redis-cli常用命令][312]
+		- [redis通讯协议(RESP)][313]
+		- [互联网公司面试必问的Redis题目][314]
+		- [删除Redis所有KEY][315]
+		- [基于Redis的异步队列][316]
+		- [基于分词+Redis技术的地域字符串快速匹配设计与实现][317]
+		- [应用Java操作Redis][318]
+		- [应用Redis实现分布式锁][319]
+	- [02.MongoDB][320]
+		- [CentOS环境下Mongodb的安装与配置][321]
+		- [MongoDB入门（1）- MongoDB简介][322]
+	- [03.Elasticsearch][323]
+		- [ElasticSearch入门][324]
+	- [04.HBase][325]
+- [09.linux][326]
+	- [CentOS系统时间和时区查看以及修改的方法][327]
+	- [应用maven自动部署的脚本][328]
+- [10.Docker][329]
+	- [Docker常用命令(1)][330]
+	- [Docker挂载本地硬盘][331]
+	- [docker commit命令][332]
+	- [docker exec命令][333]
+	- [docker load命令][334]
+	- [docker logs命令][335]
+	- [docker ps命令][336]
+	- [docker run命令][337]
+	- [docker save命令][338]
+	- [mysql on docker][339]
+- [11.maven][340]
+	- [maven基础][341]
+- [12.git][342]
+	- [Elastic Search操作入门][343]
+	- [git alias 配置][344]
+	- [git下载某一个版本][345]
+	- [git入门1-Git工作流][346]
+	- [git学习笔记5-撤销操作][347]
+	- [git学习笔记6-tag][348]
+	- [git学习笔记7-branch][349]
+- [13.编辑器与正则表达式][350]
+	- [3种不同编辑器里面的正则表达式替换][351]
+	- [正则表达式的贪婪与懒惰][352]
+- [14.前端][353]
+	- [01.JavaScript][354]
+	- [02.HTML][355]
+	- [03.css][356]
+	- [04.跨域问题][357]
+		- [前端跨域问题各种解决方案][358]
+- [15.Python][359]
+	- [mac多版本python安装 pymysql][360]
+	- [python 应用xml.dom.minidom读xml][361]
+	- [python 递归遍历文件夹][362]
+	- [python抓取网页例子][363]
+	- [如何在Centos上安装python3.4][364]
+	- [对pymysql的简单封装][365]
+	- [用Python直接写UTF-8文本文件][366]
+- [16.mac][367]
+	- [Mac下的截屏功能][368]
+	- [brew相关操作][369]
+	- [homebrew常见用法][370]
+	- [mac activemq][371]
+	- [mac下通过mdfind命令搜索文件][372]
+- [17.C#][373]
 
 [1]:https://github.com/wardensky/blogs/blob/master/01.java
 [2]:https://github.com/wardensky/blogs/blob/master/01.java/01.Java基础
@@ -615,129 +617,131 @@
 [243]:https://github.com/wardensky/blogs/blob/master/06.algorithm/06.算法的乐趣/EinsteinProblem.md
 [244]:https://github.com/wardensky/blogs/blob/master/06.algorithm/07.查找
 [245]:https://github.com/wardensky/blogs/blob/master/06.algorithm/07.查找/二分查找.md
-[246]:https://github.com/wardensky/blogs/blob/master/07.framework
-[247]:https://github.com/wardensky/blogs/blob/master/07.framework/01.Spring
-[248]:https://github.com/wardensky/blogs/blob/master/07.framework/01.Spring/01.第一个Spring项目.md
-[249]:https://github.com/wardensky/blogs/blob/master/07.framework/01.Spring/02.通过构造器注入Bean.md
-[250]:https://github.com/wardensky/blogs/blob/master/07.framework/01.Spring/03.Spring命名空间与Bean作用域.md
-[251]:https://github.com/wardensky/blogs/blob/master/07.framework/01.Spring/04.注入Bean属性.md
-[252]:https://github.com/wardensky/blogs/blob/master/07.framework/01.Spring/05.自动装配Bean属性.md
-[253]:https://github.com/wardensky/blogs/blob/master/07.framework/01.Spring/06.使用注解装配.md
-[254]:https://github.com/wardensky/blogs/blob/master/07.framework/01.Spring/07.自动检测Bean.md
-[255]:https://github.com/wardensky/blogs/blob/master/07.framework/01.Spring/08.基于Java配置而不是XML.md
-[256]:https://github.com/wardensky/blogs/blob/master/07.framework/01.Spring/09.Bean的生命周期.md
-[257]:https://github.com/wardensky/blogs/blob/master/07.framework/01.Spring/10.到底什么是IOC和DI.md
-[258]:https://github.com/wardensky/blogs/blob/master/07.framework/01.Spring/11.BeanFactory和ApplicationContext联系和区别.md
-[259]:https://github.com/wardensky/blogs/blob/master/07.framework/01.Spring/12.AOP初探.md
-[260]:https://github.com/wardensky/blogs/blob/master/07.framework/01.Spring/13.Spring-JDBC.md
-[261]:https://github.com/wardensky/blogs/blob/master/07.framework/01.Spring/14.spring事务.md
-[262]:https://github.com/wardensky/blogs/blob/master/07.framework/01.Spring/69道Spring面试题和答案.md
-[263]:https://github.com/wardensky/blogs/blob/master/07.framework/01.Spring/Spring%20Boot面试题.md
-[264]:https://github.com/wardensky/blogs/blob/master/07.framework/01.Spring/Spring面试问答Top%2025.md
-[265]:https://github.com/wardensky/blogs/blob/master/07.framework/02.Hibernate
-[266]:https://github.com/wardensky/blogs/blob/master/07.framework/02.Hibernate/Hibernate一对多和多对多.md
-[267]:https://github.com/wardensky/blogs/blob/master/07.framework/02.Hibernate/Hibernate一级缓存——Session.md
-[268]:https://github.com/wardensky/blogs/blob/master/07.framework/02.Hibernate/Hibernate三种状态的转换.md
-[269]:https://github.com/wardensky/blogs/blob/master/07.framework/02.Hibernate/Hibernate入门（1）-第一个Hibernate程序.md
-[270]:https://github.com/wardensky/blogs/blob/master/07.framework/02.Hibernate/Hibernate入门（2）-%20不用配置用注解.md
-[271]:https://github.com/wardensky/blogs/blob/master/07.framework/02.Hibernate/Hibernate入门（3）-%20持久对象的生命周期介绍.md
-[272]:https://github.com/wardensky/blogs/blob/master/07.framework/02.Hibernate/Hibernate入门（4）-%20Hibernate数据操作.md
-[273]:https://github.com/wardensky/blogs/blob/master/07.framework/02.Hibernate/Hibernate常见面试题.md
-[274]:https://github.com/wardensky/blogs/blob/master/07.framework/02.Hibernate/Hibernate有哪5个核心接口.md
-[275]:https://github.com/wardensky/blogs/blob/master/07.framework/02.Hibernate/Hibernate的SessionFactory.md
-[276]:https://github.com/wardensky/blogs/blob/master/07.framework/02.Hibernate/Hibernate的一级缓存与二级缓存的区别.md
-[277]:https://github.com/wardensky/blogs/blob/master/07.framework/02.Hibernate/Hibernate面试题.md
-[278]:https://github.com/wardensky/blogs/blob/master/07.framework/02.Hibernate/JDBC和Hibernate分页怎样实现.md
-[279]:https://github.com/wardensky/blogs/blob/master/07.framework/02.Hibernate/java面试——Hibernate常见面试题.md
-[280]:https://github.com/wardensky/blogs/blob/master/07.framework/03.struts2
-[281]:https://github.com/wardensky/blogs/blob/master/07.framework/03.struts2/Struts2入门（1）-第一个Struts2程序.md
-[282]:https://github.com/wardensky/blogs/blob/master/07.framework/03.struts2/Struts2入门（2）-常用struts2标签.md
-[283]:https://github.com/wardensky/blogs/blob/master/07.framework/04.mybatis
-[284]:https://github.com/wardensky/blogs/blob/master/07.framework/04.mybatis/MyBatis学习-映射文件标签.md
-[285]:https://github.com/wardensky/blogs/blob/master/07.framework/04.mybatis/Mybatis%20Dao接口的工作原理.md
-[286]:https://github.com/wardensky/blogs/blob/master/07.framework/04.mybatis/Mybatis%20sqlSession.md
-[287]:https://github.com/wardensky/blogs/blob/master/07.framework/04.mybatis/Mybatis分页.md
-[288]:https://github.com/wardensky/blogs/blob/master/07.framework/04.mybatis/Mybatis动态sql.md
-[289]:https://github.com/wardensky/blogs/blob/master/07.framework/04.mybatis/Mybatis常见面试题.md
-[290]:https://github.com/wardensky/blogs/blob/master/07.framework/04.mybatis/Mybatis的#{}和${}.md
-[291]:https://github.com/wardensky/blogs/blob/master/07.framework/04.mybatis/Mybatis的Executor.md
-[292]:https://github.com/wardensky/blogs/blob/master/07.framework/jfinal
-[293]:https://github.com/wardensky/blogs/blob/master/08.nosql
-[294]:https://github.com/wardensky/blogs/blob/master/08.nosql/01.Redis
-[295]:https://github.com/wardensky/blogs/blob/master/08.nosql/01.Redis/Redis%20HyperLogLog.md
-[296]:https://github.com/wardensky/blogs/blob/master/08.nosql/01.Redis/Redis中文存储乱码问题.md
-[297]:https://github.com/wardensky/blogs/blob/master/08.nosql/01.Redis/Redis事务.md
-[298]:https://github.com/wardensky/blogs/blob/master/08.nosql/01.Redis/Redis列表(List).md
-[299]:https://github.com/wardensky/blogs/blob/master/08.nosql/01.Redis/Redis发布订阅.md
-[300]:https://github.com/wardensky/blogs/blob/master/08.nosql/01.Redis/Redis哈希(Hash).md
-[301]:https://github.com/wardensky/blogs/blob/master/08.nosql/01.Redis/Redis字符串(String).md
-[302]:https://github.com/wardensky/blogs/blob/master/08.nosql/01.Redis/Redis常用命令.md
-[303]:https://github.com/wardensky/blogs/blob/master/08.nosql/01.Redis/Redis持久化.md
-[304]:https://github.com/wardensky/blogs/blob/master/08.nosql/01.Redis/Redis支持的数据类型.md
-[305]:https://github.com/wardensky/blogs/blob/master/08.nosql/01.Redis/Redis有序集合(sorted%20set).md
-[306]:https://github.com/wardensky/blogs/blob/master/08.nosql/01.Redis/Redis查询数据条数.md
-[307]:https://github.com/wardensky/blogs/blob/master/08.nosql/01.Redis/Redis的架构模式.md
-[308]:https://github.com/wardensky/blogs/blob/master/08.nosql/01.Redis/Redis键(key).md
-[309]:https://github.com/wardensky/blogs/blob/master/08.nosql/01.Redis/Redis集合(Set).md
-[310]:https://github.com/wardensky/blogs/blob/master/08.nosql/01.Redis/redis-cli常用命令.md
-[311]:https://github.com/wardensky/blogs/blob/master/08.nosql/01.Redis/redis通讯协议(RESP).md
-[312]:https://github.com/wardensky/blogs/blob/master/08.nosql/01.Redis/互联网公司面试必问的Redis题目.md
-[313]:https://github.com/wardensky/blogs/blob/master/08.nosql/01.Redis/删除Redis所有KEY.md
-[314]:https://github.com/wardensky/blogs/blob/master/08.nosql/01.Redis/基于Redis的异步队列.md
-[315]:https://github.com/wardensky/blogs/blob/master/08.nosql/01.Redis/基于分词+Redis技术的地域字符串快速匹配设计与实现.md
-[316]:https://github.com/wardensky/blogs/blob/master/08.nosql/01.Redis/应用Java操作Redis.md
-[317]:https://github.com/wardensky/blogs/blob/master/08.nosql/01.Redis/应用Redis实现分布式锁.md
-[318]:https://github.com/wardensky/blogs/blob/master/08.nosql/02.MongoDB
-[319]:https://github.com/wardensky/blogs/blob/master/08.nosql/02.MongoDB/CentOS环境下Mongodb的安装与配置.md
-[320]:https://github.com/wardensky/blogs/blob/master/08.nosql/02.MongoDB/MongoDB入门（1）-%20MongoDB简介.md
-[321]:https://github.com/wardensky/blogs/blob/master/08.nosql/03.Elasticsearch
-[322]:https://github.com/wardensky/blogs/blob/master/08.nosql/03.Elasticsearch/ElasticSearch入门.md
-[323]:https://github.com/wardensky/blogs/blob/master/08.nosql/04.HBase
-[324]:https://github.com/wardensky/blogs/blob/master/09.linux
-[325]:https://github.com/wardensky/blogs/blob/master/09.linux/CentOS系统时间和时区查看以及修改的方法.md
-[326]:https://github.com/wardensky/blogs/blob/master/09.linux/应用maven自动部署的脚本.md
-[327]:https://github.com/wardensky/blogs/blob/master/10.Docker
-[328]:https://github.com/wardensky/blogs/blob/master/10.Docker/Docker常用命令(1).md
-[329]:https://github.com/wardensky/blogs/blob/master/10.Docker/Docker挂载本地硬盘.md
-[330]:https://github.com/wardensky/blogs/blob/master/10.Docker/docker%20commit命令.md
-[331]:https://github.com/wardensky/blogs/blob/master/10.Docker/docker%20exec命令.md
-[332]:https://github.com/wardensky/blogs/blob/master/10.Docker/docker%20load命令.md
-[333]:https://github.com/wardensky/blogs/blob/master/10.Docker/docker%20logs命令.md
-[334]:https://github.com/wardensky/blogs/blob/master/10.Docker/docker%20ps命令.md
-[335]:https://github.com/wardensky/blogs/blob/master/10.Docker/docker%20run命令.md
-[336]:https://github.com/wardensky/blogs/blob/master/10.Docker/docker%20save命令.md
-[337]:https://github.com/wardensky/blogs/blob/master/10.Docker/mysql%20on%20docker.md
-[338]:https://github.com/wardensky/blogs/blob/master/11.maven
-[339]:https://github.com/wardensky/blogs/blob/master/11.maven/maven基础.md
-[340]:https://github.com/wardensky/blogs/blob/master/12.git
-[341]:https://github.com/wardensky/blogs/blob/master/12.git/Elastic%20Search操作入门.md
-[342]:https://github.com/wardensky/blogs/blob/master/12.git/git%20alias%20配置.md
-[343]:https://github.com/wardensky/blogs/blob/master/12.git/git下载某一个版本.md
-[344]:https://github.com/wardensky/blogs/blob/master/12.git/git入门1-Git工作流.md
-[345]:https://github.com/wardensky/blogs/blob/master/12.git/git学习笔记5-撤销操作.md
-[346]:https://github.com/wardensky/blogs/blob/master/12.git/git学习笔记6-tag.md
-[347]:https://github.com/wardensky/blogs/blob/master/12.git/git学习笔记7-branch.md
-[348]:https://github.com/wardensky/blogs/blob/master/13.编辑器与正则表达式
-[349]:https://github.com/wardensky/blogs/blob/master/13.编辑器与正则表达式/3种不同编辑器里面的正则表达式替换.md
-[350]:https://github.com/wardensky/blogs/blob/master/13.编辑器与正则表达式/正则表达式的贪婪与懒惰.md
-[351]:https://github.com/wardensky/blogs/blob/master/14.前端
-[352]:https://github.com/wardensky/blogs/blob/master/14.前端/01.JavaScript
-[353]:https://github.com/wardensky/blogs/blob/master/14.前端/02.HTML
-[354]:https://github.com/wardensky/blogs/blob/master/14.前端/03.css
-[355]:https://github.com/wardensky/blogs/blob/master/14.前端/04.跨域问题
-[356]:https://github.com/wardensky/blogs/blob/master/14.前端/04.跨域问题/前端跨域问题各种解决方案.md
-[357]:https://github.com/wardensky/blogs/blob/master/15.Python
-[358]:https://github.com/wardensky/blogs/blob/master/15.Python/mac多版本python安装%20pymysql.md
-[359]:https://github.com/wardensky/blogs/blob/master/15.Python/python%20应用xml.dom.minidom读xml.md
-[360]:https://github.com/wardensky/blogs/blob/master/15.Python/python%20递归遍历文件夹.md
-[361]:https://github.com/wardensky/blogs/blob/master/15.Python/python抓取网页例子.md
-[362]:https://github.com/wardensky/blogs/blob/master/15.Python/如何在Centos上安装python3.4.md
-[363]:https://github.com/wardensky/blogs/blob/master/15.Python/对pymysql的简单封装.md
-[364]:https://github.com/wardensky/blogs/blob/master/15.Python/用Python直接写UTF-8文本文件.md
-[365]:https://github.com/wardensky/blogs/blob/master/16.mac
-[366]:https://github.com/wardensky/blogs/blob/master/16.mac/Mac下的截屏功能.md
-[367]:https://github.com/wardensky/blogs/blob/master/16.mac/brew相关操作.md
-[368]:https://github.com/wardensky/blogs/blob/master/16.mac/homebrew常见用法.md
-[369]:https://github.com/wardensky/blogs/blob/master/16.mac/mac%20activemq.md
-[370]:https://github.com/wardensky/blogs/blob/master/16.mac/mac下通过mdfind命令搜索文件.md
-[371]:https://github.com/wardensky/blogs/blob/master/17.C#
+[246]:https://github.com/wardensky/blogs/blob/master/06.algorithm/08.动态规划
+[247]:https://github.com/wardensky/blogs/blob/master/06.algorithm/08.动态规划/最长公共子串问题.md
+[248]:https://github.com/wardensky/blogs/blob/master/07.framework
+[249]:https://github.com/wardensky/blogs/blob/master/07.framework/01.Spring
+[250]:https://github.com/wardensky/blogs/blob/master/07.framework/01.Spring/01.第一个Spring项目.md
+[251]:https://github.com/wardensky/blogs/blob/master/07.framework/01.Spring/02.通过构造器注入Bean.md
+[252]:https://github.com/wardensky/blogs/blob/master/07.framework/01.Spring/03.Spring命名空间与Bean作用域.md
+[253]:https://github.com/wardensky/blogs/blob/master/07.framework/01.Spring/04.注入Bean属性.md
+[254]:https://github.com/wardensky/blogs/blob/master/07.framework/01.Spring/05.自动装配Bean属性.md
+[255]:https://github.com/wardensky/blogs/blob/master/07.framework/01.Spring/06.使用注解装配.md
+[256]:https://github.com/wardensky/blogs/blob/master/07.framework/01.Spring/07.自动检测Bean.md
+[257]:https://github.com/wardensky/blogs/blob/master/07.framework/01.Spring/08.基于Java配置而不是XML.md
+[258]:https://github.com/wardensky/blogs/blob/master/07.framework/01.Spring/09.Bean的生命周期.md
+[259]:https://github.com/wardensky/blogs/blob/master/07.framework/01.Spring/10.到底什么是IOC和DI.md
+[260]:https://github.com/wardensky/blogs/blob/master/07.framework/01.Spring/11.BeanFactory和ApplicationContext联系和区别.md
+[261]:https://github.com/wardensky/blogs/blob/master/07.framework/01.Spring/12.AOP初探.md
+[262]:https://github.com/wardensky/blogs/blob/master/07.framework/01.Spring/13.Spring-JDBC.md
+[263]:https://github.com/wardensky/blogs/blob/master/07.framework/01.Spring/14.spring事务.md
+[264]:https://github.com/wardensky/blogs/blob/master/07.framework/01.Spring/69道Spring面试题和答案.md
+[265]:https://github.com/wardensky/blogs/blob/master/07.framework/01.Spring/Spring%20Boot面试题.md
+[266]:https://github.com/wardensky/blogs/blob/master/07.framework/01.Spring/Spring面试问答Top%2025.md
+[267]:https://github.com/wardensky/blogs/blob/master/07.framework/02.Hibernate
+[268]:https://github.com/wardensky/blogs/blob/master/07.framework/02.Hibernate/Hibernate一对多和多对多.md
+[269]:https://github.com/wardensky/blogs/blob/master/07.framework/02.Hibernate/Hibernate一级缓存——Session.md
+[270]:https://github.com/wardensky/blogs/blob/master/07.framework/02.Hibernate/Hibernate三种状态的转换.md
+[271]:https://github.com/wardensky/blogs/blob/master/07.framework/02.Hibernate/Hibernate入门（1）-第一个Hibernate程序.md
+[272]:https://github.com/wardensky/blogs/blob/master/07.framework/02.Hibernate/Hibernate入门（2）-%20不用配置用注解.md
+[273]:https://github.com/wardensky/blogs/blob/master/07.framework/02.Hibernate/Hibernate入门（3）-%20持久对象的生命周期介绍.md
+[274]:https://github.com/wardensky/blogs/blob/master/07.framework/02.Hibernate/Hibernate入门（4）-%20Hibernate数据操作.md
+[275]:https://github.com/wardensky/blogs/blob/master/07.framework/02.Hibernate/Hibernate常见面试题.md
+[276]:https://github.com/wardensky/blogs/blob/master/07.framework/02.Hibernate/Hibernate有哪5个核心接口.md
+[277]:https://github.com/wardensky/blogs/blob/master/07.framework/02.Hibernate/Hibernate的SessionFactory.md
+[278]:https://github.com/wardensky/blogs/blob/master/07.framework/02.Hibernate/Hibernate的一级缓存与二级缓存的区别.md
+[279]:https://github.com/wardensky/blogs/blob/master/07.framework/02.Hibernate/Hibernate面试题.md
+[280]:https://github.com/wardensky/blogs/blob/master/07.framework/02.Hibernate/JDBC和Hibernate分页怎样实现.md
+[281]:https://github.com/wardensky/blogs/blob/master/07.framework/02.Hibernate/java面试——Hibernate常见面试题.md
+[282]:https://github.com/wardensky/blogs/blob/master/07.framework/03.struts2
+[283]:https://github.com/wardensky/blogs/blob/master/07.framework/03.struts2/Struts2入门（1）-第一个Struts2程序.md
+[284]:https://github.com/wardensky/blogs/blob/master/07.framework/03.struts2/Struts2入门（2）-常用struts2标签.md
+[285]:https://github.com/wardensky/blogs/blob/master/07.framework/04.mybatis
+[286]:https://github.com/wardensky/blogs/blob/master/07.framework/04.mybatis/MyBatis学习-映射文件标签.md
+[287]:https://github.com/wardensky/blogs/blob/master/07.framework/04.mybatis/Mybatis%20Dao接口的工作原理.md
+[288]:https://github.com/wardensky/blogs/blob/master/07.framework/04.mybatis/Mybatis%20sqlSession.md
+[289]:https://github.com/wardensky/blogs/blob/master/07.framework/04.mybatis/Mybatis分页.md
+[290]:https://github.com/wardensky/blogs/blob/master/07.framework/04.mybatis/Mybatis动态sql.md
+[291]:https://github.com/wardensky/blogs/blob/master/07.framework/04.mybatis/Mybatis常见面试题.md
+[292]:https://github.com/wardensky/blogs/blob/master/07.framework/04.mybatis/Mybatis的#{}和${}.md
+[293]:https://github.com/wardensky/blogs/blob/master/07.framework/04.mybatis/Mybatis的Executor.md
+[294]:https://github.com/wardensky/blogs/blob/master/07.framework/jfinal
+[295]:https://github.com/wardensky/blogs/blob/master/08.nosql
+[296]:https://github.com/wardensky/blogs/blob/master/08.nosql/01.Redis
+[297]:https://github.com/wardensky/blogs/blob/master/08.nosql/01.Redis/Redis%20HyperLogLog.md
+[298]:https://github.com/wardensky/blogs/blob/master/08.nosql/01.Redis/Redis中文存储乱码问题.md
+[299]:https://github.com/wardensky/blogs/blob/master/08.nosql/01.Redis/Redis事务.md
+[300]:https://github.com/wardensky/blogs/blob/master/08.nosql/01.Redis/Redis列表(List).md
+[301]:https://github.com/wardensky/blogs/blob/master/08.nosql/01.Redis/Redis发布订阅.md
+[302]:https://github.com/wardensky/blogs/blob/master/08.nosql/01.Redis/Redis哈希(Hash).md
+[303]:https://github.com/wardensky/blogs/blob/master/08.nosql/01.Redis/Redis字符串(String).md
+[304]:https://github.com/wardensky/blogs/blob/master/08.nosql/01.Redis/Redis常用命令.md
+[305]:https://github.com/wardensky/blogs/blob/master/08.nosql/01.Redis/Redis持久化.md
+[306]:https://github.com/wardensky/blogs/blob/master/08.nosql/01.Redis/Redis支持的数据类型.md
+[307]:https://github.com/wardensky/blogs/blob/master/08.nosql/01.Redis/Redis有序集合(sorted%20set).md
+[308]:https://github.com/wardensky/blogs/blob/master/08.nosql/01.Redis/Redis查询数据条数.md
+[309]:https://github.com/wardensky/blogs/blob/master/08.nosql/01.Redis/Redis的架构模式.md
+[310]:https://github.com/wardensky/blogs/blob/master/08.nosql/01.Redis/Redis键(key).md
+[311]:https://github.com/wardensky/blogs/blob/master/08.nosql/01.Redis/Redis集合(Set).md
+[312]:https://github.com/wardensky/blogs/blob/master/08.nosql/01.Redis/redis-cli常用命令.md
+[313]:https://github.com/wardensky/blogs/blob/master/08.nosql/01.Redis/redis通讯协议(RESP).md
+[314]:https://github.com/wardensky/blogs/blob/master/08.nosql/01.Redis/互联网公司面试必问的Redis题目.md
+[315]:https://github.com/wardensky/blogs/blob/master/08.nosql/01.Redis/删除Redis所有KEY.md
+[316]:https://github.com/wardensky/blogs/blob/master/08.nosql/01.Redis/基于Redis的异步队列.md
+[317]:https://github.com/wardensky/blogs/blob/master/08.nosql/01.Redis/基于分词+Redis技术的地域字符串快速匹配设计与实现.md
+[318]:https://github.com/wardensky/blogs/blob/master/08.nosql/01.Redis/应用Java操作Redis.md
+[319]:https://github.com/wardensky/blogs/blob/master/08.nosql/01.Redis/应用Redis实现分布式锁.md
+[320]:https://github.com/wardensky/blogs/blob/master/08.nosql/02.MongoDB
+[321]:https://github.com/wardensky/blogs/blob/master/08.nosql/02.MongoDB/CentOS环境下Mongodb的安装与配置.md
+[322]:https://github.com/wardensky/blogs/blob/master/08.nosql/02.MongoDB/MongoDB入门（1）-%20MongoDB简介.md
+[323]:https://github.com/wardensky/blogs/blob/master/08.nosql/03.Elasticsearch
+[324]:https://github.com/wardensky/blogs/blob/master/08.nosql/03.Elasticsearch/ElasticSearch入门.md
+[325]:https://github.com/wardensky/blogs/blob/master/08.nosql/04.HBase
+[326]:https://github.com/wardensky/blogs/blob/master/09.linux
+[327]:https://github.com/wardensky/blogs/blob/master/09.linux/CentOS系统时间和时区查看以及修改的方法.md
+[328]:https://github.com/wardensky/blogs/blob/master/09.linux/应用maven自动部署的脚本.md
+[329]:https://github.com/wardensky/blogs/blob/master/10.Docker
+[330]:https://github.com/wardensky/blogs/blob/master/10.Docker/Docker常用命令(1).md
+[331]:https://github.com/wardensky/blogs/blob/master/10.Docker/Docker挂载本地硬盘.md
+[332]:https://github.com/wardensky/blogs/blob/master/10.Docker/docker%20commit命令.md
+[333]:https://github.com/wardensky/blogs/blob/master/10.Docker/docker%20exec命令.md
+[334]:https://github.com/wardensky/blogs/blob/master/10.Docker/docker%20load命令.md
+[335]:https://github.com/wardensky/blogs/blob/master/10.Docker/docker%20logs命令.md
+[336]:https://github.com/wardensky/blogs/blob/master/10.Docker/docker%20ps命令.md
+[337]:https://github.com/wardensky/blogs/blob/master/10.Docker/docker%20run命令.md
+[338]:https://github.com/wardensky/blogs/blob/master/10.Docker/docker%20save命令.md
+[339]:https://github.com/wardensky/blogs/blob/master/10.Docker/mysql%20on%20docker.md
+[340]:https://github.com/wardensky/blogs/blob/master/11.maven
+[341]:https://github.com/wardensky/blogs/blob/master/11.maven/maven基础.md
+[342]:https://github.com/wardensky/blogs/blob/master/12.git
+[343]:https://github.com/wardensky/blogs/blob/master/12.git/Elastic%20Search操作入门.md
+[344]:https://github.com/wardensky/blogs/blob/master/12.git/git%20alias%20配置.md
+[345]:https://github.com/wardensky/blogs/blob/master/12.git/git下载某一个版本.md
+[346]:https://github.com/wardensky/blogs/blob/master/12.git/git入门1-Git工作流.md
+[347]:https://github.com/wardensky/blogs/blob/master/12.git/git学习笔记5-撤销操作.md
+[348]:https://github.com/wardensky/blogs/blob/master/12.git/git学习笔记6-tag.md
+[349]:https://github.com/wardensky/blogs/blob/master/12.git/git学习笔记7-branch.md
+[350]:https://github.com/wardensky/blogs/blob/master/13.编辑器与正则表达式
+[351]:https://github.com/wardensky/blogs/blob/master/13.编辑器与正则表达式/3种不同编辑器里面的正则表达式替换.md
+[352]:https://github.com/wardensky/blogs/blob/master/13.编辑器与正则表达式/正则表达式的贪婪与懒惰.md
+[353]:https://github.com/wardensky/blogs/blob/master/14.前端
+[354]:https://github.com/wardensky/blogs/blob/master/14.前端/01.JavaScript
+[355]:https://github.com/wardensky/blogs/blob/master/14.前端/02.HTML
+[356]:https://github.com/wardensky/blogs/blob/master/14.前端/03.css
+[357]:https://github.com/wardensky/blogs/blob/master/14.前端/04.跨域问题
+[358]:https://github.com/wardensky/blogs/blob/master/14.前端/04.跨域问题/前端跨域问题各种解决方案.md
+[359]:https://github.com/wardensky/blogs/blob/master/15.Python
+[360]:https://github.com/wardensky/blogs/blob/master/15.Python/mac多版本python安装%20pymysql.md
+[361]:https://github.com/wardensky/blogs/blob/master/15.Python/python%20应用xml.dom.minidom读xml.md
+[362]:https://github.com/wardensky/blogs/blob/master/15.Python/python%20递归遍历文件夹.md
+[363]:https://github.com/wardensky/blogs/blob/master/15.Python/python抓取网页例子.md
+[364]:https://github.com/wardensky/blogs/blob/master/15.Python/如何在Centos上安装python3.4.md
+[365]:https://github.com/wardensky/blogs/blob/master/15.Python/对pymysql的简单封装.md
+[366]:https://github.com/wardensky/blogs/blob/master/15.Python/用Python直接写UTF-8文本文件.md
+[367]:https://github.com/wardensky/blogs/blob/master/16.mac
+[368]:https://github.com/wardensky/blogs/blob/master/16.mac/Mac下的截屏功能.md
+[369]:https://github.com/wardensky/blogs/blob/master/16.mac/brew相关操作.md
+[370]:https://github.com/wardensky/blogs/blob/master/16.mac/homebrew常见用法.md
+[371]:https://github.com/wardensky/blogs/blob/master/16.mac/mac%20activemq.md
+[372]:https://github.com/wardensky/blogs/blob/master/16.mac/mac下通过mdfind命令搜索文件.md
+[373]:https://github.com/wardensky/blogs/blob/master/17.C#
