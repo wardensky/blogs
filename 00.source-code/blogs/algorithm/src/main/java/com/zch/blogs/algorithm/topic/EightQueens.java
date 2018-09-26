@@ -64,6 +64,7 @@ public class EightQueens {
 			}
 			System.out.println();
 		}
+		System.out.println("*****************");
 	}
 
 }
