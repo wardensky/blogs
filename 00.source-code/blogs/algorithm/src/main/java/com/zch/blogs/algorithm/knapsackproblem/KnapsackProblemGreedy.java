@@ -1,4 +1,4 @@
-package com.zch.blogs.algorithm;
+package com.zch.blogs.algorithm.knapsackproblem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.List;
  * @time 2018年9月23日 上午10:10:55
  * 
  */
-public class KnapsackProblem {
+public class KnapsackProblemGreedy {
 
 	public static void main(String[] args) {
 		final int BAG_CONTENT = 1300;

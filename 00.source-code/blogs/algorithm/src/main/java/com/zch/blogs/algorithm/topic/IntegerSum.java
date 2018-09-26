@@ -27,7 +27,7 @@ public class IntegerSum {
 	public void search(final int[] a, int index, final int[] oriA) {
 		if (this.sumArray(a) == TOTAL) {
 			print(a);
-			index = 0;
+			
 		} else {
 			for (int i = index; i < oriA.length; i++) {
 			//	System.out.println("index = " + index);
