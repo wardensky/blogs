@@ -14,21 +14,15 @@ import java.util.List;
 public class KnapsackProblemGreedy {
 
 	public static void main(String[] args) {
-		final int BAG_CONTENT = 1300;
-		List<TagObject> objects = new ArrayList<TagObject>();
-		objects.add(new TagObject(101, 101));
-		objects.add(new TagObject(220, 202));
-		objects.add(new TagObject(330, 303));
-		objects.add(new TagObject(404, 404));
-		objects.add(new TagObject(555, 505));
-		objects.add(new TagObject(606, 606));
+
+		List<TagObject> objects = TagObjectUtil.init();
 		List<TagObject> selectObjects = new ArrayList<TagObject>();
 		while (true) {
 			TagObject select = chooseFunc2(objects);
 			if (select == null) {
 				break;
 			}
-			if (calTotalWeight(selectObjects) + select.getWeight() > BAG_CONTENT) {
+			if (calTotalWeight(selectObjects) + select.getWeight() > TagObjectUtil.BAG_CONTENT) {
 				select.setStatus(TagObjectStatus.不可用);
 			} else {
 				selectObjects.add(select);
@@ -102,58 +96,5 @@ public class KnapsackProblemGreedy {
 			}
 		}
 		return ret;
-	}
-}
-
-enum TagObjectStatus {
-
-	未选中, 已选中, 不可用;
-}
-
-class TagObject {
-	private int weight;
-	private int value;
-	private TagObjectStatus status;
-
-	public TagObject(int weight, int value) {
-		this.weight = weight;
-		this.value = value;
-		this.status = TagObjectStatus.未选中;
-	}
-
-	public int getWeight() {
-		return weight;
-	}
-
-	public TagObject setWeight(int weight) {
-		this.weight = weight;
-		return this;
-	}
-
-	public int getValue() {
-		return value;
-	}
-
-	public TagObject setValue(int value) {
-		this.value = value;
-		return this;
-	}
-
-	public TagObjectStatus getStatus() {
-		return status;
-	}
-
-	public TagObject setStatus(TagObjectStatus status) {
-		this.status = status;
-		return this;
-	}
-
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("weight = ");
-		sb.append(this.weight);
-		sb.append(" value = ");
-		sb.append(this.value);
-		return sb.toString();
 	}
 }

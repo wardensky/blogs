@@ -1,5 +1,7 @@
 package com.zch.blogs.algorithm.knapsackproblem;
 
+import java.util.List;
+
 /**
  * @Description 动态规划解决背包问题。
  * @author zch
@@ -7,47 +9,46 @@ package com.zch.blogs.algorithm.knapsackproblem;
  * 
  */
 public class KnapsackProblemDynamic {
-	void FindMax()//动态规划
-	{
-	    int i,j;
-	    //填表
-	    for(i=1;i<=number;i++)
-	    {
-	        for(j=1;j<=capacity;j++)
-	        {
-	            if(j<w[i])//包装不进
-	            {
-	                V[i][j]=V[i-1][j];
-	            }
-	            else//能装
-	            {
-	                if(V[i-1][j]>V[i-1][j-w[i]]+v[i])//不装价值大
-	                {
-	                    V[i][j]=V[i-1][j];
-	                }
-	                else//前i-1个物品的最优解与第i个物品的价值之和更大
-	                {
-	                    V[i][j]=V[i-1][j-w[i]]+v[i];
-	                }
-	            }
-	        }
-	    }
+
+	public static void main(String[] args) {
+		List<TagObject> data = TagObjectUtil.init();
+		KnapsackProblemDynamic kpd = new KnapsackProblemDynamic();
+		int result = kpd.findMax(data, TagObjectUtil.BAG_CONTENT);
+		System.out.println(result);
 	}
-	
-	void FindWhat(int i,int j)//寻找解的组成方式
-	{
-	    if(i>=0)
-	    {
-	        if(V[i][j]==V[i-1][j])//相等说明没装
-	        {
-	            item[i]=0;//全局变量，标记未被选中
-	            FindWhat(i-1,j);
-	        }
-	        else if( j-w[i]>=0 && V[i][j]==V[i-1][j-w[i]]+v[i] )
-	        {
-	            item[i]=1;//标记已被选中
-	            FindWhat(i-1,j-w[i]);//回到装包之前的位置
-	        }
-	    }
+
+	public int findMax(List<TagObject> data, int total) {
+		int tagNumber = data.size();
+		int[][] result = new int[tagNumber][total + 1];
+		for (int rowIndex = 0; rowIndex < tagNumber; rowIndex++) {
+			int weight = data.get(rowIndex).getWeight();
+			int value = data.get(rowIndex).getValue();
+
+			System.out.println("weight = " + weight + " value =" + value);
+			for (int totalWeight = 1; totalWeight <= total; totalWeight++) {
+				// 第一行单独处理。
+				if (rowIndex == 0) {
+					if (totalWeight < weight) {
+						result[rowIndex][totalWeight] = 0;
+					} else {
+						result[rowIndex][totalWeight] = value;
+					}
+				} else {
+					if (totalWeight < weight) {
+						result[rowIndex][totalWeight] = result[rowIndex - 1][totalWeight];
+					} else {
+						int value1 = 0;
+						value1 = result[rowIndex - 1][totalWeight];
+						int value2 = value;
+						if (totalWeight > weight) {
+							value2 = value + result[rowIndex - 1][totalWeight - weight];
+						}
+						result[rowIndex][totalWeight] = value1 > value2 ? value1 : value2;
+					}
+				}
+			}
+		}
+		return result[tagNumber - 1][total];
 	}
+
 }
