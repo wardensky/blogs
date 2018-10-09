@@ -34,7 +34,7 @@ StatelessKnowledgeSession 的作用与StatefulKnowledgeSession 相仿，它们�
 
 ## 2. FACT对象
 
-Fact 是指在Drools 规则应用当中，将一个普通的JavaBean 插入到规则的WorkingMemory当中后的对象。规则可以对Fact 对象进行任意的读写操作，当一个JavaBean 插入到WorkingMemory 当中变成Fact 之后，Fact 对象不是对原来的JavaBean 对象进行Clon，而是原来JavaBean 对象的引用。
+Fact 是指在Drools 规则应用当中，将一个普通的JavaBean 插入到规则的WorkingMemory当中后的对象。规则可以对Fact 对象进行任意的读写操作，当一个JavaBean 插入到WorkingMemory 当中变成Fact 之后，Fact 对象不是对原来的JavaBean 对象进行Clone，而是原来JavaBean 对象的引用。
 
 ## 3. 规则
 
@@ -86,12 +86,17 @@ then
 <action>…
 End
 ```
-此段规则的含义为：的规则就包含两个pattern，第一个pattern 有三个约束，分别是：对象类型必须是Cutomer；同时Cutomer 的age 要大于20 且gender 要是male；第二个pattern 也有三个约束，分别是：对象类型必须是Order，同时Order 对应的Cutomer 必须是前面的那个Customer 且当前这个Order 的price 要大于1000。在这两个pattern 没有符号连接，在Drools当中在pattern 中没有连接符号，那么就用and 来作为默认连接，所以在该规则的LHS 部分中两个pattern 只有都满足了才会返回true。默认情况下，每行可以用“;”来作为结束符（和Java 的结束一样），当然行尾也可以不加“;”结尾。
+此段规则的含义为：的规则就包含两个pattern，
+
+第一个pattern 有三个约束，分别是：对象类型必须是Cutomer；同时Cutomer 的age 要大于20 且gender 要是male；
+
+第二个pattern 也有三个约束，分别是：对象类型必须是Order，同时Order 对应的Cutomer 必须是前面的那个Customer 且当前这个Order 的price 要大于1000。
+
+在这两个pattern 没有符号连接，在Drools当中在pattern 中没有连接符号，那么就用and 来作为默认连接，所以在该规则的LHS 部分中两个pattern 只有都满足了才会返回true。默认情况下，每行可以用“;”来作为结束符（和Java 的结束一样），当然行尾也可以不加“;”结尾。
 
 ####  3.3.1 约束连接  
 
-对于对象内部的多个约束的连接，可以采用“&&”（and）、“||”(or)和“,”(and)来实现，“&&”（and）、“||”(or)和“,”这三个连接符号如果没有用小括号来显示的定义优先级的话，那么它们的执行顺序是：“&&”（and）、“||”(or)和“,” “&&”优先级最高，表面上看“,”与“&&”具有相同的含义，但是有一点需要注意，“，”与“&&”和“||”不能混合使用，也就是说在有“&&”或“||”出现的LHS 当中，是不可以有“，”连接符出
-现的，反之亦然。
+对于对象内部的多个约束的连接，可以采用“&&”（and）、“||”(or)和“,”(and)来实现，“&&”（and）、“||”(or)和“,”这三个连接符号如果没有用小括号来显示的定义优先级的话，那么它们的执行顺序是：“&&”（and）、“||”(or)和“,” “&&”优先级最高，表面上看“,”与“&&”具有相同的含义，但是有一点需要注意，“，”与“&&”和“||”不能混合使用，也就是说在有“&&”或“||”出现的LHS 当中，是不可以有“，”连接符出现的，反之亦然。
 
 ####  3.3.2 比较操作符
 
@@ -124,7 +129,13 @@ not contains 作用与contains 作用相反，not contains 是用来判断一个
 
 ##### 3.3.2.3 memberOf
 
-memberOf 是用来判断某个Fact 对象的某个字段是否在一个集合（Collection/Array）当中，用法与contains 有些类似，但也有不同，memberOf 的语法如下：Object(fieldName memberOf value[Collection/Array])可以看到memberOf 中集合类型的数据是作为被比较项的，集合类型的数据对象位于memberOf 操作符后面，同时在用memberOf 比较操作符时被比较项一定要是一个变量(绑定变量或者是一个global 对象)，而不能是一个静态值。
+memberOf 是用来判断某个Fact 对象的某个字段是否在一个集合（Collection/Array）当中，用法与contains 有些类似，但也有不同，memberOf 的语法如下：
+
+```
+Object(fieldName memberOf value[Collection/Array])
+```
+
+可以看到memberOf 中集合类型的数据是作为被比较项的，集合类型的数据对象位于memberOf 操作符后面，同时在用memberOf 比较操作符时被比较项一定要是一个变量(绑定变量或者是一个global 对象)，而不能是一个静态值。
 
 
 
@@ -172,7 +183,7 @@ RHS 部分是规则真正要做事情的部分，可以将因条件满足而要�
 
 
 ```
-insert(new Object());1
+insert(new Object());
 ```
 
 一旦调用insert 宏函数，那么Drools 会重新与所有的规则再重新匹配一次，对于没有设置no-loop 属性为true 的规则，如果条件满足，不管其之前是否执行过都会再执行一次，这个特性不仅存在于insert 宏函数上，后面介绍的update、retract 宏函数同样具有该特性，所以在某些情况下因考虑不周调用insert、update 或retract容易发生死循环，这点大家需要注意.
@@ -249,7 +260,7 @@ auto-focus、date-effective、date-expires、dialect、duration、enabled、lock
 
 #### 3.5.1 salience
 
-用来设置规则执行的优先级，salience 属性的值是一个数字，数字越大执行优先级越高，同时它的值可以是一个负数。默认情况下，规则的ssalience 默认值为0，所以如果我们不手动设置规则的salience 属性，那么它的执行顺序是随机（但是一般都是按照加载顺序。）
+用来设置规则执行的优先级，salience 属性的值是一个数字，数字越大执行优先级越高，同时它的值可以是一个负数。默认情况下，规则的salience 默认值为0，所以如果我们不手动设置规则的salience 属性，那么它的执行顺序是随机（但是一般都是按照加载顺序。）
 ```
 rule "rule1"
 salience 1
@@ -448,8 +459,8 @@ java 中调用
 
 ```
 
-            TestAgendaFilter filter= new TestAgendaFilter("activa");
-           int count = ks.fireAllRules(filter);12
+TestAgendaFilter filter= new TestAgendaFilter("activa");
+int count = ks.fireAllRules(filter);12
 
 ```
 
