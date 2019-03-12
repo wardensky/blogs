@@ -3,13 +3,12 @@
 
 在一个maven项目中，如果存在编译需要而发布不需要的jar包，可以用scope标签，值设为provided。如下：
 ```
-        <dependency>
-            <groupId>javax.servlet.jsp</groupId>
-            <artifactId>jsp-api</artifactId>
-            <version>2.1</version>
-            <scope>provided</scope>
-            <classifier />
-        </dependency>
+<dependency>
+     <groupId>javax.servlet.jsp</groupId>
+     <artifactId>jsp-api</artifactId>
+     <version>2.1</version>
+     <scope>provided</scope>
+</dependency>
 ```
 scope的其他参数如下：
 
